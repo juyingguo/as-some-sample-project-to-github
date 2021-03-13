@@ -62,11 +62,20 @@ void PcmCall(SLAndroidSimpleBufferQueueItf bf,void *contex)
     if(feof(fp) == 0)
     {
         int len = fread(buf,1,1024,fp);
-        if(len > 0)
+        if(len > 0){
             (*bf)->Enqueue(bf,buf,len);
+        } else{
+            fclose(fp);
+            fp = NULL;
+            free(buf);
+            buf = NULL;
+        }
+    } else{
+        fclose(fp);
+        fp = NULL;
+        free(buf);
+        buf = NULL;
     }
-
-
 
 }
 
