@@ -27,11 +27,16 @@
 #include <string>
 #include <SLES/OpenSLES.h>
 #include <SLES/OpenSLES_Android.h>
+#include <SLES/OpenSLES_AndroidConfiguration.h>
+#include <SLES/OpenSLES_AndroidMetadata.h>
+#include <unistd.h> // sleep 的头文件
 #include <android/log.h>
 #define LOGD(FORMAT,...) __android_log_print(ANDROID_LOG_ERROR,"ywl5320",FORMAT,##__VA_ARGS__);
 
 //1 创建引擎
 static SLObjectItf  engineSL = NULL;
+static SLObjectItf mix = NULL;//混音器
+static SLObjectItf player = NULL;//播放器
 SLEngineItf CreateSL()
 {
     SLresult re;
@@ -64,17 +69,27 @@ void PcmCall(SLAndroidSimpleBufferQueueItf bf,void *contex)
         int len = fread(buf,1,1024,fp);
         if(len > 0){
             (*bf)->Enqueue(bf,buf,len);
-        } else{
+        } else{//关闭文件，重置变量，释放资源，便于下次能重头正常播放
             fclose(fp);
             fp = NULL;
             free(buf);
             buf = NULL;
         }
-    } else{
+    } else{//关闭文件，重置变量，释放资源，便于下次能重头正常播放
+        LOGD("PcmCall,end of file.");
         fclose(fp);
         fp = NULL;
         free(buf);
         buf = NULL;
+
+        /* Destroy the player */
+        if(player != NULL)
+            (*player)->Destroy(player);
+        /* Destroy Output Mix object */
+        if(mix != NULL)
+            (*mix)->Destroy(mix);
+        if(engineSL != NULL)
+            (*engineSL)->Destroy(engineSL);
     }
 
 }
@@ -97,7 +112,6 @@ Java_aplay_testopensl_MainActivity_stringFromJNI(
     }
 
    //2 创建混音器
-    SLObjectItf mix = NULL;
     SLresult re = 0;
     re = (*eng)->CreateOutputMix(eng,&mix,0,0,0);
     if(re !=SL_RESULT_SUCCESS )
@@ -110,11 +124,17 @@ Java_aplay_testopensl_MainActivity_stringFromJNI(
         LOGD("(*mix)->Realize failed!");
     }
     SLDataLocator_OutputMix outmix = {SL_DATALOCATOR_OUTPUTMIX,mix};
-    SLDataSink audioSink= {&outmix,0};
+    /*SLDataSink audioSink= {&outmix,0};*/ //这种写法同下面的先定义结构体变量，再对每一个成员单独赋值。
+    SLDataSink audioSink;
+    audioSink.pLocator = &outmix;
+    audioSink.pFormat = 0;
 
     //3 配置音频信息
     //缓冲队列
+    //缓冲队列使用{SLDataLocator_BufferQueue}{SLDataLocator_AndroidSimpleBufferQueue},验证在android平台上都是可以的。只是定义buffer。
     SLDataLocator_AndroidSimpleBufferQueue que = {SL_DATALOCATOR_ANDROIDSIMPLEBUFFERQUEUE,10};
+    /*SLDataLocator_AndroidBufferQueue que = {SL_DATALOCATOR_ANDROIDBUFFERQUEUE,10};*/ //这个是不允许的
+    /*SLDataLocator_BufferQueue que = {SL_DATALOCATOR_BUFFERQUEUE,10};*/
     //音频格式
     SLDataFormat_PCM pcm = {
             SL_DATAFORMAT_PCM,
@@ -129,9 +149,9 @@ Java_aplay_testopensl_MainActivity_stringFromJNI(
 
 
     //4 创建播放器
-    SLObjectItf player = NULL;
     SLPlayItf iplayer = NULL;
     SLAndroidSimpleBufferQueueItf pcmQue = NULL;
+    SLAndroidSimpleBufferQueueState state;
     const SLInterfaceID ids[] = {SL_IID_BUFFERQUEUE};
     const SLboolean req[] = {SL_BOOLEAN_TRUE};
     LOGD("sizeof(ids) = %d,sizeof(SLInterfaceID) = %d",sizeof(ids),sizeof(SLInterfaceID));
@@ -164,5 +184,44 @@ Java_aplay_testopensl_MainActivity_stringFromJNI(
     //启动队列回调
     (*pcmQue)->Enqueue(pcmQue,"",1);
 
+    /*re = (*pcmQue)->GetState(pcmQue, &state);
+    if(re !=SL_RESULT_SUCCESS )
+    {
+        LOGD("GetState failed!");
+    }
+    LOGD("GetState,state.count=%d!",state.count);
+    while(state.count)
+    {
+        (*pcmQue)->GetState(pcmQue, &state);
+        LOGD("GetState,loop,state.count=%d!",state.count);
+        sleep(1);
+    }
+    *//* Make sure player is stopped *//*
+    re = (*iplayer)->SetPlayState(iplayer, SL_PLAYSTATE_STOPPED);
+    if(re !=SL_RESULT_SUCCESS )
+    {
+        LOGD("SetPlayState SL_PLAYSTATE_STOPPED failed!");
+    }
+    *//* Destroy the player *//*
+    if(player != NULL)
+         (*player)->Destroy(player);
+    *//* Destroy Output Mix object *//*
+    if(mix != NULL)
+        (*mix)->Destroy(mix);
+    if(engineSL != NULL)
+        (*engineSL)->Destroy(engineSL);*/
     return env->NewStringUTF(hello.c_str());
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_aplay_testopensl_MainActivity_stopPlay(JNIEnv *env, jobject thiz) {
+    LOGD("stopPlay.");
+    /* Destroy the player */
+    if(player != NULL)
+        (*player)->Destroy(player);
+    /* Destroy Output Mix object */
+    if(mix != NULL)
+        (*mix)->Destroy(mix);
+    if(engineSL != NULL)
+        (*engineSL)->Destroy(engineSL);
 }
