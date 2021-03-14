@@ -15,5 +15,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="startPlay"
+        android:onClick="onClickStartPlay"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pausePlay"
+        android:onClick="onClickPausePlay"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="stopPlay"
+        android:onClick="onClickStopPlay"/>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package aplay.testopensl;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,11 +28,26 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+    public native void startPlay();
     public native void stopPlay();
-
+    public native void stopAndExit();
+    public native void pauseOrContinue();
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopAndExit();
+    }
+
+    public void onClickStartPlay(View view) {
+        startPlay();
+    }
+
+    public void onClickPausePlay(View view) {
+        pauseOrContinue();
+    }
+
+    public void onClickStopPlay(View view) {
         stopPlay();
     }
+
 }

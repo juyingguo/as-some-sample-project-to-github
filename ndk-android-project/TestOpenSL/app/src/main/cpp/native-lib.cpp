@@ -37,6 +37,10 @@
 static SLObjectItf  engineSL = NULL;
 static SLObjectItf mix = NULL;//混音器
 static SLObjectItf player = NULL;//播放器
+/* 暂停 */
+static bool isPaused = false;
+static FILE *fp = NULL;
+static char *buf = NULL;
 SLEngineItf CreateSL()
 {
     SLresult re;
@@ -53,8 +57,6 @@ SLEngineItf CreateSL()
 void PcmCall(SLAndroidSimpleBufferQueueItf bf,void *contex)
 {
 //    LOGD("PcmCall");
-    static FILE *fp = NULL;
-    static char *buf = NULL;
     if(!buf)
     {
         buf = new char[1024*1024];
@@ -68,6 +70,9 @@ void PcmCall(SLAndroidSimpleBufferQueueItf bf,void *contex)
     {
         int len = fread(buf,1,1024,fp);
         if(len > 0){
+            while (isPaused){
+                sleep(1);
+            }
             (*bf)->Enqueue(bf,buf,len);
         } else{//关闭文件，重置变量，释放资源，便于下次能重头正常播放
             fclose(fp);
@@ -102,6 +107,13 @@ Java_aplay_testopensl_MainActivity_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
+    return env->NewStringUTF(hello.c_str());
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_aplay_testopensl_MainActivity_startPlay(JNIEnv *env, jobject thiz) {
+    // TODO: implement startPlay()
 
     //1 创建引擎
     SLEngineItf eng = CreateSL();
@@ -109,9 +121,10 @@ Java_aplay_testopensl_MainActivity_stringFromJNI(
         LOGD("CreateSL success！ ");
     }else{
         LOGD("CreateSL failed！ ");
+        _exit(0);
     }
 
-   //2 创建混音器
+    //2 创建混音器
     SLresult re = 0;
     re = (*eng)->CreateOutputMix(eng,&mix,0,0,0);
     if(re !=SL_RESULT_SUCCESS )
@@ -183,39 +196,21 @@ Java_aplay_testopensl_MainActivity_stringFromJNI(
 
     //启动队列回调
     (*pcmQue)->Enqueue(pcmQue,"",1);
-
-    /*re = (*pcmQue)->GetState(pcmQue, &state);
-    if(re !=SL_RESULT_SUCCESS )
-    {
-        LOGD("GetState failed!");
-    }
-    LOGD("GetState,state.count=%d!",state.count);
-    while(state.count)
-    {
-        (*pcmQue)->GetState(pcmQue, &state);
-        LOGD("GetState,loop,state.count=%d!",state.count);
-        sleep(1);
-    }
-    *//* Make sure player is stopped *//*
-    re = (*iplayer)->SetPlayState(iplayer, SL_PLAYSTATE_STOPPED);
-    if(re !=SL_RESULT_SUCCESS )
-    {
-        LOGD("SetPlayState SL_PLAYSTATE_STOPPED failed!");
-    }
-    *//* Destroy the player *//*
-    if(player != NULL)
-         (*player)->Destroy(player);
-    *//* Destroy Output Mix object *//*
-    if(mix != NULL)
-        (*mix)->Destroy(mix);
-    if(engineSL != NULL)
-        (*engineSL)->Destroy(engineSL);*/
-    return env->NewStringUTF(hello.c_str());
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_aplay_testopensl_MainActivity_pauseOrContinue(JNIEnv *env, jobject thiz) {
+    isPaused = !isPaused;
 }
 extern "C"
 JNIEXPORT void JNICALL
 Java_aplay_testopensl_MainActivity_stopPlay(JNIEnv *env, jobject thiz) {
+
     LOGD("stopPlay.");
+    fclose(fp);
+    fp = NULL;
+    free(buf);
+    buf = NULL;
     /* Destroy the player */
     if(player != NULL)
         (*player)->Destroy(player);
@@ -224,4 +219,22 @@ Java_aplay_testopensl_MainActivity_stopPlay(JNIEnv *env, jobject thiz) {
         (*mix)->Destroy(mix);
     if(engineSL != NULL)
         (*engineSL)->Destroy(engineSL);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_aplay_testopensl_MainActivity_stopAndExit(JNIEnv *env, jobject thiz) {
+    LOGD("stopPlay.");
+    fclose(fp);
+    fp = NULL;
+    free(buf);
+    buf = NULL;
+    /* Destroy the player */
+    if(player != NULL)
+        (*player)->Destroy(player);
+    /* Destroy Output Mix object */
+    if(mix != NULL)
+        (*mix)->Destroy(mix);
+    if(engineSL != NULL)
+        (*engineSL)->Destroy(engineSL);
+    _exit(0);
 }
