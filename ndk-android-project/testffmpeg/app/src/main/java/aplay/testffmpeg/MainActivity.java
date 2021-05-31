@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById( R.id.sample_text );
+        String str = "/sdcard/1080.mp4";
+        //Open( str,this );
         tv.setText( stringFromJNI() );
     }
 
@@ -28,4 +30,5 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+    public native boolean Open(String url,Object handle);
 }

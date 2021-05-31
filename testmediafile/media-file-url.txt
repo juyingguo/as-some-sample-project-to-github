@@ -1,0 +1,12 @@
+ String url = "http://edu.ibotn.com/nkplay.mp4";
+        if (view.getId() == R.id.tv_kangxuan){
+            url = "http://edu.ibotn.com/nkplay.mp4";
+        }else if (view.getId() == R.id.tv_2){
+            url = "http://edu.ibotn.com/download/cgtx/ROUTINE_REMINDER_FILE/04教学活动/儿童歌曲 - 排队歌.mp4";
+        }else if (view.getId() == R.id.tv_3){
+            url = "http://edu.ibotn.com/download/cgtx/ROUTINE_REMINDER_FILE/12美味加餐-洗手歌/儿童歌曲 - 洗手歌.mp4";
+        } else if (view.getId() == R.id.tv_4){
+            url = "http://dodovideo.rsvptech.cn/rsvpvideo/glgldh/091hz.mp4";
+        } else if (view.getId() == R.id.tv_5){
+            url = "http://dodovideo.rsvptech.cn/rsvpvideo/glgldh/090xthk.mp4";
+        }

@@ -22,11 +22,14 @@
 **
 *******************************************************************************/
 //！！！！！！！！！ 加群23304930下载代码和交流
-
 #include <jni.h>
 #include <string>
+#include <android/log.h>
+#define LOGW(...) __android_log_print(ANDROID_LOG_WARN,"testff",__VA_ARGS__)
+
 extern "C"{
-    #include <libavcodec/avcodec.h>
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
 }
 
 extern "C"
@@ -44,5 +47,41 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
     hello += avcodec_license();
     hello += "\n";
     hello += avcodec_configuration();
+    //初始化解封装
+    av_register_all();
+    //初始化网络
+    avformat_network_init();
+    //打开文件
+    AVFormatContext *ic = NULL;
+    char path[] = "/sdcard/paiDuiGe.mp4";
+    int re = avformat_open_input(&ic,path,0,0);
+    if(re == 0)
+    {
+       LOGW("avformat_open_input %s success!",path);
+    }
+    else
+    {
+        LOGW("avformat_open_input failed!:%s",av_err2str(re));
+    }
     return env->NewStringUTF(hello.c_str());
+}
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_aplay_testffmpeg_MainActivity_Open(JNIEnv *env, jobject instance, jstring url_,
+                                        jobject handle) {
+    const char *url = env->GetStringUTFChars(url_, 0);
+
+    // TODO
+    FILE *fp = fopen(url,"rb");
+    if(!fp)
+    {
+        LOGW("File %s open failed!",url);
+    }
+    else
+    {
+        LOGW("File %s open succes!",url);
+        fclose(fp);
+    }
+    env->ReleaseStringUTFChars(url_, url);
+    return true;
 }
