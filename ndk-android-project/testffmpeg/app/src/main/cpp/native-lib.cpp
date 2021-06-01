@@ -46,6 +46,7 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
     hello += "avcodec_license()=";
     hello += avcodec_license();
     hello += "\n";
+    hello += "avcodec_configuration=";
     hello += avcodec_configuration();
     //初始化解封装
     av_register_all();

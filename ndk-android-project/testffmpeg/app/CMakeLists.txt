@@ -12,10 +12,21 @@ cmake_minimum_required(VERSION 3.4.1)
 #添加头文件路径（相对于本文件路径）
 include_directories(include)
 
+# 打印日志
+message("CMAKE_SOURCE_DIR:${CMAKE_CURRENT_SOURCE_DIR}")
+message("CMAKE_ANDROID_ARCH_ABI:${CMAKE_ANDROID_ARCH_ABI}")
+message("ANDROID_ABI:${ANDROID_ABI}")
+
 #设置ffmpeg库所在路径的变量
 set(FF ${CMAKE_CURRENT_SOURCE_DIR}/libs/${ANDROID_ABI})
 add_library(avcodec SHARED IMPORTED)
 set_target_properties(avcodec PROPERTIES IMPORTED_LOCATION ${FF}/libavcodec.so)
+
+add_library(avformat SHARED IMPORTED)
+set_target_properties(avformat PROPERTIES IMPORTED_LOCATION ${FF}/libavformat.so)
+
+add_library(avutil SHARED IMPORTED)
+set_target_properties(avutil PROPERTIES IMPORTED_LOCATION ${FF}/libavutil.so)
 
 add_library( # Sets the name of the library.
              native-lib
@@ -45,7 +56,7 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
                        native-lib
-                        avcodec
+                        avcodec avformat avutil
                        # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib} )
