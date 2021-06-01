@@ -67,8 +67,8 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
 
     //打开文件
     AVFormatContext *ic = NULL;
-//    char path[] = "/sdcard/paiDuiGe.mp4";
-    char path[] = "/sdcard/paiDuiGe.flv";
+    char path[] = "/sdcard/paiDuiGe.mp4";
+//    char path[] = "/sdcard/paiDuiGe.flv";
     int re = avformat_open_input(&ic,path,0,0);
     if(re != 0)
     {
@@ -116,6 +116,31 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
         }
     }
     //ic->streams[videoStream];
+    //获取音频流信息
+    audioStream = av_find_best_stream(ic,AVMEDIA_TYPE_AUDIO,-1,-1,NULL,0);
+    LOGW("av_find_best_stream audioStream = %d",audioStream);
+
+    //读取帧数据
+    AVPacket *pkt = av_packet_alloc();
+    for(;;)
+    {
+        int re = av_read_frame(ic,pkt);
+        if(re != 0)
+        {
+
+            LOGW("读取到结尾处!");
+//            int pos = 20 * r2d(ic->streams[videoStream]->time_base);
+//            av_seek_frame(ic,videoStream,pos,AVSEEK_FLAG_BACKWARD|AVSEEK_FLAG_FRAME );
+//            continue;
+            break;
+        }
+        LOGW("stream = %d size =%d pts=%lld flag=%d",
+             pkt->stream_index,pkt->size,pkt->pts,pkt->flags);
+        //////////////////////
+        
+        av_packet_unref(pkt);
+    }
+
 
 
     //关闭上下文
