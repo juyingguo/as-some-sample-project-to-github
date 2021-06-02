@@ -65,6 +65,8 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
     //初始化网络
     avformat_network_init();
 
+    avcodec_register_all();
+
     //打开文件
     AVFormatContext *ic = NULL;
     char path[] = "/sdcard/paiDuiGe.mp4";
@@ -119,8 +121,52 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
     //获取音频流信息
     audioStream = av_find_best_stream(ic,AVMEDIA_TYPE_AUDIO,-1,-1,NULL,0);
     LOGW("av_find_best_stream audioStream = %d",audioStream);
+    //////////////////////////////////////////////////////////
+    //打开视频解码器
+    //软解码器
+    AVCodec *codec = avcodec_find_decoder(ic->streams[videoStream]->codecpar->codec_id);
+    //硬解码
+    //codec = avcodec_find_decoder_by_name("h264_mediacodec");
+    if(!codec)
+    {
+        LOGW("avcodec_find failed!");
+        return env->NewStringUTF(hello.c_str());
+    }
+    //解码器初始化
+    AVCodecContext *vc = avcodec_alloc_context3(codec);
+    avcodec_parameters_to_context(vc,ic->streams[videoStream]->codecpar);
+    vc->thread_count = 1;
+    //打开解码器
+    re = avcodec_open2(vc,0,0);
+    if(re != 0)
+    {
+        LOGW("avcodec_open2 video failed!");
+        return env->NewStringUTF(hello.c_str());
+    }
 
-    //读取帧数据
+    //////////////////////////////////////////////////////////
+    //打开音频解码器
+    //软解码器
+    AVCodec *acodec = avcodec_find_decoder(ic->streams[audioStream]->codecpar->codec_id);
+    //硬解码
+    //codec = avcodec_find_decoder_by_name("h264_mediacodec");
+    if(!acodec)
+    {
+        LOGW("avcodec_find failed!");
+        return env->NewStringUTF(hello.c_str());
+    }
+    //解码器初始化
+    AVCodecContext *ac = avcodec_alloc_context3(acodec);
+    avcodec_parameters_to_context(ac,ic->streams[audioStream]->codecpar);
+    ac->thread_count = 1;
+    //打开解码器
+    re = avcodec_open2(ac,0,0);
+    if(re != 0)
+    {
+        LOGW("avcodec_open2  audio failed!");
+        return env->NewStringUTF(hello.c_str());
+    }
+        //读取帧数据
     AVPacket *pkt = av_packet_alloc();
     int i = 0;
     for(;;)
