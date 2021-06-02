@@ -44,6 +44,17 @@ static double r2d(AVRational r)
     return r.num==0||r.den == 0 ? 0 :(double)r.num/(double)r.den;
 }
 
+//当前时间戳 clock
+long long GetNowMs()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    int sec = tv.tv_sec%360000;
+    long long t = sec*1000+tv.tv_usec/1000;
+    return t;
+}
+
+
 extern "C"
 JNIEXPORT jstring
 
@@ -168,7 +179,7 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
     }
         //读取帧数据
     AVPacket *pkt = av_packet_alloc();
-    int i = 0;
+    AVFrame *frame = av_frame_alloc();
     for(;;)
     {
         int re = av_read_frame(ic,pkt);
@@ -176,20 +187,49 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
         {
 
             LOGW("读取到结尾处!");
-            int pos = static_cast<int>(20 * r2d(ic->streams[videoStream]->time_base));
-            LOGW("seek position=%d\n",pos);
-            av_seek_frame(ic,videoStream,68012000,AVSEEK_FLAG_BACKWARD|AVSEEK_FLAG_FRAME );//往后找同时跳到关键帧
-            if (++i > 2){
-                break;
-            } else{
-                continue;
-            }
+            int pos = 20 * r2d(ic->streams[videoStream]->time_base);
+            av_seek_frame(ic,videoStream,pos,AVSEEK_FLAG_BACKWARD|AVSEEK_FLAG_FRAME );
+//            continue;
+            break;
         }
-        LOGW("stream = %d size =%d pts=%lld flag=%d",
-             pkt->stream_index,pkt->size,pkt->pts,pkt->flags);
-        //////////////////////
-        
+        //只测试视频
+        /*if(pkt->stream_index !=videoStream)
+        {
+            continue;
+        }*/
+        //LOGW("stream = %d size =%d pts=%lld flag=%d",
+        //     pkt->stream_index,pkt->size,pkt->pts,pkt->flags
+        //);
+
+        AVCodecContext *cc = vc;
+        if(pkt->stream_index == audioStream)
+            cc=ac;
+
+        //发送到线程中解码
+        re = avcodec_send_packet(cc,pkt);
+        //清理
+        int p = pkt->pts;
         av_packet_unref(pkt);
+
+        if(re != 0)
+        {
+            LOGW("avcodec_send_packet failed!");
+            continue;
+        }
+        for(;;)
+        {
+            re = avcodec_receive_frame(cc,frame);
+            if(re !=0)
+            {
+                //LOGW("avcodec_receive_frame failed!");
+                break;
+            }
+            LOGW("avcodec_receive_frame %lld",frame->pts);
+        }
+
+        //////////////////////
+
+
     }
 
 
