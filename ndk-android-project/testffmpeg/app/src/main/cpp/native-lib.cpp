@@ -122,6 +122,7 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
 
     //读取帧数据
     AVPacket *pkt = av_packet_alloc();
+    int i = 0;
     for(;;)
     {
         int re = av_read_frame(ic,pkt);
@@ -129,10 +130,14 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
         {
 
             LOGW("读取到结尾处!");
-//            int pos = 20 * r2d(ic->streams[videoStream]->time_base);
-//            av_seek_frame(ic,videoStream,pos,AVSEEK_FLAG_BACKWARD|AVSEEK_FLAG_FRAME );
-//            continue;
-            break;
+            int pos = static_cast<int>(20 * r2d(ic->streams[videoStream]->time_base));
+            LOGW("seek position=%d\n",pos);
+            av_seek_frame(ic,videoStream,68012000,AVSEEK_FLAG_BACKWARD|AVSEEK_FLAG_FRAME );//往后找同时跳到关键帧
+            if (++i > 2){
+                break;
+            } else{
+                continue;
+            }
         }
         LOGW("stream = %d size =%d pts=%lld flag=%d",
              pkt->stream_index,pkt->size,pkt->pts,pkt->flags);
