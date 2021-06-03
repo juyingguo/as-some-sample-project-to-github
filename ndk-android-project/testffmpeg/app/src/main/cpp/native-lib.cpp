@@ -32,6 +32,7 @@ extern "C"{
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavcodec/jni.h>
+#include <libswscale/swscale.h>
 }
 #include<iostream>
 using namespace std;
@@ -154,7 +155,7 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
     AVCodecContext *vc = avcodec_alloc_context3(codec);
     avcodec_parameters_to_context(vc,ic->streams[videoStream]->codecpar);
 
-    vc->thread_count = 1;
+    vc->thread_count = 8;
     //打开解码器
     re = avcodec_open2(vc,0,0);
     //vc->time_base = ic->streams[videoStream]->time_base;
@@ -179,7 +180,7 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
     //解码器初始化
     AVCodecContext *ac = avcodec_alloc_context3(acodec);
     avcodec_parameters_to_context(ac,ic->streams[audioStream]->codecpar);
-    ac->thread_count = 1;
+    ac->thread_count = 8;
     //打开解码器
     re = avcodec_open2(ac,0,0);
     if(re != 0)
@@ -192,6 +193,13 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
     AVFrame *frame = av_frame_alloc();
     long long start = GetNowMs();
     int frameCount = 0;
+
+
+    //初始化像素格式转换的上下文
+    SwsContext *vctx = NULL;
+    int outWidth = 1280;
+    int outHeight = 720;
+    char *rgb = new char[1920*1080*4];
     for(;;)
     {
         //超过三秒
@@ -217,9 +225,9 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
         {
             continue;
         }*/
-        //LOGW("stream = %d size =%d pts=%lld flag=%d",
-        //     pkt->stream_index,pkt->size,pkt->pts,pkt->flags
-        //);
+        /*LOGW("stream = %d size =%d pts=%lld flag=%d",
+             pkt->stream_index,pkt->size,pkt->pts,pkt->flags
+        );*/
 
         AVCodecContext *cc = vc;
         if(pkt->stream_index == audioStream)
@@ -236,6 +244,8 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
             LOGW("avcodec_send_packet failed!");
             continue;
         }
+
+
         for(;;)
         {
             re = avcodec_receive_frame(cc,frame);
@@ -249,6 +259,34 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
             if(cc == vc)
             {
                 frameCount++;
+                vctx = sws_getCachedContext(vctx,
+                                            frame->width,
+                                            frame->height,
+                                            (AVPixelFormat)frame->format,
+                                            outWidth,
+                                            outHeight,
+                                            AV_PIX_FMT_RGBA,
+                                            SWS_FAST_BILINEAR,
+                                            0,0,0
+                );
+                if(!vctx)
+                {
+                    LOGW("sws_getCachedContext failed!");
+                }
+                else
+                {
+                    uint8_t *data[AV_NUM_DATA_POINTERS] = {0};
+                    data[0] =(uint8_t *)rgb;
+                    int lines[AV_NUM_DATA_POINTERS] = {0};
+                    lines[0] = outWidth * 4;
+                    int h = sws_scale(vctx,
+                                      (const uint8_t **)frame->data,
+                                      frame->linesize,0,
+                                      frame->height,
+                                      data,lines);
+                    LOGW("sws_scale = %d",h);
+                }
+
             }
 
         }
@@ -257,6 +295,7 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
 
 
     }
+    delete []rgb;
 
 
 
