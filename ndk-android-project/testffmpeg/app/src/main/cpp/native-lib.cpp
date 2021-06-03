@@ -33,6 +33,7 @@ extern "C"{
 #include <libavformat/avformat.h>
 #include <libavcodec/jni.h>
 #include <libswscale/swscale.h>
+#include <libswresample/swresample.h>
 }
 #include<iostream>
 using namespace std;
@@ -177,7 +178,7 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
         LOGW("avcodec_find for audio failed!:%s",av_err2str(re));
         return env->NewStringUTF(hello.c_str());
     }
-    //解码器初始化
+    //音频解码器初始化
     AVCodecContext *ac = avcodec_alloc_context3(acodec);
     avcodec_parameters_to_context(ac,ic->streams[audioStream]->codecpar);
     ac->thread_count = 8;
@@ -200,6 +201,28 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
     int outWidth = 1280;
     int outHeight = 720;
     char *rgb = new char[1920*1080*4];
+    char *pcm = new char[48000*4*2];
+
+    //音频重采样上下文初始化
+    SwrContext *actx = swr_alloc();
+    actx = swr_alloc_set_opts(actx,
+                              av_get_default_channel_layout(2),
+                              AV_SAMPLE_FMT_S16,ac->sample_rate,
+                              av_get_default_channel_layout(ac->channels),
+                              ac->sample_fmt,ac->sample_rate,
+                              0,0 );
+    re = swr_init(actx);
+    if(re != 0)
+    {
+        LOGW("swr_init failed!");
+    }
+    else
+    {
+        LOGW("swr_init success!");
+    }
+
+
+
     for(;;)
     {
         //超过三秒
@@ -288,6 +311,18 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
                 }
 
             }
+            else //音频
+            {
+                uint8_t *out[2] = {0};
+                out[0] = (uint8_t*) pcm;
+
+                //音频重采样
+                int len = swr_convert(actx,out,
+                                      frame->nb_samples,
+                                      (const uint8_t**)frame->data,
+                                      frame->nb_samples);
+                LOGW("swr_convert = %d",len);
+            }
 
         }
 
@@ -295,7 +330,8 @@ Java_aplay_testffmpeg_MainActivity_stringFromJNI(
 
 
     }
-    delete []rgb;
+    delete rgb;
+    delete pcm;
 
 
 
