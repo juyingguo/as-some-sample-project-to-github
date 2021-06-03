@@ -207,7 +207,7 @@ Java_aplay_testffmpeg_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, jo
 
     //初始化像素格式转换的上下文
     SwsContext *vctx = NULL;
-    int outWidth = 1280;
+    int outWidth = 1280 -64;
     int outHeight = 720;
     char *rgb = new char[1280*720*4];
     char *pcm = new char[48000*4*2];
@@ -292,6 +292,9 @@ Java_aplay_testffmpeg_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, jo
             //如果是视频帧
             if(cc == vc)
             {
+                LOGW("video frame->width=%d,frame->height=%d",frame->width,frame->height);
+                LOGW("video frame->linesize[0]=%d",frame->linesize[0]);
+//                outWidth = frame->linesize[0];
                 frameCount++;
                 vctx = sws_getCachedContext(vctx,
                                             frame->width,
@@ -319,7 +322,7 @@ Java_aplay_testffmpeg_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, jo
                                       frame->height,
                                       data,lines);
                     LOGW("sws_scale = %d",h);
-                    if(h >= 0)
+                    if(h > 0)
                     {
                         ANativeWindow_lock(nwin,&wbuf,0);
                         uint8_t *dst = (uint8_t*)wbuf.bits;

@@ -7,6 +7,7 @@
     tools:context="aplay.testffmpeg.MainActivity">
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/sample_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
