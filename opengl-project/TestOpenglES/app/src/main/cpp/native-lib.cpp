@@ -237,8 +237,9 @@ Java_aplay_testopengles_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, 
     glVertexAttribPointer(atex,2,GL_FLOAT,GL_FALSE,8,txts);
 
 
-    int width = 424;
-    int height = 240;
+    //设置的宽高要和实际视频保持一致，否则显示花屏图像
+    int width = 1280;
+    int height = 720;
 
     //材质纹理初始化
     //设置纹理层
