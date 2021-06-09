@@ -112,6 +112,15 @@ JNIEXPORT void JNICALL
 Java_aplay_testopengles_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, jobject surface) {
     const char *url = env->GetStringUTFChars(url_, 0);
     LOGD("open url is %s",url);
+
+    FILE *fp = fopen(url,"rb");
+    if(!fp)
+    {
+        LOGD("open file %s failed!",url);
+        return;
+    }
+
+
     //1 获取原始窗口
     ANativeWindow *nwin = ANativeWindow_fromSurface(env,surface);
 
@@ -301,11 +310,25 @@ Java_aplay_testopengles_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, 
     buf[1] = new unsigned char[width*height/4];
     buf[2] = new unsigned char[width*height/4];
 
+
     for(int i = 0; i<10000;i++)
     {
-        memset(buf[0],i,width*height);
-        memset(buf[1],i,width*height/4);
-        memset(buf[2],i,width*height/4);
+        //memset(buf[0],i,width*height);
+        // memset(buf[1],i,width*height/4);
+        //memset(buf[2],i,width*height/4);
+
+        //420p   yyyyyyyy uu vv
+        if(feof(fp) == 0)
+        {
+            //yyyyyyyy
+            fread(buf[0],1,width*height,fp);
+            fread(buf[1],1,width*height/4,fp);
+            fread(buf[2],1,width*height/4,fp);
+        }
+
+
+
+
 
         //激活第1层纹理,绑定到创建的opengl纹理
         glActiveTexture(GL_TEXTURE0);
