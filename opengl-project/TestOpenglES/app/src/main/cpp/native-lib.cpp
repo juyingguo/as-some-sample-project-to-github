@@ -29,6 +29,7 @@
 #include <android/native_window_jni.h>
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
+#include <string.h>
 
 #define LOGD(...) __android_log_print(ANDROID_LOG_WARN,"testff",__VA_ARGS__)
 
@@ -293,10 +294,47 @@ Java_aplay_testopengles_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, 
 
 
 
+    //////////////////////////////////////////////////////
+    ////纹理的修改和显示
+    unsigned char *buf[3] = {0};
+    buf[0] = new unsigned char[width*height];
+    buf[1] = new unsigned char[width*height/4];
+    buf[2] = new unsigned char[width*height/4];
+
+    for(int i = 0; i<10000;i++)
+    {
+        memset(buf[0],i,width*height);
+        memset(buf[1],i,width*height/4);
+        memset(buf[2],i,width*height/4);
+
+        //激活第1层纹理,绑定到创建的opengl纹理
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D,texts[0]);
+        //替换纹理内容
+        glTexSubImage2D(GL_TEXTURE_2D,0,0,0,width,height,GL_LUMINANCE,GL_UNSIGNED_BYTE,buf[0]);
 
 
 
+        //激活第2层纹理,绑定到创建的opengl纹理
+        glActiveTexture(GL_TEXTURE0+1);
+        glBindTexture(GL_TEXTURE_2D,texts[1]);
+        //替换纹理内容
+        glTexSubImage2D(GL_TEXTURE_2D,0,0,0,width/2,height/2,GL_LUMINANCE,GL_UNSIGNED_BYTE,buf[1]);
 
+
+        //激活第2层纹理,绑定到创建的opengl纹理
+        glActiveTexture(GL_TEXTURE0+2);
+        glBindTexture(GL_TEXTURE_2D,texts[2]);
+        //替换纹理内容
+        glTexSubImage2D(GL_TEXTURE_2D,0,0,0,width/2,height/2,GL_LUMINANCE,GL_UNSIGNED_BYTE,buf[2]);
+
+        //三维绘制
+        glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+        //窗口显示
+        eglSwapBuffers(display,winsurface);
+
+
+    }
 
 
 
