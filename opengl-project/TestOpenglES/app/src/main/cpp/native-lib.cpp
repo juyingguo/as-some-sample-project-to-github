@@ -233,13 +233,18 @@ Java_aplay_testopengles_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, 
             0.0,1.0
     };
     GLuint atex = (GLuint)glGetAttribLocation(program,"aTexCoord");
+    if(atex == GL_INVALID_OPERATION )
+    {
+        LOGD("glGetAttribLocation failed!");
+        return;
+    }
     glEnableVertexAttribArray(atex);
     glVertexAttribPointer(atex,2,GL_FLOAT,GL_FALSE,8,txts);
 
 
     //设置的宽高要和实际视频保持一致，否则显示花屏图像
-    int width = 1280;
-    int height = 720;
+    int width = 512;
+    int height = 256;
 
     //材质纹理初始化
     //设置纹理层
@@ -314,9 +319,9 @@ Java_aplay_testopengles_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, 
 
     for(int i = 0; i<10000;i++)
     {
-        //memset(buf[0],i,width*height);
-        // memset(buf[1],i,width*height/4);
-        //memset(buf[2],i,width*height/4);
+//        memset(buf[0],i,width*height);
+//         memset(buf[1],i,width*height/4);
+//        memset(buf[2],i,width*height/4);
 
         //420p   yyyyyyyy uu vv
         if(feof(fp) == 0)
