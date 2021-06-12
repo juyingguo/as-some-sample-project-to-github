@@ -256,6 +256,7 @@ Java_aplay_testopengles_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, 
     GLuint texts[3] = {0};
     //创建三个纹理
     glGenTextures(3,texts);
+    LOGD("glGenTextures call after,texture texts[0]=%d,texts[1]=%d,texts[2]=%d\n",texts[0],texts[1],texts[2]);
 
     //设置纹理属性
     glBindTexture(GL_TEXTURE_2D,texts[0]);
