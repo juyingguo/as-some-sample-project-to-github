@@ -30,7 +30,7 @@
 extern "C"{
 #include <libavformat/avformat.h>
 }
-//打开文件，或者流媒体 rmtp http rtsp
+//打开文件，或者流媒体 rtmp http rtsp
 bool FFDemux::Open(const char *url)
 {
     XLOGI(TAG "Open file %s begin",url);

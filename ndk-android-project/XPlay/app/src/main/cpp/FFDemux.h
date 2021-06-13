@@ -33,7 +33,7 @@
 
 
 #include "IDemux.h"
-struct AVFormatContext;
+struct AVFormatContext;//技巧：采用结构体指针方式，无需引用头文件。
 
 class FFDemux: public IDemux {
 public:
@@ -47,7 +47,7 @@ public:
     FFDemux();
 
 private:
-    AVFormatContext *ic = 0;
+    AVFormatContext *ic = 0;//c++11，且调用无参构造函数时才初始化。c++11的坑。
 };
 
 

@@ -43,7 +43,7 @@ Java_xplay_xplay_MainActivity_stringFromJNI(
     ///////////////////////////////////
     ///测试用代码
     IDemux *de = new FFDemux();
-    de->Open("/sdcard/test-file/output_640_480.mp4");
+    de->Open("/sdcard/paiDuiGe.mp4");
     for(;;)
     {
         XData d = de->Read();
