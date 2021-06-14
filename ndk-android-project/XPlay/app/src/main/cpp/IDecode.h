@@ -24,67 +24,47 @@
 //！！！！！！！！！ 加群23304930下载代码和交流
 
 
-#include <jni.h>
-#include <string>
+//
+// Created by Administrator on 2018-03-02.
+//
 
-#include "FFDemux.h"
-#include "XLog.h"
-#include "FFDecode.h"
+#ifndef XPLAY_IDECODE_H
+#define XPLAY_IDECODE_H
 
-class TestObs:public IObserver
+#include "XParameter.h"
+#include "IObserver.h"
+#include <list>
+//解码接口，支持硬解码
+class IDecode:public IObserver
 {
 public:
-    void Update(XData d)
-    {
-        //XLOGI("TestObs Update data size is %d",d.size);
-    }
+    //打开解码器
+    virtual bool Open(XParameter para) = 0;
+
+    //future模型 发送数据到线程解码
+    virtual bool SendPacket(XData pkt) = 0;
+
+    //从线程中获取解码结果  再次调用会复用上次空间，线程不安全
+    virtual XData RecvFrame() = 0;
+
+    //由主体notify的数据 阻塞
+    virtual void Update(XData pkt);
+
+    bool isAudio = false;
+
+    //最大的队列缓冲，防止一直没有读取，导致内存耗尽。
+    int maxList = 100;
+
+
+protected:
+    virtual void Main();
+
+    //读取缓冲
+    std::list<XData> packs;
+    std::mutex packsMutex;
+
+
 };
 
 
-
-extern "C"
-JNIEXPORT jstring
-
-JNICALL
-Java_xplay_xplay_MainActivity_stringFromJNI(
-        JNIEnv *env,
-        jobject /* this */) {
-    std::string hello = "Hello from C++";
-
-    //XLOGI("S begin!");
-    //XSleep(3000);
-    //XLOGI("S end!");
-    //return env->NewStringUTF(hello.c_str());
-
-    ///////////////////////////////////
-    ///测试用代码
-    TestObs *tobs = new TestObs();
-    IDemux *de = new FFDemux();
-    //de->AddObs(tobs);
-    de->Open("/sdcard/paiDuiGe.mp4");
-
-    IDecode *vdecode = new FFDecode();
-    vdecode->Open(de->GetVPara());
-
-    IDecode *adecode = new FFDecode();
-    adecode->Open(de->GetAPara());
-    de->AddObs(vdecode);
-    de->AddObs(adecode);
-
-    //vdecode->Open();
-    de->Start();
-    vdecode->Start();
-    adecode->Start();
-
-    //XSleep(3000);
-    //de->Stop();
-    /*for(;;)
-    {
-        XData d = de->Read();
-        XLOGI("Read data size is %d",d.size);
-
-
-    }*/
-
-    return env->NewStringUTF(hello.c_str());
-}
+#endif //XPLAY_IDECODE_H
