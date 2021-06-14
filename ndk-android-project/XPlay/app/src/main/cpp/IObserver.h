@@ -28,19 +28,31 @@
 // Created by Administrator on 2018-03-01.
 //
 
-#include "IDemux.h"
-#include "XLog.h"
+#ifndef XPLAY_IOBSERVER_H
+#define XPLAY_IOBSERVER_H
 
-void IDemux::Main()
+#include "XData.h"
+#include "XThread.h"
+#include <vector>
+#include <mutex>
+
+//观察者 和 主体
+class IObserver:public XThread
 {
-    XLOGI("IDemux::Main() enter.");
-    while(!isExit)
-    {
+public:
+    //观察者接收数据函数
+    virtual void Update(XData data) {}
 
-        XData d = Read();
-        if(d.size > 0)
-            Notify(d);
-        //XLOGI("IDemux Read %d",d.size);
-        //if(d.size<=0)break;
-    }
-}
+    //主体函数 添加观察者(线程安全)
+    void AddObs(IObserver *obs);
+
+    //通知所有观察者(线程安全)
+    void Notify(XData data);
+
+protected:
+    std::vector<IObserver *>obss;
+    std::mutex mux;
+};
+
+
+#endif //XPLAY_IOBSERVER_H

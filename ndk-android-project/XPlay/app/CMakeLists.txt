@@ -44,6 +44,8 @@ add_library( # Sets the name of the library.
               src/main/cpp/FFDemux.cpp
               src/main/cpp/XData.cpp
               src/main/cpp/XLog.cpp
+              src/main/cpp/XThread.cpp
+              src/main/cpp/IObserver.cpp
 
 
 

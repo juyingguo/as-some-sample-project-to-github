@@ -28,19 +28,32 @@
 // Created by Administrator on 2018-03-01.
 //
 
-#include "IDemux.h"
-#include "XLog.h"
+#ifndef XPLAY_XTHREAD_H
+#define XPLAY_XTHREAD_H
 
-void IDemux::Main()
+//sleep 毫秒
+void XSleep(int mis);
+
+//c++ 11 线程库
+class XThread
 {
-    XLOGI("IDemux::Main() enter.");
-    while(!isExit)
-    {
+public:
+    //启动线程
+    virtual void Start();
 
-        XData d = Read();
-        if(d.size > 0)
-            Notify(d);
-        //XLOGI("IDemux Read %d",d.size);
-        //if(d.size<=0)break;
-    }
-}
+    //通过控制isExit安全停止线程（不一定成功）
+    virtual void Stop();
+
+    //入口主函数
+    virtual void Main() {}
+
+protected:
+    bool isExit = false;
+    bool isRunning = false;
+private:
+    void ThreadMain();
+
+};
+
+
+#endif //XPLAY_XTHREAD_H

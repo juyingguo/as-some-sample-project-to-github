@@ -28,19 +28,27 @@
 // Created by Administrator on 2018-03-01.
 //
 
-#include "IDemux.h"
-#include "XLog.h"
+#include "IObserver.h"
 
-void IDemux::Main()
+
+//主体函数 添加观察者
+void IObserver::AddObs(IObserver *obs)
 {
-    XLOGI("IDemux::Main() enter.");
-    while(!isExit)
-    {
+    if(!obs)return;
+    mux.lock();
+    obss.push_back(obs);
+    mux.unlock();
+}
 
-        XData d = Read();
-        if(d.size > 0)
-            Notify(d);
-        //XLOGI("IDemux Read %d",d.size);
-        //if(d.size<=0)break;
+//通知所有观察者
+void IObserver::Notify(XData data)
+{
+
+    mux.lock();
+    for(int i =0; i < obss.size(); i++)
+    {
+        obss[i]->Update(data);
     }
+    mux.unlock();
+
 }

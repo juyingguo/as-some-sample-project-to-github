@@ -30,6 +30,17 @@
 #include "FFDemux.h"
 #include "XLog.h"
 
+class TestObs:public IObserver
+{
+public:
+    void Update(XData d)
+    {
+        XLOGI("TestObs Update data size is %d",d.size);
+    }
+};
+
+
+
 extern "C"
 JNIEXPORT jstring
 
@@ -39,18 +50,27 @@ Java_xplay_xplay_MainActivity_stringFromJNI(
         jobject /* this */) {
     std::string hello = "Hello from C++";
 
+    //XLOGI("S begin!");
+    //XSleep(3000);
+    //XLOGI("S end!");
+    //return env->NewStringUTF(hello.c_str());
 
     ///////////////////////////////////
     ///测试用代码
+    TestObs *tobs = new TestObs();
     IDemux *de = new FFDemux();
+    de->AddObs(tobs);
     de->Open("/sdcard/paiDuiGe.mp4");
-    for(;;)
+    de->Start();
+    XSleep(3000);
+//    de->Stop();
+    /*for(;;)
     {
         XData d = de->Read();
         XLOGI("Read data size is %d",d.size);
 
 
-    }
+    }*/
 
     return env->NewStringUTF(hello.c_str());
 }
