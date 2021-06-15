@@ -207,8 +207,8 @@ Java_aplay_testffmpeg_XPlay_Open(JNIEnv *env, jobject instance, jstring url_, jo
 
     //初始化像素格式转换的上下文
     SwsContext *vctx = NULL;
-    int outWidth = 1280 - 64;
-    int outHeight = 720;
+    int outWidth = 1920;
+    int outHeight = 1080;
     char *rgb = new char[1920*1080*4];
     char *pcm = new char[48000*4*2];
 
