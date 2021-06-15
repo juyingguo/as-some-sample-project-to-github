@@ -24,39 +24,25 @@
 //！！！！！！！！！ 加群23304930下载代码和交流
 
 
-package xplay.xplay;
+//
+// Created by Administrator on 2018-03-05.
+//
 
-import android.content.Context;
-import android.opengl.GLSurfaceView;
-import android.util.AttributeSet;
-import android.view.SurfaceHolder;
+#ifndef XPLAY_IRESAMPLE_H
+#define XPLAY_IRESAMPLE_H
 
-/**
- * Created by Administrator on 2018-03-04.
- */
+#include "XParameter.h"
+#include "IObserver.h"
 
-public class XPlay extends GLSurfaceView implements SurfaceHolder.Callback {
-    public XPlay(Context context, AttributeSet attrs) {
-        super( context, attrs );
-    }
-    @Override
-    public void surfaceCreated(SurfaceHolder holder)
-    {
-        //初始化opengl egl 显示
-        InitView(holder.getSurface());
-    }
+class IResample: public IObserver
+{
+public:
+    virtual bool Open(XParameter in,XParameter out=XParameter()) = 0;
+    virtual XData Resample(XData indata) = 0;
+    virtual void Update(XData data);
+    int outChannels = 2;
+    int outFormat = 1;
+};
 
-    @Override
-    public void surfaceChanged(SurfaceHolder var1, int var2, int var3, int var4)
-    {
 
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder var1)
-    {
-
-    }
-    public native void InitView(Object surface);
-
-}
+#endif //XPLAY_IRESAMPLE_H

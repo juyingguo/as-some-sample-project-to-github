@@ -24,39 +24,25 @@
 //！！！！！！！！！ 加群23304930下载代码和交流
 
 
-package xplay.xplay;
+//
+// Created by Administrator on 2018-03-05.
+//
 
-import android.content.Context;
-import android.opengl.GLSurfaceView;
-import android.util.AttributeSet;
-import android.view.SurfaceHolder;
+#ifndef XPLAY_FFRESAMPLE_H
+#define XPLAY_FFRESAMPLE_H
 
-/**
- * Created by Administrator on 2018-03-04.
- */
 
-public class XPlay extends GLSurfaceView implements SurfaceHolder.Callback {
-    public XPlay(Context context, AttributeSet attrs) {
-        super( context, attrs );
-    }
-    @Override
-    public void surfaceCreated(SurfaceHolder holder)
-    {
-        //初始化opengl egl 显示
-        InitView(holder.getSurface());
-    }
+#include "IResample.h"
+struct SwrContext;
+class FFResample: public IResample
+{
+public:
+    virtual bool Open(XParameter in,XParameter out=XParameter());
+    virtual XData Resample(XData indata);
+protected:
+    SwrContext *actx = 0;
 
-    @Override
-    public void surfaceChanged(SurfaceHolder var1, int var2, int var3, int var4)
-    {
+};
 
-    }
 
-    @Override
-    public void surfaceDestroyed(SurfaceHolder var1)
-    {
-
-    }
-    public native void InitView(Object surface);
-
-}
+#endif //XPLAY_FFRESAMPLE_H
