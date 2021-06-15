@@ -26,6 +26,7 @@
 
 #include <jni.h>
 #include <string>
+#include <android/native_window_jni.h>
 
 #include "FFDemux.h"
 #include "XLog.h"
@@ -87,4 +88,13 @@ Java_xplay_xplay_MainActivity_stringFromJNI(
     }*/
 
     return env->NewStringUTF(hello.c_str());
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_xplay_xplay_XPlay_InitView(JNIEnv *env, jobject instance, jobject surface) {
+
+    // TODO
+    ANativeWindow *win = ANativeWindow_fromSurface(env,surface);
+
+
 }
