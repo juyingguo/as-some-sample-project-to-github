@@ -27,6 +27,7 @@
 package xplay.xplay;
 
 import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -46,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        toCheckPermission();
+        if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.M){
+            toCheckPermission();
+        }
         setContentView( R.layout.activity_main );
 
         // Example of a call to a native method

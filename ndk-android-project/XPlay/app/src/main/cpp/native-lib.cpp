@@ -67,8 +67,8 @@ Java_xplay_xplay_MainActivity_stringFromJNI(
     TestObs *tobs = new TestObs();
     IDemux *de = new FFDemux();
     //de->AddObs(tobs);
-//    de->Open("/sdcard/paiDuiGe.mp4");
-    de->Open("/sdcard/1080.mp4");
+    de->Open("/sdcard/paiDuiGe.mp4");
+//    de->Open("/sdcard/1080.mp4");
 
     IDecode *vdecode = new FFDecode();
     vdecode->Open(de->GetVPara());
