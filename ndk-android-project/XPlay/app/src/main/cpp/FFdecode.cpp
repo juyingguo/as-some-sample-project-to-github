@@ -112,6 +112,7 @@ XData FFDecode::RecvFrame()
     {
         //yuv平面数据，依次在数组中。
         d.size = (frame->linesize[0] + frame->linesize[1] + frame->linesize[2])*frame->height;
+        //XLOGI("RecvFrame() frame->width=%d",frame->width);
         d.width = frame->width;
         d.height = frame->height;
     }
