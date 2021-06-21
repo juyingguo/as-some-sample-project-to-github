@@ -25,26 +25,33 @@
 
 
 //
-// Created by Administrator on 2018-03-04.
+// Created by Administrator on 2018-03-05.
 //
 
-#ifndef XPLAY_XTEXTURE_H
-#define XPLAY_XTEXTURE_H
-enum XTextureType
-{
-    XTEXTURE_YUV420P = 0,  // Y 4  u 1 v 1
-    XTEXTURE_NV12 = 25,    // Y4   uv1
-    XTEXTURE_NV21 = 26     // Y4   vu1
+#ifndef XPLAY_IAUDIOPLAY_H
+#define XPLAY_IAUDIOPLAY_H
 
-};
 
-class XTexture
+#include <list>
+#include "IObserver.h"
+#include "XParameter.h"
+
+class IAudioPlay: public IObserver
 {
 public:
-    static XTexture *Create();
-    virtual bool Init(void *win,XTextureType type=XTEXTURE_YUV420P) = 0;
-    virtual void Draw(unsigned char *data[],int width,int height) = 0;
+    //缓冲满后阻塞
+    virtual void Update(XData data);
+
+    //获取缓冲数据，如没有则阻塞
+    virtual XData GetData();
+
+    virtual bool StartPlay(XParameter out) = 0;
+    //最大缓冲
+    int maxFrame = 100;
+protected:
+    std::list <XData> frames;
+    std::mutex framesMutex;
 };
 
 
-#endif //XPLAY_XTEXTURE_H
+#endif //XPLAY_IAUDIOPLAY_H

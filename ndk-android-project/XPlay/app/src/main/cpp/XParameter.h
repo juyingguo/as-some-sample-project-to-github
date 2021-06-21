@@ -38,7 +38,8 @@ class XParameter
 {
 public:
     AVCodecParameters *para = 0;
-
+    int channels = 2;
+    int sample_rate = 44100;
 };
 
 

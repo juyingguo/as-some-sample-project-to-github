@@ -25,26 +25,46 @@
 
 
 //
-// Created by Administrator on 2018-03-04.
+// Created by Administrator on 2018-03-05.
 //
 
-#ifndef XPLAY_XTEXTURE_H
-#define XPLAY_XTEXTURE_H
-enum XTextureType
+#include "IAudioPlay.h"
+#include "XLog.h"
+XData IAudioPlay::GetData()
 {
-    XTEXTURE_YUV420P = 0,  // Y 4  u 1 v 1
-    XTEXTURE_NV12 = 25,    // Y4   uv1
-    XTEXTURE_NV21 = 26     // Y4   vu1
+    XData d;
 
-};
-
-class XTexture
+    while(!isExit)
+    {
+        framesMutex.lock();
+        if(!frames.empty())
+        {
+            d = frames.front();
+            frames.pop_front();
+            framesMutex.unlock();
+            return d;
+        }
+        framesMutex.unlock();
+        XSleep(1);
+    }
+    return d;
+}
+void IAudioPlay::Update(XData data)
 {
-public:
-    static XTexture *Create();
-    virtual bool Init(void *win,XTextureType type=XTEXTURE_YUV420P) = 0;
-    virtual void Draw(unsigned char *data[],int width,int height) = 0;
-};
-
-
-#endif //XPLAY_XTEXTURE_H
+    //XLOGE("IAudioPlay::Update %d",data.size);
+    //压入缓冲队列
+    if(data.size<=0|| !data.data) return;
+    while(!isExit)
+    {
+        framesMutex.lock();
+        if(frames.size() > maxFrame)
+        {
+            framesMutex.unlock();
+            XSleep(1);
+            continue;
+        }
+        frames.push_back(data);
+        framesMutex.unlock();
+        break;
+    }
+}

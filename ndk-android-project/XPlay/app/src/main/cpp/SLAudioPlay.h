@@ -25,26 +25,26 @@
 
 
 //
-// Created by Administrator on 2018-03-04.
+// Created by Administrator on 2018-03-05.
 //
 
-#ifndef XPLAY_XTEXTURE_H
-#define XPLAY_XTEXTURE_H
-enum XTextureType
-{
-    XTEXTURE_YUV420P = 0,  // Y 4  u 1 v 1
-    XTEXTURE_NV12 = 25,    // Y4   uv1
-    XTEXTURE_NV21 = 26     // Y4   vu1
+#ifndef XPLAY_SLAUDIOPLAY_H
+#define XPLAY_SLAUDIOPLAY_H
 
-};
 
-class XTexture
+#include "IAudioPlay.h"
+
+class SLAudioPlay: public IAudioPlay
 {
 public:
-    static XTexture *Create();
-    virtual bool Init(void *win,XTextureType type=XTEXTURE_YUV420P) = 0;
-    virtual void Draw(unsigned char *data[],int width,int height) = 0;
+    virtual bool StartPlay(XParameter out);
+    void PlayCall(void *bufq);
+
+    SLAudioPlay();
+    virtual ~SLAudioPlay();
+protected:
+    unsigned char *buf = 0;
 };
 
 
-#endif //XPLAY_XTEXTURE_H
+#endif //XPLAY_SLAUDIOPLAY_H

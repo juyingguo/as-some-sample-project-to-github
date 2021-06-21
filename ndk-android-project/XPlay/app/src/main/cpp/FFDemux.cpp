@@ -96,6 +96,8 @@ XParameter FFDemux::GetAPara()
     audioStream = re;
     XParameter para;
     para.para = ic->streams[re]->codecpar;
+    para.channels = ic->streams[re]->codecpar->channels;
+    para.sample_rate = ic->streams[re]->codecpar->sample_rate;
     return para;
 }
 //读取一帧数据，数据由调用者清理
