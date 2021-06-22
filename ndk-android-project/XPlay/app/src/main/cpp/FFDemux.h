@@ -38,7 +38,7 @@ struct AVFormatContext;//技巧：采用结构体指针方式，无需引用头�
 class FFDemux: public IDemux {
 public:
 
-    //打开文件，或者流媒体 rmtp http rtsp
+    //打开文件，或者流媒体 rtmp http rtsp
     virtual bool Open(const char *url);
 
     //获取视频参数
