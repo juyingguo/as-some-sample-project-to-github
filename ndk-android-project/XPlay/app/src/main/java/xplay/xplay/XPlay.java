@@ -38,7 +38,7 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by Administrator on 2018-03-04.
  */
 
-public class XPlay extends GLSurfaceView implements SurfaceHolder.Callback,GLSurfaceView.Renderer {
+public class XPlay extends GLSurfaceView implements /*SurfaceHolder.Callback,*/GLSurfaceView.Renderer {
     public XPlay(Context context, AttributeSet attrs) {
         super( context, attrs );
     }
