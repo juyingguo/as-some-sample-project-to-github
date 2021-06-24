@@ -1,11 +1,17 @@
 cmake_minimum_required(VERSION 3.4.1)
 set(CMAKE_VERBOSE_MAKEFILE on)
 
+message("CMAKE_CURRENT_LIST_DIR：${CMAKE_CURRENT_LIST_DIR}")
 
-set(LINK_DIR ${CMAKE_CURRENT_LIST_DIR}/../jniLibs/armeabi-v7a)
+#in windows ndk(for windows) androidstudio,path:
+set(LINK_DIR "D:/juying/as1_5project/as-some-sample-project-to-github/ndk-android-project/GifRecorder/app/src/main/jniLibs/armeabi-v7a")
+
+#set(LINK_DIR ${CMAKE_CURRENT_LIST_DIR}/../jniLibs/armeabi-v7a) #for linux
+message("LINK_DIR：${LINK_DIR}")
 link_directories(${LINK_DIR})
 
-set(INCLUDE_DIR "/home/hm/ffmpeg/ffmpeg_source/ffmpeg-3.4.1")
+#in windows ndk(for windows) androidstudio,path:
+set(INCLUDE_DIR "e:/juying-epan/ffmpeg/FFmpeg-n3.4.1")
 #头文件目录设置为ffmpeg-3.4.1源码目录及CMakeLists.txt文件所在目录
 #也可以不显式指定CMakeLists.txt文件所在目录，该目录默认包含在搜索目录中
 include_directories(${CMAKE_CURRENT_LIST_DIR} ${INCLUDE_DIR})
