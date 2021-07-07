@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".MainActivity">
+
+
+    <TextureView
+        android:id="@+id/preview_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center" />
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="200dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/newui_selector_back" />
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="28dp"
+        android:drawableLeft="@mipmap/icon_video"
+        android:drawablePadding="16dp"
+        android:textSize="28sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_takevideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.9"
+            android:background="@drawable/selector_bg_takevedio" />
+
+
+        <Button
+            android:id="@+id/btn_takephoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="98dp"
+            android:alpha="0.9"
+            android:background="@drawable/selector_bg_takephoto" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_dcim"
+            android:layout_width="118dp"
+            android:layout_height="118dp"
+            android:layout_marginLeft="98dp"
+            android:alpha="0.9"
+            android:elevation="10dp"
+            android:visibility="gone"
+            app:civ_border_color="@color/colorBlue"
+            app:civ_border_width="10dp" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

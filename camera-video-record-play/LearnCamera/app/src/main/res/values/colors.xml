@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBlue">#99bdf1</color>
+
+    <!-- new ui -->
+    <!-- bg -->
+    <!-- title -->
+    <color name="new_ui_color_bg_blue">#99bfef</color>
+    <!-- right big bg -->
+    <color name="new_ui_color_bg_blue_light">#b5f5ff</color>
+    <!-- right small bg -->
+    <color name="new_ui_color_bg_white">#e9fcff</color>
+
+    <color name="new_ui_color_bg_coffee_deep">#ba744a</color>
+
+    <!-- 米白色 -->
+    <color name="new_ui_color_bg_creamy_white_normal">#fbffdd</color>
+    <color name="new_ui_color_bg_creamy_white_press">#fdb349</color>
+
+    <color name="new_ui_color_bg_coffee_normal">#fdb349</color>
+    <color name="new_ui_color_bg_coffee_press">#fbffdd</color>
+
+    <color name="new_ui_color_bg_white_normal">#e9fcff</color>
+    <color name="new_ui_color_bg_white_press">#fbffdd</color>
+
+    <!-- switch -->
+    <color name="new_ui_color_bg_switch_check">#fbffdd</color>
+    <color name="new_ui_color_bg_switch_normal">#888888</color>
+
+    <!-- text -->
+    <color name="new_ui_color_text_blue">#2684b1</color>
+    <color name="new_ui_color_text_coffee">#ba744a</color>
+    <color name="new_ui_color_text_coffee_light">#f6ae4e</color>
+    <color name="new_ui_color_text_blue_dark_dark">#2841af</color>
+    <color name="new_ui_color_text_blue_dark">#2171ab</color>
+    <color name="new_ui_color_text_blue_light">#5ca8c1</color>
+
+</resources>

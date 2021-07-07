@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">DemoCamera</string>
+    <string name="image_file_name_format" translatable="false">"'IMG'_yyyyMMdd_HHmmssSSS"</string>
+    <string name="video_file_name_format" translatable="false">"'VID'_yyyyMMdd_HHmmss"</string>
+    <string name="jpeg_file_name_format" translatable="false">"'JPG'_yyyyMMdd_HHmmssSSS"</string>
+    <string name="no_storage">“在使用相机前插入SD卡。”</string>
+    <string name="preparing_sd">“准备SD卡......”</string>
+    <string name="access_sd_fail">“无法访问SD卡。”</string>
+    <string name="spaceIsLow_content">“您的SD卡空间不足。更改质量设置或删除一些图像或其他文件。”</string>
+    <string name="video_call">“其他应用”</string>
+    <string name="face_call">“其他应用”</string>
+    <string name="camera_call">“其他应用”</string>
+    <string name="courseware">“课件”</string>
+    <string name="please_try_later">“请稍后再试”</string>
+    <string name="camera_opened">打开了相机</string>
+    <string name="face_recognize">人脸识别</string>
+    <string name="video_record">"视频记录"</string>
+    <string name="connect_camera_error">无法启动相机！</string>
+    <string name="ok">确认</string>
+    <string name="text_time_too_short">时间太短！</string>
+    <string name="error_too_fast">视频太短了！</string>
+    <string name="photo">相机</string>
+    <string name="tts_1">1</string>
+    <string name="tts_2">2</string>
+    <string name="tts_3">3</string>
+    <string name="error_pl_stop_videio">请先关闭录像</string>
+    <string name="error_click_too_fast">点击太快了</string>
+    <string name="pls_restart_device">DCIM文件状态不对,需要重新启动设备</string>
+</resources>

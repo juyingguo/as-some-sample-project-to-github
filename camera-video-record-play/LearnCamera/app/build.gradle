@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+
+    defaultConfig {
+        applicationId "com.demo.camera"
+        minSdkVersion 22
+        targetSdkVersion 26
+        versionCode 13
+        versionName "1.13"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            outFileFormat(defaultConfig,"release")
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+}
+
+static def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
+def outFileFormat(defaultConfig, str) {
+    // 自定义APK安装包名
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def path = "../" + str + "/";
+                def fileName = "DemoCamera_${str}_V${defaultConfig.versionName}_${releaseTime()}.apk";
+                outputFileName = new File(path, fileName)
+            }
+        }
+    }
+}
