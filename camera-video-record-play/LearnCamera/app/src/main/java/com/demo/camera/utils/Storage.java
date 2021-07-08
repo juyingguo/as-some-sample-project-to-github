@@ -222,7 +222,7 @@ public class Storage {
 
         String state = Environment.getExternalStorageState(new File(DIRECTORY));
 //        String state = Environment.getExternalStorageState();
-        Log.d(TAG, "yison External storage state=" + state + " DIRECTORY = "+DIRECTORY);
+        Log.d(TAG, " External storage state=" + state + " DIRECTORY = "+DIRECTORY);
         if (Environment.MEDIA_CHECKING.equals(state)) {
             return PREPARING;
         }

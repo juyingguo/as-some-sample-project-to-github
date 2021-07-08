@@ -194,7 +194,7 @@ public class CameraPreviewService extends Service
                 @Override
                 public void onMediaSaved(String filePath) {
                     if (filePath != null) {
-                        LogUtils.e(TAG,"yison onMediaSaved updateStorageSpaceAndHint ");
+                        LogUtils.e(TAG," onMediaSaved updateStorageSpaceAndHint ");
                         videoHandler.onVideoRecordingSaved(mCurrentVideoFilename.replace(".tmp", ""));
                         updateStorageSpaceAndHint();
                     } else {
@@ -297,7 +297,7 @@ public class CameraPreviewService extends Service
     @Override
     public void onCreate() {
         super.onCreate();
-        LogUtils.d(TAG, "yison onCreate");
+        LogUtils.d(TAG, " onCreate");
 
         bindIbotnCameraService();
 
@@ -313,7 +313,7 @@ public class CameraPreviewService extends Service
     }
 
     private void bindIbotnCameraService() {
-        LogUtils.e(TAG, "yison bind ibotncameraservice");
+        LogUtils.e(TAG, " bind ibotncameraservice");
         Intent intent = new Intent();
         ComponentName component = new ComponentName("com.demo.ibotncameraservice", "com.demo.ibotncameraservice.IbotnCameraService");
         intent.setComponent(component);
@@ -605,12 +605,12 @@ public class CameraPreviewService extends Service
             int width, height;
             width = s.width;
             height = s.height;
-//            LogUtils.d(TAG, "yison "+message + " width=" + width + " height=" + height);
+            LogUtils.d(TAG, "onPictureTaken " + " width=" + width + " height=" + height);
             NamedImages.NamedEntity name = mNamedImages.getNextNameEntity();
             String title = (name == null) ? null : name.title;
             long date = (name == null) ? -1 : name.date;
 
-            LogUtils.d(TAG, "yison onPictureTaken title = " + title + " date = " + date);
+            LogUtils.d(TAG, " onPictureTaken title = " + title + " date = " + date);
 
             if (mMediaSaveService != null) {
                 mMediaSaveService.addImage(
@@ -835,7 +835,7 @@ public class CameraPreviewService extends Service
     private IBinder.DeathRecipient recipient = new IBinder.DeathRecipient() {
         @Override
         public void binderDied() {
-            LogUtils.e(TAG, "yison binderDied "+Thread.currentThread().getId());
+            LogUtils.e(TAG, " binderDied "+Thread.currentThread().getId());
         }
     };
     private ServiceConnection conn = new ServiceConnection() {
@@ -1014,7 +1014,7 @@ public class CameraPreviewService extends Service
 
 
     private void startRecording() {
-        //LogUtils.d(TAG, "startRecordingTTT");
+        LogUtils.d(TAG, "startRecording");
         if (mMediaRecorder == null) {
             LogUtils.d(TAG, "initialize recorder fail!");
             return;

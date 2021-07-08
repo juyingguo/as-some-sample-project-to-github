@@ -59,7 +59,7 @@ public class MainActivity extends FullScreenActivity implements TextureView.Surf
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.e(TAG, "yison onCreate");
+        LogUtils.e(TAG, " onCreate");
         CameraPreviewService.activitys.add(this);
         setContentView(R.layout.activity_main);
         initViews();
@@ -224,7 +224,7 @@ public class MainActivity extends FullScreenActivity implements TextureView.Surf
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtils.e(TAG, "yison onDestroy");
+        LogUtils.e(TAG, " onDestroy");
         CameraPreviewService.activitys.remove(this);
         EventBus.getDefault().unregister(this);
 
@@ -238,7 +238,7 @@ public class MainActivity extends FullScreenActivity implements TextureView.Surf
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStopRecordEvent(MessageEvent messageEvent)
     {
-        LogUtils.e(TAG,"yison onStopRecordEvent messageEvent = "+messageEvent);
+        LogUtils.e(TAG," onStopRecordEvent messageEvent = "+messageEvent);
         if(countHandler != null && countHandler.hasMessages(MSG_START_VIDEIO))
             countHandler.removeMessages(MSG_START_VIDEIO);
         startAndendRecording();
@@ -257,13 +257,14 @@ public class MainActivity extends FullScreenActivity implements TextureView.Surf
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
-        LogUtils.v(TAG, "onSurfaceTextureAvailable");
+        LogUtils.d(TAG, "onSurfaceTextureAvailable,width=" + width + ",height=" + height);
         mSurface = surfaceTexture;
         float ratio = (float) CameraPreviewService.SIZE_1080P.getWidth() / (float) CameraPreviewService.SIZE_1080P.getHeight();
         ViewGroup.LayoutParams param = mPreviewContent.getLayoutParams();
         float minHeight = Math.min((float) width / ratio, (float) height);
         param.width = (int) (minHeight * ratio);
         param.height = (int) minHeight;
+        LogUtils.d(TAG, "onSurfaceTextureAvailable,param.width =" + param.width  + ",param.height =" + param.height );
         mPreviewContent.setLayoutParams(param);
         bindPreviewService();
     }
@@ -320,14 +321,14 @@ public class MainActivity extends FullScreenActivity implements TextureView.Surf
             mPreviewServcieBinder.takePicture(CameraPreviewService.SIZE_1080P, new CameraPreviewService.TakePictureHandler() {
                 @Override
                 public void onPictureDone(String title) {
-                    LogUtils.d(TAG, "yison onPictureDone title " + title + " Thread = " + Thread.currentThread().getName());
+                    LogUtils.d(TAG, " onPictureDone title " + title + " Thread = " + Thread.currentThread().getName());
                     String filePath = Storage.DIRECTORY + File.separator + title + Storage.JPEG_POSTFIX;
                     File file = new File(filePath);
                     if (file.exists()) {
-                        LogUtils.d(TAG, "yison setbitmap start filePath = " + filePath);
+                        LogUtils.d(TAG, "onPictureDone setBitmap start filePath = " + filePath);
                         Bitmap bitmap = ImageCacheUtil.getResizedBitmap(filePath, null, MainActivity.this, null, IMAGE_SIZE, true);
                         img_dcim.setImageBitmap(bitmap);
-                        LogUtils.d(TAG, "yison setbitmap end filePath = " + filePath);
+                        LogUtils.d(TAG, "onPictureDone setBitmap end filePath = " + filePath);
                         mCurrentFilePath = filePath;
                         img_dcim.setVisibility(View.VISIBLE);
                         mType = "image";

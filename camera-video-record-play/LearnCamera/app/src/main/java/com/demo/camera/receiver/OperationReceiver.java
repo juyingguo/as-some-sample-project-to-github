@@ -60,7 +60,7 @@ public class OperationReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, final Intent intent) {
 
         String action = intent.getAction();
-        LogUtils.d(TAG, TAG + "yison >>>onReceive()>>action:" + action);
+        LogUtils.d(TAG, TAG + " >>>onReceive()>>action:" + action);
         if (ACTION_CAMERA_OPERATION.equals(action)) {
             //是否语音唤起
             boolean withAudio = intent.getBooleanExtra(EXTRA_WITH_AUDIO, true);
@@ -68,7 +68,7 @@ public class OperationReceiver extends BroadcastReceiver {
             //语音停止录像
             if(TextUtils.equals(functionType,FUNCTION_TYPE_STOP_VIDEO_RECORDING))
             {
-                LogUtils.e(TAG,"yison receive FUNCTION_TYPE_STOP_VIDEO_RECORDING");
+                LogUtils.e(TAG," receive FUNCTION_TYPE_STOP_VIDEO_RECORDING");
                 EventBus.getDefault().post(new MessageEvent(1));
                 ConstControl.setExpressionAnimationState(context, ConstControl.EXPRESSION_STOP_VR);
                 //语音开启录像
