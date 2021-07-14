@@ -81,13 +81,14 @@ public class CMDUtils {
             CMD_Result cmdRsult = null;
             Process process = null;
             PrintWriter pw = null;
-            int result;
+            int result = 0;
             try {
                 process = Runtime.getRuntime().exec("su"); //获取root权限
+//                process = Runtime.getRuntime().exec("/system/bin/sh"); //获取root权限
                 pw = new PrintWriter(process.getOutputStream());
                 pw.println(command);
                 pw.flush();
-                result = process.waitFor();
+
                 if (isNeedResultMsg) {
                     StringBuilder successMsg = new StringBuilder();
                     StringBuilder errorMsg = new StringBuilder();
@@ -97,6 +98,7 @@ public class CMDUtils {
                             new InputStreamReader(process.getErrorStream()));
                     String s;
                     while ((s = successResult.readLine()) != null) {
+                        Log.d("runCMDWithRoot,result:", s);
                         successMsg.append(s);
                     }
                     while ((s = errorResult.readLine()) != null) {
@@ -105,10 +107,12 @@ public class CMDUtils {
                     cmdRsult = new CMD_Result(result, errorMsg.toString(),
                             successMsg.toString());
                 }
+                result = process.waitFor();
             } catch (Exception e) {
                 Log.e(TAG, "run CMD:" + command + " failed");
                 e.printStackTrace();
             }
+            Log.i(TAG, "runCMDWithRoot end.");
             return cmdRsult;
         }
 }

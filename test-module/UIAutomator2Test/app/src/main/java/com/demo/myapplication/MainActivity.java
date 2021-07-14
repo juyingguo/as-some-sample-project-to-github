@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "UiautomatorThread,run.");
 
             //String command=generateCommand("com.demo.uiautomator2testcase", "OpenAppTest", "demo");
-            String command=generateCommandAndroidX("com.demo.myapplication", "OpenAppTest", "demo");
+//            String command=generateCommandAndroidX("com.demo.myapplication", "OpenAppTest", "demo");
+            String command="pm list package -3";
+            RootCmd.execRootCmd(command);
             CMDUtils.CMD_Result rs= CMDUtils.runCMDWithRoot(command,true,true);
             Log.e(TAG, "run: " + rs.error + "-------" + rs.success);
         }
@@ -71,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
          */
         public  String generateCommandAndroidX(String pkgName, String clsName, String mtdName) {
             Log.i(TAG, "generateCommand.");
-            /*String command = "am instrument  --user 0 -w -r   -e debug false -e class "
+            /*String command = "am instrument --user 0 -w -r -e debug false -e class "
                     + pkgName + "." + clsName + "#" + mtdName + " "
-                    + pkgName + ".test/android.support.test.runner.AndroidJUnitRunner";*/
+                    + pkgName + ".test/androidx.test.runner.AndroidJUnitRunner";*/
             String command = "am instrument -w -r -e debug false -e class "
                     + pkgName + "." + clsName + "#" + mtdName + " "
                     + pkgName + ".test/androidx.test.runner.AndroidJUnitRunner";
