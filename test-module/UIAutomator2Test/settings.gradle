@@ -1,0 +1,2 @@
+include ':app', ':UIAutomator2TestCase'
+rootProject.name='UIAutomator2Test'
