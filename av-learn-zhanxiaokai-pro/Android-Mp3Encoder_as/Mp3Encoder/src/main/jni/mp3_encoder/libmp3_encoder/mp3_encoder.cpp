@@ -1,4 +1,7 @@
 #include "mp3_encoder.h"
+#include "../../common/CommonTools.h"
+
+#define LOG_TAG "Mp3Encoder"
 
 Mp3Encoder::Mp3Encoder() {
 }
@@ -10,8 +13,10 @@ int Mp3Encoder::Init(const char* pcmFilePath, const char *mp3FilePath, int sampl
 	int ret = -1;
 	pcmFile = fopen(pcmFilePath, "rb");
 	if(pcmFile) {
+	    LOGI("Mp3Encoder::Init,fopen ok for pcmFilePath:%s.", pcmFilePath);
 		mp3File = fopen(mp3FilePath, "wb");
 		if(mp3File) {
+		    LOGI("Mp3Encoder::Init,fopen ok for mp3File:%s.", mp3File);
 			lameClient = lame_init();
 			lame_set_in_samplerate(lameClient, sampleRate);
 			lame_set_out_samplerate(lameClient, sampleRate);
@@ -19,7 +24,11 @@ int Mp3Encoder::Init(const char* pcmFilePath, const char *mp3FilePath, int sampl
 			lame_set_brate(lameClient, bitRate / 1000);
 			lame_init_params(lameClient);
 			ret = 0;
-		}
+		}else{
+            LOGI("Mp3Encoder::Init,fopen fail for mp3File:%s.", mp3File);
+        }
+	}else{
+        LOGI("Mp3Encoder::Init,fopen fail for pcmFilePath:%s.", pcmFilePath);
 	}
 	return ret;
 }

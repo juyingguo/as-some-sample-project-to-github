@@ -13,11 +13,13 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
+	private static final String TAG = "MainActivity";
+
 	static {
 		System.loadLibrary("audioencoder");
+		Log.i(TAG,"android loadLibrary audioencoder so done");
 	}
 	private Button mp3_encoder_btn;
-	private final String TAG = "MainActivity";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
