@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        applicationId "com.phuket.tour.mp3encoder"
+        minSdkVersion 22
+        targetSdkVersion 22
+
+        ndk {
+            moduleName "libaudioencoder"
+            abiFilters 'armeabi-v7a' // armeabi arm64-v8a、armeabi-v7a、x86_64、x86 中的一个或多个
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    packagingOptions {
+        exclude 'lib/armeabi-v7a/libaudioencoder.so'  ///resolve problem:[More than one file was found with OS independent path 'lib/armeabi-v7a/libaudioencoder.so']
+    }
+    sourceSets {
+        main() {
+            //1. 不配置jniLibs.srcDirs,在 AndroidStudio 中它会自动去加载 jniLibs (src/main/jniLibs)目录中的 *.so 文件
+            //2. 手动指定*.so所在目录， 这里我写 'src/main/libs'，它就会去 'src/main/libs' 目录中找，你也可以放在其它任何目录中。
+//          jniLibs.srcDirs = ['src/main/libs']
+//            jni.srcDirs = [] //a,jni.srcDirs = [] 就可以屏蔽掉默认的jni编译生成过程。b,如果不屏蔽,即不做配置，下面的ndk-build命令配置函数ndkBuild也会执行。
+        }
+    }
+
+    task ndkBuild(type:Exec,description:'Compile JNI source via NDK'){//配置ndk-build命令，便于自动生成库文件
+        commandLine getNdkBuildCmd()/*"E:\\android-ndk-r10b\\ndk-build.cmd"*/,//配置ndk的路径,已封装通过函数获取
+                'NDK_PROJECT_PATH=build/intermediates/ndk',//ndk默认的生成so的文件
+                'NDK_LIBS_OUT=src/main/jniLibs',//配置的我们想要生成的so文件所在的位置
+                'APP_BUILD_SCRIPT=src/main/jni/Android.mk',//指定项目以这个mk的方式,src/main/jni/Android.mk
+                'NDK_APPLICATION_MK=src/main/jni/Application.mk'//指定项目以这个mk的方式
+    }
+    tasks.withType(JavaCompile){//使用ndkBuild
+    compileTask ->compileTask.dependsOn ndkBuild
+    }
+    //cleanNative 移除之前生成的所有二进制文件。
+    task cleanNative(type: Exec) {
+//        workingDir file('src/main') // 配置'src/main'会移除src/main/libs下的所有*so
+        workingDir file('src/main/jniLibs') //配置'src/main'也是会移除src/main/libs下的所有*so，是不是指定了生成和删除目录位置？？
+        commandLine getNdkBuildCmd(),'clean'
+    }
+    clean.dependsOn cleanNative //执行ndk-build clean,或者clean project时都会执行。
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk') ///[link c++ project with Gradle] after,auto save here.
+        }
+    }
+}
+/**
+ *
+ * @return NdkDir
+ */
+def getNdkDir() {
+    if(System.env.ANDROID_NDK_ROOT !=null)
+        returnSystem.env.ANDROID_NDK_ROOT
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties')
+            .newDataInputStream())
+    def ndkdir = properties.getProperty('ndk.dir',null)
+    if(ndkdir ==null)
+        throw newGradleException("NDK location not found. Define location with ndk.dir in the local.properties file or with an ANDROID_NDK_ROOT environment variable.")
+    return ndkdir
+}
+/**
+ *
+ * @return ndk-build.cmd
+ */
+def getNdkBuildCmd() {
+    def ndkbuild =getNdkDir() +"\\ndk-build.cmd"
+//    def ndkbuild ="E\\:\\adt\\sdk\\ndk-bundle\\ndk-build.cmd"
+    /*if (Os.isFamily(Os.FAMILY_WINDOWS))
+        ndkbuild += ".cmd"*/
+    return ndkbuild
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-v4:23.+'
+}

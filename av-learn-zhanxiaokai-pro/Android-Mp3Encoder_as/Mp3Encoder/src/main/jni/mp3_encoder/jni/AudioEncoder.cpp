@@ -11,7 +11,7 @@ JNIEXPORT jint JNICALL Java_com_phuket_tour_studio_Mp3Encoder_init
 			jint sampleRate, jstring mp3PathParam) {
 	const char* pcmPath = env->GetStringUTFChars(pcmPathParam, NULL);
 	const char* mp3Path = env->GetStringUTFChars(mp3PathParam, NULL);
-	LOGI("mp3Path is %s...", mp3Path);
+	LOGI("init,mp3Path is %s...", mp3Path);
 	encoder = new Mp3Encoder();
 	encoder->Init(pcmPath, mp3Path, sampleRate, channels, bitRate);
 	env->ReleaseStringUTFChars(mp3PathParam, mp3Path);

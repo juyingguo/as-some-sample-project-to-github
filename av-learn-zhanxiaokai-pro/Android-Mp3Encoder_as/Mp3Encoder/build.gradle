@@ -10,14 +10,23 @@ android {
         targetSdkVersion 22
 
         ndk {
-            moduleName "libaudioencoder"
-            abiFilters 'armeabi-v7a' // armeabi arm64-v8a、armeabi-v7a、x86_64、x86 中的一个或多个
+            moduleName "libaudioencoder"//可写，可不写，目前验证都无影响。默认使用Android.mk中指定的。
+
+            //以下配置可以替换掉Android.mk,Application.mk中内容,即无需写Application.mk文件。
+            abiFilters 'armeabi-v7a'///,'armeabi','arm64-v8a','x86_64'// armeabi arm64-v8a、armeabi-v7a、x86_64、x86 中的一个或多个
+
+            //Other ndk flags configurable here are
+             cFlags "-fno-rtti"
+             cFlags "-fno-exceptions"
+             ldLibs("android", "log")
+             stl "system"
         }
     }
     lintOptions {
         abortOnError false
     }
-    sourceSets {
+
+    sourceSets {///当配置externalNativeBuild后，sourceSets内部的配置就不起作用了，全部可以不配置了
         main() {
             //1. 不配置jniLibs.srcDirs,在 AndroidStudio 中它会自动去加载 jniLibs (src/main/jniLibs)目录中的 *.so 文件
             //2. 手动指定*.so所在目录， 这里我写 'src/main/libs'，它就会去 'src/main/libs' 目录中找，你也可以放在其它任何目录中。
@@ -26,8 +35,15 @@ android {
         }
     }
 
-    task ndkBuild(type:Exec,description:'Compile JNI source via NDK'){//配置ndk-build命令，便于自动生成库文件
-        commandLine getNdkBuildCmd()/*"E:\\android-ndk-r10b\\ndk-build.cmd"*/,//配置ndk的路径,已封装通过函数获取
+    ///当已经生成需要*.so文件后，下面代码就可以注释掉。将*.so拷贝到(src/main/jniLibs)目录下，as gradle默认就会将其打包到apk中
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk') ///指定编译Android.mk目录
+            ///path file('src/main/jni/Application.mk') ///指定编译Application.mk目录,这样指定无效。
+        }
+    }
+    /*task ndkBuild(type:Exec,description:'Compile JNI source via NDK'){//配置ndk-build命令，便于自动生成库文件
+        commandLine getNdkBuildCmd()*//*"E:\\android-ndk-r10b\\ndk-build.cmd"*//*,//配置ndk的路径,已封装通过函数获取
                 'NDK_PROJECT_PATH=build/intermediates/ndk',//ndk默认的生成so的文件
                 'NDK_LIBS_OUT=src/main/jniLibs',//配置的我们想要生成的so文件所在的位置
                 'APP_BUILD_SCRIPT=src/main/jni/Android.mk',//指定项目以这个mk的方式,src/main/jni/Android.mk
@@ -42,7 +58,7 @@ android {
         workingDir file('src/main/jniLibs') //配置'src/main'也是会移除src/main/libs下的所有*so，是不是指定了生成和删除目录位置？？
         commandLine getNdkBuildCmd(),'clean'
     }
-    clean.dependsOn cleanNative //执行ndk-build clean,或者clean project时都会执行。
+    clean.dependsOn cleanNative //执行ndk-build clean,或者clean project时都会执行。*/
     buildTypes {
         release {
             minifyEnabled false
@@ -50,32 +66,33 @@ android {
         }
     }
 }
-/**
- *
- * @return NdkDir
- */
-def getNdkDir() {
-    if(System.env.ANDROID_NDK_ROOT !=null)
-        returnSystem.env.ANDROID_NDK_ROOT
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties')
-            .newDataInputStream())
-    def ndkdir = properties.getProperty('ndk.dir',null)
-    if(ndkdir ==null)
-        throw newGradleException("NDK location not found. Define location with ndk.dir in the local.properties file or with an ANDROID_NDK_ROOT environment variable.")
-    return ndkdir
-}
-/**
- *
- * @return ndk-build.cmd
- */
-def getNdkBuildCmd() {
-    def ndkbuild =getNdkDir() +"\\ndk-build.cmd"
-//    def ndkbuild ="E\\:\\adt\\sdk\\ndk-bundle\\ndk-build.cmd"
-    /*if (Os.isFamily(Os.FAMILY_WINDOWS))
-        ndkbuild += ".cmd"*/
-    return ndkbuild
-}
+
+///**
+// *
+// * @return NdkDir
+// */
+//def getNdkDir() {
+//    if(System.env.ANDROID_NDK_ROOT !=null)
+//        returnSystem.env.ANDROID_NDK_ROOT
+//    Properties properties = new Properties()
+//    properties.load(project.rootProject.file('local.properties')
+//            .newDataInputStream())
+//    def ndkdir = properties.getProperty('ndk.dir',null)
+//    if(ndkdir ==null)
+//        throw newGradleException("NDK location not found. Define location with ndk.dir in the local.properties file or with an ANDROID_NDK_ROOT environment variable.")
+//    return ndkdir
+//}
+///**
+// *
+// * @return ndk-build.cmd
+// */
+//def getNdkBuildCmd() {
+//    def ndkbuild =getNdkDir() +"\\ndk-build.cmd"
+////    def ndkbuild ="E\\:\\adt\\sdk\\ndk-bundle\\ndk-build.cmd"
+//    /*if (Os.isFamily(Os.FAMILY_WINDOWS))
+//        ndkbuild += ".cmd"*/
+//    return ndkbuild
+//}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:support-v4:23.+'
