@@ -36,6 +36,7 @@ android {
     }
 
     ///当已经生成需要*.so文件后，下面代码就可以注释掉。将*.so拷贝到(src/main/jniLibs)目录下，as gradle默认就会将其打包到apk中
+    ///
     externalNativeBuild {
         ndkBuild {
             path file('src/main/jni/Android.mk') ///指定编译Android.mk目录

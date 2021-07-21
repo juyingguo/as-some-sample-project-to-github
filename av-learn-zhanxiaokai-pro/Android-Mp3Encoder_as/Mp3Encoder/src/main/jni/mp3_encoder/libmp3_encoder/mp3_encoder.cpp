@@ -32,8 +32,12 @@ int Mp3Encoder::Init(const char* pcmFilePath, const char *mp3FilePath, int sampl
 	}
 	return ret;
 }
-
+/*
+ * 其次是Encode方法的实现，函数主体是一个循环，每次都会读取一段bufferSize大小的PCM数据buffer，然后再编码该buffer，
+ * 但是在编码buffer之前得把该buffer的左右声道拆分开，再送入到LAME编码器，最后将编码之后的数据写入MP3文件中。
+ */
 void Mp3Encoder::Encode() {
+    LOGI("Mp3Encoder::Encode() enter.");
 	int bufferSize = 1024 * 256;
 	short* buffer = new short[bufferSize / 2];
 	short* leftBuffer = new short[bufferSize / 4];
@@ -49,6 +53,7 @@ void Mp3Encoder::Encode() {
 			}
 		}
 		int wroteSize = lame_encode_buffer(lameClient, (short int *) leftBuffer, (short int *) rightBuffer, readBufferSize / 2, mp3_buffer, bufferSize);
+        LOGI("Mp3Encoder::Encode() readBufferSize=%d,wroteSize=%d\n",readBufferSize,wroteSize);
 		fwrite(mp3_buffer, 1, wroteSize, mp3File);
 	}
 	delete[] buffer;
