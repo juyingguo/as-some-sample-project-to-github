@@ -7,7 +7,7 @@ toast("检测是否开启无障碍模式")
 auto.waitFor()
 launch("com.ss.android.ugc.aweme.lite");
 //var stay_time = 15*1000;
-sleep(20000);
+sleep(15000);
     execTask();
 toast("退出脚本");
 back();
@@ -22,6 +22,6 @@ function execTask(){
 
         gesture(1000, [350, 800], [350, 150]);
 
-        sleep(20000);
+        sleep(15000);
     }
 };
