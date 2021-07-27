@@ -169,21 +169,6 @@ function execAutoPageTask(){
     while(true){
         sleep(2000);
 
-        //关闭弹框，如果失败会，会引发下面其余代码无法执行         
-        try{
-            var dialogTipClose = id("bai").findOne(2000);
-            if(dialogTipClose){
-                dialogTipClose.click();
-            }            
-        }catch(error){
-            console.log("execAutoPageTask id,error:" + error);
-        }
-        try{
-            className("android.widget.ImageView").depth(4).clickable(true).findOne(2000).click();            
-        }catch(error){
-            console.log("execAutoPageTask depth,error:" + error);
-        }
-
         gesture(1000, [350, 800], [350, 150]);
 
         sleep(13000);
