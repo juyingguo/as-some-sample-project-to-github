@@ -5,9 +5,11 @@
 
 toast("检测是否开启无障碍模式")
 auto.waitFor()
-launch("com.ss.android.ugc.aweme.lite");
+// launch("com.ss.android.ugc.aweme.lite");
 //var stay_time = 15*1000;
 sleep(5000);
+
+    // close();
 
     makeMoneyView();
     ///execLaiZhuanQian();
@@ -114,7 +116,54 @@ function makeMoneyView() {
     //     console.log("viewKGGZHJB not exist,error:" + error);
     // }
     
-    ////11 走了赚金币。不可见的时候也能检测出来
+    ////11 走路赚金币。不可见的时候也能检测出来，可以直接点击打开对应界面，操作完成后，退出该界面
+    execZouLuZHJBTask();
+
+    execChiFanBuTieTask();
+
+    sleep(1000);
+    back();
+    execAutoPageTask();
+
+    // back();
+    // execAutoPageTask();
+}
+
+/**
+ * 滑动翻页
+ */
+function execAutoPageTask(){
+    console.log("execAutoPageTask enter.");
+    while(true){
+        sleep(2000);
+
+        //关闭弹框，如果失败会，会引发下面其余代码无法执行         
+        // try{
+        //     var dialogTipClose = id("bai").findOne(2000);
+        //     if(dialogTipClose){
+        //         dialogTipClose.click();
+        //     }            
+        // }catch(error){
+        //     console.log("execAutoPageTask id,error:" + error);
+        // }
+        try{
+            className("android.widget.ImageView").depth(4).clickable(true).findOne(2000).click();            
+            console.log("execAutoPageTask depth,click ok.");
+        }catch(error){
+            console.log("execAutoPageTask depth,error:" + error);
+        }
+
+        gesture(1000, [350, 800], [350, 150]);
+
+        sleep(13000);
+    }
+};
+
+/**
+ * 走路赚金币。不可见的时候也能检测出来，可以直接点击打开对应界面，操作完成后，退出该界面
+ */
+function execZouLuZHJBTask(){
+    console.log("execZouLuZHJBTask enter.");
     sleep(5000);
     var flag = true;
     while(flag){
@@ -153,39 +202,76 @@ function makeMoneyView() {
     //返回上一个界面
     sleep(1000);
     back();
+    console.log("execZouLuZHJBTask end.");
+}
+/**
+ * 吃饭补贴-领金币。
+ * 1.操作完成后，退出该界面
+ */
+ function execChiFanBuTieTask(){
+    console.log("execChiFanBuTieTask enter.");
+    sleep(5000);
+    //未领过，可以点击，弹框，领过后，再关闭。
+    //已经领过，不可点击
+    try{
+
+        var viewChiFanBuTie = text("吃饭补贴").findOne(1000);
+        if(viewChiFanBuTie){
+            viewChiFanBuTie.click();
+            sleep(3000);
+        }
+
+        var viewChiFanBuTieLinQu = className("android.view.View").clickable(true).depth(13).findOne(2000);
+        if(viewChiFanBuTieLinQu){
+            console.log("execChiFanBuTieTask viewChiFanBuTieLinQu exist.");
+
+            // var viewZouLuZHJB_bounds = viewZouLuZHJB.bounds();
+            // console.log("viewZouLuZHJB exist,left:" + viewZouLuZHJB_bounds.left + " top" + viewZouLuZHJB_bounds.top);
+
+            // console.log("viewZouLuZHJB(走路赚金币) exist,click bounds.");
+            // click(viewZouLuZHJB_bounds.left + 10,viewZouLuZHJB_bounds.top+10);
+
+            ///点击领金币
+            viewChiFanBuTieLinQu.click();
+
+            sleep(3000);
+            //领金币成功后，关闭弹框
+            try {
+                var closeImage = className("android.widget.Image").depth(13).clickable(true).findOne(1000);
+                if(closeImage){
+                    closeImage.click();
+                }
+            } catch (error) {
+                console.log("execChiFanBuTieTask viewChiFanBuTieLinQu 领金币成功后，关闭弹框,error:" + error);
+            }
+
+        }else{
+            console.log("execChiFanBuTieTask viewChiFanBuTieLinQu component not find(clickable(false)) 已经领过，不可点击.");
+            viewChiFanBuTie = className("android.view.View").clickable(false).depth(13).findOne(2000);
+            // if(viewChiFanBuTie){
+            //     console.log("execChiFanBuTieTask viewChiFanBuTieLinQu component not find 已经领过，不可点击.");
+            // }
+        }
+    }catch(error){
+        console.log("execChiFanBuTieTask viewChiFanBuTie(吃饭补贴) error:" + error);
+    } 
+    
+    //返回上一个界面
     sleep(1000);
     back();
-    execAutoPageTask();
-
-    // back();
-    // execAutoPageTask();
+    console.log("execChiFanBuTieTask end.");
 }
 
-/**
- * 滑动翻页
- */
-function execAutoPageTask(){
-    console.log("execAutoPageTask enter.");
-    while(true){
-        sleep(2000);
-
-        //关闭弹框，如果失败会，会引发下面其余代码无法执行         
-        try{
-            var dialogTipClose = id("bai").findOne(2000);
-            if(dialogTipClose){
-                dialogTipClose.click();
-            }            
-        }catch(error){
-            console.log("execAutoPageTask id,error:" + error);
-        }
-        try{
-            className("android.widget.ImageView").depth(4).clickable(true).findOne(2000).click();            
-        }catch(error){
-            console.log("execAutoPageTask depth,error:" + error);
-        }
-
-        gesture(1000, [350, 800], [350, 150]);
-
-        sleep(13000);
-    }
-};
+// function close(){
+//     console.log("close() enter.");
+//     sleep(6000);
+//     //领金币成功后，关闭弹框
+//     try {
+//         var closeImage = className("android.widget.Image").depth(13).clickable(true).findOne(1000);
+//         if(closeImage){
+//             closeImage.click();
+//         }
+//     } catch (error) {
+//         console.log("execChiFanBuTieTask viewChiFanBuTieLinQu 领金币成功后，关闭弹框,error:" + error);
+//     }
+// }
