@@ -551,6 +551,7 @@ public class ExplorerView extends ThemeColorSwipeRefreshLayout implements SwipeR
 
         @OnClick(R.id.run)
         void run() {
+            mSelectedItem = mExplorerItem;
             Scripts.INSTANCE.run(new ScriptFile(mExplorerItem.getPath()));
             notifyOperated();
         }

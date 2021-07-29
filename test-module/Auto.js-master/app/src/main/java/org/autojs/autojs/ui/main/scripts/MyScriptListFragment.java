@@ -1,8 +1,13 @@
 package org.autojs.autojs.ui.main.scripts;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -14,9 +19,12 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.autojs.autojs.Pref;
 import org.autojs.autojs.R;
+import org.autojs.autojs.autojs.AutoJs;
 import org.autojs.autojs.external.fileprovider.AppFileProvider;
 import org.autojs.autojs.model.explorer.ExplorerDirPage;
+import org.autojs.autojs.model.explorer.ExplorerItem;
 import org.autojs.autojs.model.explorer.Explorers;
+import org.autojs.autojs.model.script.ScriptFile;
 import org.autojs.autojs.model.script.Scripts;
 import org.autojs.autojs.tool.SimpleObserver;
 import org.autojs.autojs.ui.common.ScriptOperations;
@@ -48,7 +56,21 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
     ExplorerView mExplorerView;
 
     private FloatingActionMenu mFloatingActionMenu;
-
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == MSG_STOP_AND_RERUN_SCRIPT){
+                //stop
+                AutoJs.getInstance().getScriptEngineService().stopAllAndToast();
+                //rerun
+                Scripts.INSTANCE.run(new ScriptFile(msg.obj.toString()));
+                mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_STOP_AND_RERUN_SCRIPT,msg.obj),60*1000);
+            }
+        }
+    };
+    private final int MSG_STOP_AND_RERUN_SCRIPT = 101;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +82,15 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
         ExplorerItemList.SortConfig sortConfig = ExplorerItemList.SortConfig.from(PreferenceManager.getDefaultSharedPreferences(getContext()));
         mExplorerView.setSortConfig(sortConfig);
         mExplorerView.setExplorer(Explorers.workspace(), ExplorerDirPage.createRoot(Pref.getScriptDirPath()));
+        mExplorerView.setOnItemOperatedListener(new ExplorerView.OnItemOperatedListener() {
+            @Override
+            public void OnItemOperated(ExplorerItem item) {
+                Log.d(TAG,"OnItemOperated,item.getName():"  + item.getName());
+                if ("douyinjisuban.js".equals(item.getName())){
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_STOP_AND_RERUN_SCRIPT,item.getPath()),60*1000);
+                }
+            }
+        });
         mExplorerView.setOnItemClickListener((view, item) -> {
             if (item.isEditable()) {
                 Scripts.INSTANCE.edit(getActivity(), item.toScriptFile());
@@ -67,6 +98,7 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
                 IntentUtil.viewFile(GlobalAppContext.get(), item.getPath(), AppFileProvider.AUTHORITY);
             }
         });
+
     }
 
     @Override

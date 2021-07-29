@@ -148,9 +148,9 @@ function execAutoPageTask(){
         // }
         try{
             className("android.widget.ImageView").depth(4).clickable(true).findOne(2000).click();            
-            console.log("execAutoPageTask depth,click ok.");
+            console.log("execAutoPageTask close dialog(use depth),click ok.");
         }catch(error){
-            console.log("execAutoPageTask depth,error:" + error);
+            // console.log("execAutoPageTask depth,error:" + error);
         }
 
         gesture(1000, [350, 800], [350, 150]);
