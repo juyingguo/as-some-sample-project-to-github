@@ -5,7 +5,7 @@
 
 toast("检测是否开启无障碍模式")
 auto.waitFor()
-// launch("com.ss.android.ugc.aweme.lite");
+launch("com.ss.android.ugc.aweme.lite");
 //var stay_time = 15*1000;
 sleep(5000);
 
@@ -210,7 +210,7 @@ function execZouLuZHJBTask(){
  */
  function execChiFanBuTieTask(){
     console.log("execChiFanBuTieTask enter.");
-    sleep(5000);
+    sleep(1000);
     //未领过，可以点击，弹框，领过后，再关闭。
     //已经领过，不可点击
     try{
@@ -218,7 +218,7 @@ function execZouLuZHJBTask(){
         var viewChiFanBuTie = text("吃饭补贴").findOne(1000);
         if(viewChiFanBuTie){
             viewChiFanBuTie.click();
-            sleep(3000);
+            sleep(4000);
         }
 
         var viewChiFanBuTieLinQu = className("android.view.View").clickable(true).depth(13).findOne(2000);
@@ -234,7 +234,7 @@ function execZouLuZHJBTask(){
             ///点击领金币
             viewChiFanBuTieLinQu.click();
 
-            sleep(3000);
+            sleep(1500);
             //领金币成功后，关闭弹框
             try {
                 var closeImage = className("android.widget.Image").depth(13).clickable(true).findOne(1000);
