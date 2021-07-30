@@ -66,11 +66,12 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
                 AutoJs.getInstance().getScriptEngineService().stopAllAndToast();
                 //rerun
                 Scripts.INSTANCE.run(new ScriptFile(msg.obj.toString()));
-                mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_STOP_AND_RERUN_SCRIPT,msg.obj),60*1000);
+                mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_STOP_AND_RERUN_SCRIPT,msg.obj),MSG_STOP_AND_RERUN_SCRIPT_DELAY);
             }
         }
     };
     private final int MSG_STOP_AND_RERUN_SCRIPT = 101;
+    private final int MSG_STOP_AND_RERUN_SCRIPT_DELAY = 60*60*1000;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +88,7 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
             public void OnItemOperated(ExplorerItem item) {
                 Log.d(TAG,"OnItemOperated,item.getName():"  + item.getName());
                 if ("douyinjisuban.js".equals(item.getName())){
-                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_STOP_AND_RERUN_SCRIPT,item.getPath()),60*1000);
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_STOP_AND_RERUN_SCRIPT,item.getPath()),MSG_STOP_AND_RERUN_SCRIPT_DELAY);
                 }
             }
         });
