@@ -71,7 +71,7 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
         }
     };
     private final int MSG_STOP_AND_RERUN_SCRIPT = 101;
-    private final int MSG_STOP_AND_RERUN_SCRIPT_DELAY = 60*60*1000;
+    private final int MSG_STOP_AND_RERUN_SCRIPT_DELAY = /*60**/60*1000;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
