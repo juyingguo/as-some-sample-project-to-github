@@ -8,9 +8,30 @@ android {
         applicationId "com.phuket.tour.audioplayer"
         minSdkVersion 22
         targetSdkVersion 22
+
+        ndk {
+            //moduleName "libsongstudio"//可写，可不写，目前验证都无影响。默认使用Android.mk中指定的。
+
+            //以下配置可以替换掉Android.mk,Application.mk中内容,即无需写Application.mk文件。
+            abiFilters 'armeabi-v7a'///,'armeabi','arm64-v8a','x86_64'// armeabi arm64-v8a、armeabi-v7a、x86_64、x86 中的一个或多个
+
+            //Other ndk flags configurable here are
+            cFlags "-fno-rtti"
+            cFlags "-fno-exceptions"
+            ldLibs("android", "log")
+            stl "system"
+        }
     }
     lintOptions {
         abortOnError false
+    }
+    ///当已经生成需要*.so文件后，下面代码就可以注释掉。将*.so拷贝到(src/main/jniLibs)目录下，as gradle默认就会将其打包到apk中
+    ///
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk') ///指定编译Android.mk目录
+            ///path file('src/main/jni/Application.mk') ///指定编译Application.mk目录,这样指定无效。会自动加载，该文件。可以通过去掉ndk dir目录，通过错误提示看出来。
+        }
     }
     buildTypes {
         release {
@@ -21,5 +42,6 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:support-v4:23.+'
 }
