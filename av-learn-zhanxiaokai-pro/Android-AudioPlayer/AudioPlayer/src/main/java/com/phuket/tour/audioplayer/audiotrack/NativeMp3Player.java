@@ -6,6 +6,8 @@ import android.media.AudioFormat;
 import android.media.AudioTrack;
 import android.util.Log;
 
+import com.phuket.tour.audioplayer.util.LogUtil;
+
 public class NativeMp3Player {
 
 	public static final String TAG = "NativeMp3Player";
@@ -48,15 +50,18 @@ public class NativeMp3Player {
 
 	/** 初始化mp3 解码器以及初始化一些metaData **/
 	public boolean setDataSource(String path) {
+		LogUtil.i(TAG,"setDataSource,enter,path:" + path);
 		decoder = new MusicDecoder();
 		boolean result = initMetaData(path);
 		if (result) {
 			decoder.init(path, 0.2f);
 		}
+		LogUtil.i(TAG,"setDataSource,end.");
 		return result;
 	}
 
 	private boolean initMetaData(String path) {
+		LogUtil.i(TAG,"initMetaData,enter.");
 		int[] metaArray = new int[] { 0, 0 };
 		decoder.getMusicMetaByPath(path, metaArray);
 		this.sampleRateInHz = metaArray[0];

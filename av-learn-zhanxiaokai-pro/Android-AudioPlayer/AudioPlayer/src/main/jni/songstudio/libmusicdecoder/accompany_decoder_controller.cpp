@@ -11,13 +11,14 @@ AccompanyDecoderController::~AccompanyDecoderController() {
 
 int AccompanyDecoderController::getMusicMeta(const char* accompanyPath,
 		int * accompanyMetaData) {
+	LOGI("AccompanyDecoderController::getMusicMeta,enter.");
 	//获取伴奏的meta
 	AccompanyDecoder* accompanyDecoder = new AccompanyDecoder();
 	accompanyDecoder->getMusicMeta(accompanyPath, accompanyMetaData);
 	delete accompanyDecoder;
 	//初始化伴奏的采样率
 	accompanySampleRate = accompanyMetaData[0];
-//	LOGI("accompanySampleRate is %d", accompanySampleRate);
+	LOGI("AccompanyDecoderController::getMusicMeta,accompanySampleRate is %d", accompanySampleRate);
 	return 0;
 }
 
@@ -38,17 +39,21 @@ void* AccompanyDecoderController::startDecoderThread(void* ptr) {
 		}
 	}
 	pthread_mutex_unlock(&decoderController->mLock);
+    LOGI("AccompanyDecoderController::startDecoderThread,end.");
 }
 
 void AccompanyDecoderController::initAccompanyDecoder(
 		const char* accompanyPath) {
+    LOGI("AccompanyDecoderController::initAccompanyDecoder,enter.");
 	//初始化两个decoder
 	accompanyDecoder = new AccompanyDecoder();
 	accompanyDecoder->init(accompanyPath, accompanyPacketBufferSize);
+    LOGI("AccompanyDecoderController::initAccompanyDecoder,end.");
 }
 
 void AccompanyDecoderController::init(const char* accompanyPath,
 		float packetBufferTimePercent) {
+    LOGI("AccompanyDecoderController::init,enter.");
 	//初始化两个全局变量
 	volume = 1.0f;
 	accompanyMax = 1.0f;
@@ -64,6 +69,7 @@ void AccompanyDecoderController::init(const char* accompanyPath,
 	packetPool = PacketPool::GetInstance();
 	packetPool->initDecoderAccompanyPacketQueue();
 	initDecoderThread();
+    LOGI("AccompanyDecoderController::init,end.");
 }
 
 void AccompanyDecoderController::initDecoderThread() {
@@ -93,6 +99,7 @@ void AccompanyDecoderController::destroyDecoderThread() {
 
 int AccompanyDecoderController::readSamples(short* samples, int size,
 		int* slientSizeArr) {
+    LOGI("AccompanyDecoderController::readSamples,enter.");
 	int result = -1;
 	AudioPacket* accompanyPacket = NULL;
 	packetPool->getDecoderAccompanyPacket(&accompanyPacket, true);
@@ -100,7 +107,7 @@ int AccompanyDecoderController::readSamples(short* samples, int size,
 		int samplePacketSize = accompanyPacket->size;
 		if (samplePacketSize != -1 && samplePacketSize <= size) {
 			//copy the raw data to samples
-			memcpy(samples, accompanyPacket->buffer, samplePacketSize * 2);
+			memcpy(samples, accompanyPacket->buffer, samplePacketSize * 2);//TODO 为啥乘以2
 			adjustSamplesVolume(samples, samplePacketSize,
 					volume / accompanyMax);
 			delete accompanyPacket;
@@ -116,6 +123,7 @@ int AccompanyDecoderController::readSamples(short* samples, int size,
 		}
 		pthread_mutex_unlock (&mLock);
 	}
+    LOGI("AccompanyDecoderController::readSamples,end.");
 	return result;
 }
 

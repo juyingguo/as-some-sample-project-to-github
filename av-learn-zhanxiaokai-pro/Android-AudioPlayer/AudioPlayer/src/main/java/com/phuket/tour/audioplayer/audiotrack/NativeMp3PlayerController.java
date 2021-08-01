@@ -5,9 +5,13 @@ import java.util.TimerTask;
 
 import android.media.AudioManager;
 import android.os.Handler;
+import android.util.Log;
+
+import com.phuket.tour.audioplayer.util.LogUtil;
 
 public class NativeMp3PlayerController {
-
+	private final String TAG = "NativeMp3PlayerController";
+	private final String TAG_C = TAG;
 	public static final int UPDATE_PLAY_VOICE_PROGRESS = 730;
 	
 	public NativeMp3Player mediaPlayer;
@@ -55,10 +59,12 @@ public class NativeMp3PlayerController {
 	// *****************************************************
 
 	public boolean setAudioDataSource(String path) {
+		LogUtil.i(TAG_C,"setAudioDataSource,enter,path:" + path);
 		boolean result = mediaPlayer.setDataSource(path);
 		if (result) {
 			mediaPlayer.prepare();
 		}
+		LogUtil.i(TAG_C,"setAudioDataSource,end.");
 		return result;
 	}
 

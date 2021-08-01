@@ -8,12 +8,12 @@ AccompanyDecoderController* decoderController = NULL;
 JNIEXPORT jint JNICALL Java_com_phuket_tour_audioplayer_audiotrack_MusicDecoder_getMusicMeta
   (JNIEnv * env, jobject obj, jstring accompanyFilePathParam, jintArray meta) {
 	const char* accompanyFilePath = env->GetStringUTFChars(accompanyFilePathParam, NULL);
-	LOGI("musicPath is %s", accompanyFilePath);
+	LOGI("getMusicMeta,musicPath is %s", accompanyFilePath);
 	jint* metaData = env->GetIntArrayElements(meta, 0);
 	decoderController = new AccompanyDecoderController();
 	decoderController->getMusicMeta(accompanyFilePath, metaData);
-	LOGI("sampleRate is %d", metaData[0]);
-	LOGI("bitrate is %d", metaData[1]);
+	LOGI("getMusicMeta,sampleRate is %d", metaData[0]);
+	LOGI("getMusicMeta,bitrate is %d", metaData[1]);
 	env->ReleaseIntArrayElements(meta, metaData, 0);
 	env->ReleaseStringUTFChars(accompanyFilePathParam, accompanyFilePath);
 	return 0;
@@ -21,6 +21,7 @@ JNIEXPORT jint JNICALL Java_com_phuket_tour_audioplayer_audiotrack_MusicDecoder_
 
 JNIEXPORT jint JNICALL Java_com_phuket_tour_audioplayer_audiotrack_MusicDecoder_openFile
   (JNIEnv * env, jobject obj, jstring accompanyFilePathParam, jfloat packetBufferTimePercent) {
+	LOGI("openFile enter.");
 	if(NULL != decoderController) {
 		const char* accompanyFilePath = env->GetStringUTFChars(accompanyFilePathParam, NULL);
 		decoderController->init(accompanyFilePath, packetBufferTimePercent);

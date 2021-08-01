@@ -17,14 +17,16 @@ AccompanyDecoder::~AccompanyDecoder() {
 }
 
 int AccompanyDecoder::getMusicMeta(const char* fileString, int * metaData) {
+    LOGI("AccompanyDecoder::getMusicMeta,enter.");
 	init(fileString);
 	int sampleRate = avCodecContext->sample_rate;
-	LOGI("sampleRate is %d", sampleRate);
+	LOGI("AccompanyDecoder::getMusicMeta,sampleRate is %d", sampleRate);
 	int bitRate = avCodecContext->bit_rate;
-	LOGI("bitRate is %d", bitRate);
+	LOGI("AccompanyDecoder::getMusicMeta,bitRate is %d", bitRate);
 	destroy();
 	metaData[0] = sampleRate;
 	metaData[1] = bitRate;
+    LOGI("AccompanyDecoder::getMusicMeta,end.");
 	return 0;
 }
 
@@ -50,7 +52,7 @@ int AccompanyDecoder::init(const char* audioFile) {
 	av_register_all();
 	avFormatContext = avformat_alloc_context();
 	// 打开输入文件
-	LOGI("open accompany file %s....", audioFile);
+	LOGI("AccompanyDecoder::init,open accompany file %s....", audioFile);
 
 	if(NULL == accompanyFilePath){
 		int length = strlen(audioFile);
@@ -62,25 +64,25 @@ int AccompanyDecoder::init(const char* audioFile) {
 
 	int result = avformat_open_input(&avFormatContext, audioFile, NULL, NULL);
 	if (result != 0) {
-		LOGI("can't open file %s result is %d", audioFile, result);
+		LOGI("AccompanyDecoder::init,can't open file %s result is %d", audioFile, result);
 		return -1;
 	} else {
-		LOGI("open file %s success and result is %d", audioFile, result);
+		LOGI("AccompanyDecoder::init,open file %s success and result is %d", audioFile, result);
 	}
 	avFormatContext->max_analyze_duration = 50000;
 	//检查在文件中的流的信息
 	result = avformat_find_stream_info(avFormatContext, NULL);
 	if (result < 0) {
-		LOGI("fail avformat_find_stream_info result is %d", result);
+		LOGI("AccompanyDecoder::init,fail avformat_find_stream_info result is %d", result);
 		return -1;
 	} else {
-		LOGI("sucess avformat_find_stream_info result is %d", result);
+		LOGI("AccompanyDecoder::init, sucess avformat_find_stream_info result is %d", result);
 	}
 	stream_index = av_find_best_stream(avFormatContext, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
-	LOGI("stream_index is %d", stream_index);
+	LOGI("AccompanyDecoder::init,stream_index is %d", stream_index);
 	// 没有音频
 	if (stream_index == -1) {
-		LOGI("no audio stream");
+		LOGI("AccompanyDecoder::init,no audio stream");
 		return -1;
 	}
 	//音频流
@@ -92,23 +94,23 @@ int AccompanyDecoder::init(const char* audioFile) {
 	//获得音频流的解码器上下文
 	avCodecContext = audioStream->codec;
 	// 根据解码器上下文找到解码器
-	LOGI("avCodecContext->codec_id is %d AV_CODEC_ID_AAC is %d", avCodecContext->codec_id, AV_CODEC_ID_AAC);
+	LOGI("AccompanyDecoder::init,avCodecContext->codec_id is %d AV_CODEC_ID_AAC is %d", avCodecContext->codec_id, AV_CODEC_ID_AAC);
 	AVCodec * avCodec = avcodec_find_decoder(avCodecContext->codec_id);
 	if (avCodec == NULL) {
-		LOGI("Unsupported codec ");
+		LOGI("AccompanyDecoder::init,Unsupported codec ");
 		return -1;
 	}
 	// 打开解码器
 	result = avcodec_open2(avCodecContext, avCodec, NULL);
 	if (result < 0) {
-		LOGI("fail avformat_find_stream_info result is %d", result);
+		LOGI("AccompanyDecoder::init,fail avcodec_open2 result is %d", result);
 		return -1;
 	} else {
-		LOGI("sucess avformat_find_stream_info result is %d", result);
+		LOGI("success avcodec_open2 result is %d", result);
 	}
 	//4、判断是否需要resampler
 	if (!audioCodecIsSupported()) {
-		LOGI("because of audio Codec Is Not Supported so we will init swresampler...");
+		LOGI("AccompanyDecoder::init,because of audio Codec Is Not Supported so we will init swresampler...");
 		/**
 		 * 初始化resampler
 		 * @param s               Swr context, can be NULL
@@ -127,13 +129,13 @@ int AccompanyDecoder::init(const char* audioFile) {
 			if (swrContext)
 				swr_free(&swrContext);
 			avcodec_close(avCodecContext);
-			LOGI("init resampler failed...");
+			LOGI("AccompanyDecoder::init,init resampler failed...");
 			return -1;
 		}
 	}
-	LOGI("channels is %d sampleRate is %d", avCodecContext->channels, avCodecContext->sample_rate);
+	LOGI("AccompanyDecoder::init,channels is %d sampleRate is %d", avCodecContext->channels, avCodecContext->sample_rate);
 	pAudioFrame = avcodec_alloc_frame();
-//	LOGI("leave AccompanyDecoder::init");
+	LOGI("leave AccompanyDecoder::init");
 	return 1;
 }
 
@@ -301,7 +303,7 @@ int AccompanyDecoder::readFrame() {
 }
 
 void AccompanyDecoder::destroy() {
-//	LOGI("start destroy!!!");
+	LOGI("AccompanyDecoder::destroy,start destroy!!!");
 	if (NULL != swrBuffer) {
 		free(swrBuffer);
 		swrBuffer = NULL;
@@ -320,9 +322,9 @@ void AccompanyDecoder::destroy() {
 		avCodecContext = NULL;
 	}
 	if (NULL != avFormatContext) {
-		LOGI("leave LiveReceiver::destory");
+		LOGI("AccompanyDecoder::destroy,leave LiveReceiver::destory");
 		avformat_close_input(&avFormatContext);
 		avFormatContext = NULL;
 	}
-//	LOGI("end destroy!!!");
+	LOGI("AccompanyDecoder::destroy,end destroy!!!");
 }
