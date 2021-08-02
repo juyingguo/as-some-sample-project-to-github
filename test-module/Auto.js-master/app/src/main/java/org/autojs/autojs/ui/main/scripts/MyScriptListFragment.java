@@ -87,6 +87,7 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
             @Override
             public void OnItemOperated(ExplorerItem item) {
                 Log.d(TAG,"OnItemOperated,item.getName():"  + item.getName());
+                Log.d(TAG,"OnItemOperated,item.getPath():"  + item.getPath());
                 /*if ("douyinjisuban.js".equals(item.getName())){
                     mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_STOP_AND_RERUN_SCRIPT,item.getPath()),MSG_STOP_AND_RERUN_SCRIPT_DELAY);
                 }*/

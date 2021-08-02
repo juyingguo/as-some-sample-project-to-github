@@ -543,6 +543,7 @@ public class ExplorerView extends ThemeColorSwipeRefreshLayout implements SwipeR
 
         @OnClick(R.id.item)
         void onItemClick() {
+            mSelectedItem = mExplorerItem;
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(itemView, mExplorerItem);
             }
