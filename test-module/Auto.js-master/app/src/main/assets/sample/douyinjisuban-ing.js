@@ -41,7 +41,7 @@ function makeMoneyView() {
 
     //     //
     //     var zouLuZhuanQianClick=className("android.view.View").clickable(true).depth(13).selected(false).findOnce(1000);
-    //     if(zouLuZhuanQianClick){
+    //     if(zouLuZhuanQianClick){ 
     //         zouLuZhuanQianClick.click();
     //         sleep(2000);
     //     }
@@ -83,7 +83,7 @@ function makeMoneyView() {
     // if(daily_invite_apprentice != null){
     //     toastLog("daily_invite_apprentice find.");
     //     daily_invite_apprentice.click();
-    // }
+    // }    
     ///8.1 通过坐标点击。ok。需要确认点击的控件范围坐标。
     // click(30+5,844+5);
 
@@ -99,7 +99,7 @@ function makeMoneyView() {
     //     console.log("123-ni-hao-test id not exist,error:" + error);
     // }
 
-    ///10 看广告赚金币。
+    ///10 看广告赚金币。    
     // try{
     //     var viewKGGZHJB = text("看广告赚金币").findOne();
     //     if(viewKGGZHJB){
@@ -115,7 +115,7 @@ function makeMoneyView() {
     // }catch(error){
     //     console.log("viewKGGZHJB not exist,error:" + error);
     // }
-
+    
     ////11 走路赚金币。不可见的时候也能检测出来，可以直接点击打开对应界面，操作完成后，退出该界面
     execZouLuZHJBTask();
 
@@ -137,17 +137,18 @@ function execAutoPageTask(){
     while(true){
         sleep(2000);
 
-        //关闭弹框，如果失败会，会引发下面其余代码无法执行
-        // try{
-        //     var dialogTipClose = id("bai").findOne(2000);
-        //     if(dialogTipClose){
-        //         dialogTipClose.click();
-        //     }
-        // }catch(error){
-        //     console.log("execAutoPageTask id,error:" + error);
-        // }
+        //关闭弹框，如果失败会，会引发下面其余代码无法执行   
+        //通多id获取控件，通过depth，两者都添加，防止有时候，无法执行。     
         try{
-            className("android.widget.ImageView").depth(4).clickable(true).findOne(2000).click();
+            var dialogTipClose = id("bai").findOne(2000);
+            if(dialogTipClose){
+                dialogTipClose.click();
+            }            
+        }catch(error){
+            // console.log("execAutoPageTask use id,error:" + error);
+        }
+        try{
+            className("android.widget.ImageView").depth(4).clickable(true).findOne(2000).click();            
             console.log("execAutoPageTask close dialog(use depth),click ok.");
         }catch(error){
             // console.log("execAutoPageTask depth,error:" + error);
@@ -164,44 +165,37 @@ function execAutoPageTask(){
  */
 function execZouLuZHJBTask(){
     console.log("execZouLuZHJBTask enter.");
-    sleep(5000);
-    var flag = true;
-    while(flag){
-        try{
-            var viewZouLuZHJB = text("走路赚金币").findOne(3000);
-            if(viewZouLuZHJB){
-                console.log("viewZouLuZHJB exist,");
+    sleep(4000);
+    try{
+        var viewZouLuZHJB = text("走路赚金币").findOne(1000);
+        if(viewZouLuZHJB){
+            console.log("viewZouLuZHJB exist,");
 
-                // var viewZouLuZHJB_bounds = viewZouLuZHJB.bounds();
-                // console.log("viewZouLuZHJB exist,left:" + viewZouLuZHJB_bounds.left + " top" + viewZouLuZHJB_bounds.top);
+            // var viewZouLuZHJB_bounds = viewZouLuZHJB.bounds();
+            // console.log("viewZouLuZHJB exist,left:" + viewZouLuZHJB_bounds.left + " top" + viewZouLuZHJB_bounds.top);
 
-                // console.log("viewZouLuZHJB(走路赚金币) exist,click bounds.");
-                // click(viewZouLuZHJB_bounds.left + 10,viewZouLuZHJB_bounds.top+10);
+            // console.log("viewZouLuZHJB(走路赚金币) exist,click bounds.");
+            // click(viewZouLuZHJB_bounds.left + 10,viewZouLuZHJB_bounds.top+10);
 
-                viewZouLuZHJB.click();
-                sleep(3000);
+            viewZouLuZHJB.click();
+            sleep(2000);
 
-                ///走了金币-领金币
-                try {
-                    className("android.view.View").clickable(true).depth(13).findOne(2000).click();
-                } catch (error) {
-                    console.log("viewZouLuZHJB 走了金币-领金币 not exist,error" + error);
-                }
-
-                break;
-            }else{
-                console.log("viewZouLuZHJB not exist.");
+            ///走路-领金币
+            try {
+                className("android.view.View").clickable(true).depth(13).findOne(2000).click();
+            } catch (error) {
+                console.log("viewZouLuZHJB 走路-领金币 error:" + error);
             }
-        }catch(error){
-            console.log("viewZouLuZHJB(走路赚金币) not exist,继续滑动300px.");
-            gesture(1000, [350, 800], [350, 500]);
+        
+            //返回上一个界面
+            sleep(1000);
+            back();
+        }else{
+            console.log("viewZouLuZHJB not exist.");
         }
-        sleep(1000);
+    }catch(error){
+        console.log("viewZouLuZHJB(走路赚金币) error:" + error);
     }
-
-    //返回上一个界面
-    sleep(1000);
-    back();
     console.log("execZouLuZHJBTask end.");
 }
 /**
@@ -218,7 +212,7 @@ function execZouLuZHJBTask(){
         var viewChiFanBuTie = text("吃饭补贴").findOne(1000);
         if(viewChiFanBuTie){
             viewChiFanBuTie.click();
-            sleep(4000);
+            sleep(3000);
         }
 
         var viewChiFanBuTieLinQu = className("android.view.View").clickable(true).depth(13).findOne(2000);
@@ -254,8 +248,8 @@ function execZouLuZHJBTask(){
         }
     }catch(error){
         console.log("execChiFanBuTieTask viewChiFanBuTie(吃饭补贴) error:" + error);
-    }
-
+    } 
+    
     //返回上一个界面
     sleep(1000);
     back();

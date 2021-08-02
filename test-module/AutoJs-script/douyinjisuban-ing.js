@@ -137,15 +137,16 @@ function execAutoPageTask(){
     while(true){
         sleep(2000);
 
-        //关闭弹框，如果失败会，会引发下面其余代码无法执行         
-        // try{
-        //     var dialogTipClose = id("bai").findOne(2000);
-        //     if(dialogTipClose){
-        //         dialogTipClose.click();
-        //     }            
-        // }catch(error){
-        //     console.log("execAutoPageTask id,error:" + error);
-        // }
+        //关闭弹框，如果失败会，会引发下面其余代码无法执行   
+        //通多id获取控件，通过depth，两者都添加，防止有时候，无法执行。     
+        try{
+            var dialogTipClose = id("bai").findOne(2000);
+            if(dialogTipClose){
+                dialogTipClose.click();
+            }            
+        }catch(error){
+            // console.log("execAutoPageTask use id,error:" + error);
+        }
         try{
             className("android.widget.ImageView").depth(4).clickable(true).findOne(2000).click();            
             console.log("execAutoPageTask close dialog(use depth),click ok.");
