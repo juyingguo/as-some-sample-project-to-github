@@ -192,6 +192,15 @@ public class ScriptEngineService {
             mUiHandler.toast(String.format(mContext.getString(R.string.text_already_stop_n_scripts), n));
     }
 
+    /**
+     * stop script by script filename
+     */
+    public void stopByScriptFileName(String fileName) {
+        int n = mScriptEngineManager.stopByScriptFileName(fileName);
+        if (n > 0)
+            mUiHandler.toast(String.format(mContext.getString(R.string.text_already_stop_n_scripts), n));
+
+    }
     public Set<ScriptEngine> getEngines() {
         return mScriptEngineManager.getEngines();
     }

@@ -1,10 +1,13 @@
 package com.stardust.autojs.engine;
 
 import android.content.Context;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.stardust.autojs.execution.ScriptExecution;
+import com.stardust.autojs.script.JavaScriptSource;
 import com.stardust.autojs.script.ScriptSource;
 import com.stardust.util.Supplier;
 
@@ -79,6 +82,29 @@ public class ScriptEngineManager {
             int n = mEngines.size();
             for (ScriptEngine engine : mEngines) {
                 engine.forceStop();
+            }
+            return n;
+        }
+    }
+
+    /**
+     * stop script by script filename
+     * @param fileName  script filename
+     * @return number for stopped script
+     */
+    public int stopByScriptFileName(String fileName) {
+        Log.i(TAG,"stopByScriptFileName enter,fileName:" + fileName);
+        synchronized (mEngines) {
+            int n = 0;
+            for (ScriptEngine engine : mEngines) {
+                Object tag = engine.getTag(ScriptEngine.TAG_SOURCE);
+                if (tag instanceof JavaScriptSource){
+                    if (((JavaScriptSource) tag).getName().equals(fileName)){
+                        Log.i(TAG,"stopByScriptFileName find ScriptEngine with fileName:" + fileName + ",forceStop it.");
+                        engine.forceStop();
+                        n++;
+                    }
+                }
             }
             return n;
         }

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.stardust.app.GlobalAppContext;
 import com.stardust.autojs.execution.ExecutionConfig;
+import com.stardust.pio.PFiles;
 
 import org.autojs.autojs.autojs.AutoJs;
 import org.autojs.autojs.model.script.ScriptFile;
@@ -35,9 +36,15 @@ public class BaseBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * 运行任务前，先停止之前运行的同一个脚本任务
+     */
     static void runTask(Context context, Intent intent, IntentTask task) {
         Log.d(LOG_TAG, "runTask: action = " + intent.getAction() + ", script = " + task.getScriptPath());
         ScriptFile file = new ScriptFile(task.getScriptPath());
+        //stop first.
+        AutoJs.getInstance().getScriptEngineService().stopByScriptFileName(PFiles.getNameWithoutExtension(file.getName()));
+
         ExecutionConfig config = new ExecutionConfig();
         config.setArgument("intent", intent.clone());
         config.setWorkingDirectory(file.getParent());
