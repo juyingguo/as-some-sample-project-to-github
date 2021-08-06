@@ -5,7 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import org.autojs.autojs.App;
+import com.stardust.autojs.util.LogUtil;
+
 import org.autojs.autojs.external.ScriptIntents;
 
 /**
@@ -13,12 +14,13 @@ import org.autojs.autojs.external.ScriptIntents;
  */
 
 public class TaskReceiver extends BroadcastReceiver {
-
+    private final String TAG = "TaskReceiver";
     public static final String ACTION_TASK = "com.stardust.autojs.action.task";
     public static final String EXTRA_TASK_ID = "task_id";
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        LogUtil.i(TAG,"onReceive,intent:" + intent);
         ScriptIntents.handleIntent(context, intent);
         long id = intent.getLongExtra(EXTRA_TASK_ID, -1);
         if (id >= 0) {
