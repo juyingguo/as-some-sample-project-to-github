@@ -32,112 +32,97 @@
      if(frameLayouts.length==1){  //注意如果是6个的时候，该如何
          frameLayouts[0].click();
      }
- 
-     //走路赚钱-id=a90
-     // var zouLuZhuanQian = id("a90").findOne(1000);
-     // if(zouLuZhuanQian){
-     //     zouLuZhuanQian.click();
-     //     sleep(2000);
- 
-     //     //
-     //     var zouLuZhuanQianClick=className("android.view.View").clickable(true).depth(13).selected(false).findOnce(1000);
-     //     if(zouLuZhuanQianClick){ 
-     //         zouLuZhuanQianClick.click();
-     //         sleep(2000);
-     //     }
- 
-     // }
- 
- 
-     ///金币转换提示，clickable一直变
-     ///var jinBiZhuanHuanTip = className("android.view.View").text(金币每天凌晨左右自动兑换成现金).clickable(true).depth(14).findOnce(1000);
-     // sleep(5000);
-     // var jinBiZhuanHuanTip = className("android.view.View").clickable(true).depth(14).findOnce();
-     // if(jinBiZhuanHuanTip != null){
-     //     jinBiZhuanHuanTip.click();
- 
-     //     sleep(5000);
-     //     //关闭提示框
-     //     className("android.view.Button").text("closebutton").findOnce(1000).click;
-     // }
- 
-     ///5设置
-     ///5.1 但是打开的是。外层id="bqy"，但是点击后为：拍视频开红包。
-     // var set = id("bqy").findOne().click();
-     //5.2 通过下面depth 是可以的。
-     // className("android.view.View").clickable(true).depth(14).findOne().click();
- 
-     ///6 关闭。id=a8p。可以用
-     // var close = id("a8p").findOne().click();
-     //6.1 通过坐标点击。ok
-     // click(32+5,64+5);
- 
- 
-     ///7. 看赛事。目前失败
-     // id("olympics_gold_bonus").findOne().click();
- 
-     ///8. 邀请好友
-     ///8.1 大额福利，实际点击也无效。
-     // text("大额福利").findOne().click();
-     // var daily_invite_apprentice = id("daily_invite_apprentice").findOne();
-     // if(daily_invite_apprentice != null){
-     //     toastLog("daily_invite_apprentice find.");
-     //     daily_invite_apprentice.click();
-     // }    
-     ///8.1 通过坐标点击。ok。需要确认点击的控件范围坐标。
-     // click(30+5,844+5);
- 
-     ///9 判断控件是否存在，异常捕获。
-     // try{
-     //     var id = id("123-ni-hao-test").findOne();
-     //     if(id){
-     //         toastLog("123-ni-hao-test id exist.");
-     //     }else{
-     //         toastLog("123-ni-hao-test id not exist.");
-     //     }
-     // }catch(error){
-     //     console.log("123-ni-hao-test id not exist,error:" + error);
-     // }
- 
-     ///10 看广告赚金币。    
-     // try{
-     //     var viewKGGZHJB = text("看广告赚金币").findOne();
-     //     if(viewKGGZHJB){
-     //         console.log("viewKGGZHJB exist,");
- 
-     //         var viewKGGZHJB_bounds = viewKGGZHJB.bounds();
-     //         console.log("viewKGGZHJB exist,left:" + viewKGGZHJB_bounds.left + " top" + viewKGGZHJB_bounds.top);
- 
-     //         click(viewKGGZHJB_bounds.left -3,viewKGGZHJB_bounds.top-3);
-     //     }else{
-     //         toastLog("viewKGGZHJB not exist.");
-     //     }
-     // }catch(error){
-     //     console.log("viewKGGZHJB not exist,error:" + error);
-     // }
+     //今日签到(前提是进入到赚钱任务页面)
+     signInToday();
+
+     //开宝箱赚金币(前提是进入到赚钱任务页面)
+     makeMoneyByBox();
      
-     ////11 走路赚金币。不可见的时候也能检测出来，可以直接点击打开对应界面，操作完成后，退出该界面
+     // 走路赚金币。不可见的时候也能检测出来，可以直接点击打开对应界面，操作完成后，退出该界面
      execZouLuZHJBTask();
  
+     //吃饭补贴-领金币
      execChiFanBuTieTask();
  
      sleep(1000);
+     //退到主界面
      back();
+     //翻页看视频
      execAutoPageTask();
  
-     // back();
-     // execAutoPageTask();
  }
  
+/**
+ * 今日签到(前提是进入到赚钱任务页面)
+ */
+function signInToday(){
+
+    sleep(5000);
+    toastLog("signInToday");
+
+    let temp=text("今日签到").find();
+    // toastLog("signInToday--num:"+temp.length);
+    if(temp.length==1){
+
+        temp[0].click();
+
+        //今日签到界面是自动弹出来的，所以直接点击签到领取
+        let views=className("android.view.View").depth(16).selected(false).clickable(true).find();
+        toastLog("signInToday-1-views.length:"+views.length);
+        
+        if(views.length==4){
+
+            views[2].click();
+        }
+
+        sleep(1000);
+
+        //点击其他空白区域关闭今日签到界面
+        clickScreenActionByXY(device.width*0.2,device.height*0.1);
+
+    }
+    sleep(500);
+}
+
+/**
+ * 开宝箱赚金币(前提是进入到赚钱任务页面)
+ */
+function makeMoneyByBox(){
+    sleep(2000);
+    toastLog("makeMoneyByBox");
+
+    //点击宝箱图案
+    let views=className("android.view.View").depth(13).selected(false).clickable(true).find();
+    toastLog("makeMoneyByBox-1-views.length:"+views.length);
+    
+    if(views.length==1){
+        views[0].click();
+    }
+
+    sleep(1000);
+
+    //关闭宝箱界面
+    let views2=className("android.view.View").depth(16).selected(false).clickable(true).find();
+    toastLog("makeMoneyByBox-2-views2.length:"+views2.length);
+    
+    if(views2.length==4){
+        views2[3].click();    //2表示点击了再看广告领取金币; 3是关闭
+    }
+
+    if(views2.length==3){
+        views2[2].click();    
+    }
+}
  /**
-  * 滑动翻页
+  * 1.向上滑动翻页看视频。
+  * 2.看视频中会有提示金币框，关闭弹框
   */
  function execAutoPageTask(){
      console.log("execAutoPageTask enter.");
      while(true){
          sleep(2000);
  
-         //关闭弹框，如果失败会，会引发下面其余代码无法执行   
+         //看视频中会有提示金币框，关闭弹框，如果失败会，会引发下面其余代码无法执行   
          //通多id获取控件，通过depth，两者都添加，防止有时候，无法执行。     
          try{
              var dialogTipClose = id("bai").findOne(2000);
