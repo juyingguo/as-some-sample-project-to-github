@@ -141,7 +141,7 @@ function makeMoneyByBox(){
  
          gesture(1000, [350, 800], [350, 150]);
  
-         sleep(13000);
+         sleep(8000);
      }
  };
  

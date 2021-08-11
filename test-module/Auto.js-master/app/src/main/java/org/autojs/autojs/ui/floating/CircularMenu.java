@@ -15,6 +15,7 @@ import com.stardust.autojs.core.record.Recorder;
 import com.stardust.enhancedfloaty.FloatyService;
 import com.stardust.enhancedfloaty.FloatyWindow;
 
+import org.autojs.autojs.App;
 import org.autojs.autojs.Pref;
 import org.autojs.autojs.R;
 import org.autojs.autojs.autojs.AutoJs;
@@ -37,6 +38,7 @@ import com.stardust.view.accessibility.AccessibilityService;
 import com.stardust.view.accessibility.LayoutInspector;
 import com.stardust.view.accessibility.NodeInfo;
 
+import org.autojs.autojs.ui.main.scripts.MyScriptListFragment_;
 import org.greenrobot.eventbus.EventBus;
 import org.jdeferred.Deferred;
 import org.jdeferred.impl.DeferredObject;
@@ -247,6 +249,7 @@ public class CircularMenu implements Recorder.OnStateChangedListener, LayoutInsp
     void stopAllScripts() {
         mWindow.collapse();
         AutoJs.getInstance().getScriptEngineService().stopAllAndToast();
+        App.Companion.getApp().sendBroadcast(new Intent(MyScriptListFragment_.ACTION_SCRIPT_STOP_BY_USER));
     }
 
 

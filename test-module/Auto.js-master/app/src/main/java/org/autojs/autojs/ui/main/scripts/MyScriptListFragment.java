@@ -2,6 +2,10 @@ package org.autojs.autojs.ui.main.scripts;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -56,6 +60,14 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
     ExplorerView mExplorerView;
 
     private FloatingActionMenu mFloatingActionMenu;
+
+    private final int MSG_STOP_AND_RERUN_SCRIPT = 101;
+    private final int MSG_STOP_AND_RERUN_SCRIPT_DELAY = 30*60*1000;
+    /**
+     * 用户关闭脚本。
+     */
+    public final static String ACTION_SCRIPT_STOP_BY_USER = "ACTION_SCRIPT_STOP_BY_USER";
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler(){
         @Override
@@ -70,13 +82,24 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
             }
         }
     };
-    private final int MSG_STOP_AND_RERUN_SCRIPT = 101;
-    private final int MSG_STOP_AND_RERUN_SCRIPT_DELAY = 2*60*1000;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+
+        IntentFilter filter = new IntentFilter(ACTION_SCRIPT_STOP_BY_USER);
+        if(getActivity() != null)
+            getActivity().registerReceiver(mReceiver,filter);
     }
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG,"onReceive,intent:"  + intent);
+            if (mHandler != null)
+                mHandler.removeCallbacksAndMessages(null);
+        }
+    };
 
     @AfterViews
     void setUpViews() {
@@ -177,6 +200,9 @@ public class MyScriptListFragment extends ViewPagerFragment implements FloatingA
         super.onDetach();
         if (mFloatingActionMenu != null)
             mFloatingActionMenu.setOnFloatingActionButtonClickListener(null);
+
+        if(getActivity() != null)
+            getActivity().unregisterReceiver(mReceiver);
     }
 
 

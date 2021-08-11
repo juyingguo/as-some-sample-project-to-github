@@ -53,6 +53,7 @@ import org.autojs.autojs.ui.log.LogActivity_;
 import org.autojs.autojs.ui.main.community.CommunityFragment;
 import org.autojs.autojs.ui.main.community.CommunityFragment_;
 import org.autojs.autojs.ui.main.market.MarketFragment;
+import org.autojs.autojs.ui.main.scripts.MyScriptListFragment;
 import org.autojs.autojs.ui.main.scripts.MyScriptListFragment_;
 import org.autojs.autojs.ui.main.task.TaskManagerFragment_;
 import org.autojs.autojs.ui.settings.SettingsActivity_;
@@ -217,6 +218,8 @@ public class MainActivity extends BaseActivity implements OnActivityResultDelega
         ForegroundService.stop(this);
         stopService(new Intent(this, FloatyService.class));
         AutoJs.getInstance().getScriptEngineService().stopAll();
+
+        sendBroadcast(new Intent(MyScriptListFragment_.ACTION_SCRIPT_STOP_BY_USER));
     }
 
     @Override
