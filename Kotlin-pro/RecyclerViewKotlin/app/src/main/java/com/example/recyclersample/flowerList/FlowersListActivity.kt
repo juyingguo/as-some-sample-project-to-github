@@ -46,7 +46,7 @@ class FlowersListActivity : AppCompatActivity() {
 
         /* Instantiates headerAdapter and flowersAdapter. Both adapters are added to concatAdapter.
         which displays the contents sequentially */
-        val headerAdapter = HeaderAdapter()
+        val headerAdapter = HeaderAdapter();
         val flowersAdapter = FlowersAdapter { flower -> adapterOnClick(flower) }
         val concatAdapter = ConcatAdapter(headerAdapter, flowersAdapter)
 

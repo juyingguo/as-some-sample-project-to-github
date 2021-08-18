@@ -43,6 +43,11 @@ class FlowersAdapter(private val onClick: (Flower) -> Unit) :
                     onClick(it)
                 }
             }
+            /*itemView.setOnClickListener(View.OnClickListener { currentFlower?.let { it1 ->
+                onClick(
+                    it1
+                )
+            } })*/
         }
 
         /* Bind flower name and image. */
