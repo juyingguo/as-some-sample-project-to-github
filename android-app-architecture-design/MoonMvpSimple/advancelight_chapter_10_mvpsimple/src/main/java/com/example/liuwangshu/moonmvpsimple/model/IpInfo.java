@@ -23,4 +23,12 @@ public class IpInfo {
     public void setData(IpData data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "IpInfo{" +
+                "code=" + code +
+                ", data=" + data +
+                '}';
+    }
 }

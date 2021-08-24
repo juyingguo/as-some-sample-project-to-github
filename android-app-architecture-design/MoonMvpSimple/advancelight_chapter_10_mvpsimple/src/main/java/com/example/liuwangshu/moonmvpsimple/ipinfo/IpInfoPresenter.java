@@ -1,6 +1,7 @@
 package com.example.liuwangshu.moonmvpsimple.ipinfo;
 
 import com.example.liuwangshu.moonmvpsimple.LoadTasksCallBack;
+import com.example.liuwangshu.moonmvpsimple.model.IpInfo;
 import com.example.liuwangshu.moonmvpsimple.net.NetTask;
 
 
@@ -8,7 +9,7 @@ import com.example.liuwangshu.moonmvpsimple.net.NetTask;
  * Created by Administrator on 2016/12/29 0029.
  */
 
-public class IpInfoPresenter implements IpInfoContract.Presenter, LoadTasksCallBack<String> {
+public class IpInfoPresenter implements IpInfoContract.Presenter, LoadTasksCallBack<IpInfo/*String*/> {
     private NetTask<String> netTask;
     private IpInfoContract.View addTaskView;
 
@@ -21,19 +22,19 @@ public class IpInfoPresenter implements IpInfoContract.Presenter, LoadTasksCallB
         if (netTask != null) netTask.execute(ip, this);
     }
 
-    /*@Override
+    @Override
     public void onSuccess(IpInfo ipInfo) {
         if(addTaskView.isActive()){
             addTaskView.setIpInfo(ipInfo);
         }
-    }*/
+    }
 
-    @Override
+    /*@Override
     public void onSuccess(String ipInfo) {
         if(addTaskView.isActive()){
             addTaskView.setIpInfo(ipInfo);
         }
-    }
+    }*/
 
     @Override
     public void onStart() {

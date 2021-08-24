@@ -64,7 +64,7 @@ public class IpInfoFragment extends Fragment implements IpInfoContract.View {
         mPresenter=presenter;
     }
 
-    /*@Override
+    @Override
     public void setIpInfo(IpInfo ipInfo) {
         if(ipInfo!=null&&ipInfo.getData()!=null){
             IpData ipData=ipInfo.getData();
@@ -72,14 +72,14 @@ public class IpInfoFragment extends Fragment implements IpInfoContract.View {
             tv_area.setText(ipData.getArea());
             tv_city.setText(ipData.getCity());
         }
-    }*/
+    }
 
-    @Override
+    /*@Override
     public void setIpInfo(String ipInfo) {
         if(ipInfo!=null){
             tv_country.setText(ipInfo);
         }
-    }
+    }*/
 
     @Override
     public void showLoading() {

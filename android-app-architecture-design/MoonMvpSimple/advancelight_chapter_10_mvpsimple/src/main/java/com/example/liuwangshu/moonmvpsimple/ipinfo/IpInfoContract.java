@@ -10,8 +10,8 @@ public interface IpInfoContract {
     }
 
     interface View extends BaseView<Presenter> {
-//        void setIpInfo(IpInfo ipInfo);
-        void setIpInfo(String ipInfo);
+        void setIpInfo(IpInfo ipInfo);
+//        void setIpInfo(String ipInfo);
         void showLoading();
         void hideLoading();
         void showError();

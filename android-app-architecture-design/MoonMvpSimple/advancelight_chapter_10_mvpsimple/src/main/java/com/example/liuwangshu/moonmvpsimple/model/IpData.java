@@ -122,4 +122,23 @@ public class IpData {
     public void setIp(String ip) {
         this.ip = ip;
     }
+
+    @Override
+    public String toString() {
+        return "IpData{" +
+                "country='" + country + '\'' +
+                ", country_id='" + country_id + '\'' +
+                ", area='" + area + '\'' +
+                ", area_id='" + area_id + '\'' +
+                ", region='" + region + '\'' +
+                ", region_id='" + region_id + '\'' +
+                ", city='" + city + '\'' +
+                ", city_id='" + city_id + '\'' +
+                ", county='" + county + '\'' +
+                ", county_id='" + county_id + '\'' +
+                ", isp='" + isp + '\'' +
+                ", isp_id='" + isp_id + '\'' +
+                ", ip='" + ip + '\'' +
+                '}';
+    }
 }
