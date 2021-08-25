@@ -1,0 +1,8 @@
+1.ERROR: android-apt plugin is incompatible with the Android Gradle plugin.  Please use 'annotationProcessor' configuration instead.
+    https://blog.csdn.net/l403040463/article/details/79166342
+    一、把module/build.gradle下的apt插件应用全部注释掉
+    二、把dependencies下的apt全部改为annotationProcessor
+    三、把project/build.gradle中的apt插件声明注释
+2.初步验证
+    注解Singleton与自定义注解ApplicationScope效果一样
+    分析：查看源码，ApplicationScope与Singleton源码一样
