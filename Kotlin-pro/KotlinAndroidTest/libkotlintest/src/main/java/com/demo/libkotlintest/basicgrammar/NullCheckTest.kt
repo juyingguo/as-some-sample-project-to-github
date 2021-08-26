@@ -13,6 +13,7 @@ fun parseInt(str: String): Int? {
 fun main(args: Array<String>) {
     arrayTest()
     nullCheck()
+    nullCheck2()
 }
 
 fun arrayTest() {
@@ -45,5 +46,14 @@ fun nullCheck(){
     //抛出空指针异常
     val ages = age!!.toInt()
 
-    print("nullCheck,ages=$ages")
+    println("nullCheck,ages=$ages")
+}
+fun nullCheck2(){
+    //类型后面加?表示可为空
+//    var age: String? = "23"
+
+    var age: String? = null//如果写在类中就错误了，需要初始化。如果写在非类中，是可以的。
+    val s = age?:"123";
+    println("nullCheck2,age=$age")
+    println("nullCheck2,s=$s")
 }

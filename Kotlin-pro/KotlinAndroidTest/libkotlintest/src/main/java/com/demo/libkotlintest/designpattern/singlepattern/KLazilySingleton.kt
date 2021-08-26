@@ -12,7 +12,7 @@ class KLazilySingleton private constructor() : Serializable {
                 return field ?: KLazilySingleton()
             }
 
-//        @JvmStatic
+        @JvmStatic
         @Synchronized//添加synchronized同步锁
         fun getInstance(): KLazilySingleton {
             return requireNotNull(mInstance)
@@ -26,4 +26,7 @@ class KLazilySingleton private constructor() : Serializable {
 //在Kotlin中调用
 fun main(args: Array<String>) {
     KLazilySingleton.getInstance().doSomething()
+    println("KLazilySingleton.getInstance():" + KLazilySingleton.getInstance())
+    println("KLazilySingleton.getInstance():" + KLazilySingleton.getInstance())
+
 }

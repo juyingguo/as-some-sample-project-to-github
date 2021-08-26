@@ -15,4 +15,6 @@ object KSingleton : Serializable {//实现Serializable序列化接口，通过�
 //在Kotlin中使用KSingleton
 fun main(args: Array<String>) {
     KSingleton.doSomething()//像调用静态方法一样，调用单例类中的方法
+    println("KSingleton.hashCode():" + KSingleton.hashCode())
+    println("KSingleton.hashCode():" + KSingleton.hashCode())
 }
