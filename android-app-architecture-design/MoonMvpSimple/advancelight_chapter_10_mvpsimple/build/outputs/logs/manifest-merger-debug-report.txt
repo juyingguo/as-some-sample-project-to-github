@@ -1,0 +1,154 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:1-22:12
+MERGED from [com.android.support:appcompat-v7:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\44f7d7f5df9ffe5a19775a18d623434f\appcompat-v7-25.0.1\AndroidManifest.xml:17:1-27:12
+MERGED from [cn.finalteam:okhttpfinal:2.0.7] C:\Users\username\.gradle\caches\transforms-2\files-2.1\4c53f086ea5b43bc2f378b0964691ebd\okhttpfinal-2.0.7\AndroidManifest.xml:17:1-26:12
+MERGED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:2:1-28:12
+MERGED from [com.android.support:support-v4:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\ec623c3852732fdb6f43649705e31200\support-v4-25.0.1\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:animated-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\718f0cde2897283170c3e49e512ed71f\animated-vector-drawable-25.0.1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:support-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\15afa2ad4ab14f2ae19baa73674b8ec2\support-vector-drawable-25.0.1\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:support-fragment:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\f8756ab9d14c8b833cd607fde5e78718\support-fragment-25.0.1\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-media-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\defa9ad7ada4d0d0790c99e63fb9f2d8\support-media-compat-25.0.1\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-core-utils:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\a178cec0af3ef95d490e801e0c7a0c78\support-core-utils-25.0.1\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-core-ui:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\18fb90170b002a4ea2ce59d60a5050b2\support-core-ui-25.0.1\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\3e48781bab00c441806cd7aaff9e18e9\support-compat-25.0.1\AndroidManifest.xml:17:1-27:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:1-22:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:1-22:12
+	package
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:3:5-51
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:1-22:12
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:1-22:12
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:5:5-20:19
+MERGED from [com.android.support:appcompat-v7:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\44f7d7f5df9ffe5a19775a18d623434f\appcompat-v7-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\44f7d7f5df9ffe5a19775a18d623434f\appcompat-v7-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\ec623c3852732fdb6f43649705e31200\support-v4-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\ec623c3852732fdb6f43649705e31200\support-v4-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\718f0cde2897283170c3e49e512ed71f\animated-vector-drawable-25.0.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\718f0cde2897283170c3e49e512ed71f\animated-vector-drawable-25.0.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\15afa2ad4ab14f2ae19baa73674b8ec2\support-vector-drawable-25.0.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\15afa2ad4ab14f2ae19baa73674b8ec2\support-vector-drawable-25.0.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-fragment:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\f8756ab9d14c8b833cd607fde5e78718\support-fragment-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\f8756ab9d14c8b833cd607fde5e78718\support-fragment-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\defa9ad7ada4d0d0790c99e63fb9f2d8\support-media-compat-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\defa9ad7ada4d0d0790c99e63fb9f2d8\support-media-compat-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\a178cec0af3ef95d490e801e0c7a0c78\support-core-utils-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\a178cec0af3ef95d490e801e0c7a0c78\support-core-utils-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\18fb90170b002a4ea2ce59d60a5050b2\support-core-ui-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\18fb90170b002a4ea2ce59d60a5050b2\support-core-ui-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\3e48781bab00c441806cd7aaff9e18e9\support-compat-25.0.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\3e48781bab00c441806cd7aaff9e18e9\support-compat-25.0.1\AndroidManifest.xml:25:5-20
+	android:supportsRtl
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:9:9-41
+	android:icon
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:8:9-43
+	android:allowBackup
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:7:9-35
+	android:theme
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:11:9-40
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:6:9-39
+activity#com.example.liuwangshu.moonmvpsimple.ipinfo.IpInfoActivity
+ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:12:19-56
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:16:27-74
+uses-permission#android.permission.INTERNET
+ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:21:5-67
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml:21:22-64
+uses-sdk
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\44f7d7f5df9ffe5a19775a18d623434f\appcompat-v7-25.0.1\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\44f7d7f5df9ffe5a19775a18d623434f\appcompat-v7-25.0.1\AndroidManifest.xml:21:5-23:78
+MERGED from [cn.finalteam:okhttpfinal:2.0.7] C:\Users\username\.gradle\caches\transforms-2\files-2.1\4c53f086ea5b43bc2f378b0964691ebd\okhttpfinal-2.0.7\AndroidManifest.xml:22:5-24:41
+MERGED from [cn.finalteam:okhttpfinal:2.0.7] C:\Users\username\.gradle\caches\transforms-2\files-2.1\4c53f086ea5b43bc2f378b0964691ebd\okhttpfinal-2.0.7\AndroidManifest.xml:22:5-24:41
+MERGED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:7:5-9:41
+MERGED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\ec623c3852732fdb6f43649705e31200\support-v4-25.0.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\ec623c3852732fdb6f43649705e31200\support-v4-25.0.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:animated-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\718f0cde2897283170c3e49e512ed71f\animated-vector-drawable-25.0.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\718f0cde2897283170c3e49e512ed71f\animated-vector-drawable-25.0.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\15afa2ad4ab14f2ae19baa73674b8ec2\support-vector-drawable-25.0.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-vector-drawable:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\15afa2ad4ab14f2ae19baa73674b8ec2\support-vector-drawable-25.0.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-fragment:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\f8756ab9d14c8b833cd607fde5e78718\support-fragment-25.0.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\f8756ab9d14c8b833cd607fde5e78718\support-fragment-25.0.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\defa9ad7ada4d0d0790c99e63fb9f2d8\support-media-compat-25.0.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\defa9ad7ada4d0d0790c99e63fb9f2d8\support-media-compat-25.0.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\a178cec0af3ef95d490e801e0c7a0c78\support-core-utils-25.0.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\a178cec0af3ef95d490e801e0c7a0c78\support-core-utils-25.0.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\18fb90170b002a4ea2ce59d60a5050b2\support-core-ui-25.0.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\18fb90170b002a4ea2ce59d60a5050b2\support-core-ui-25.0.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\3e48781bab00c441806cd7aaff9e18e9\support-compat-25.0.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\3e48781bab00c441806cd7aaff9e18e9\support-compat-25.0.1\AndroidManifest.xml:21:5-23:58
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.0.1] C:\Users\username\.gradle\caches\transforms-2\files-2.1\44f7d7f5df9ffe5a19775a18d623434f\appcompat-v7-25.0.1\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-app-architecture-design\MoonMvpSimple\advancelight_chapter_10_mvpsimple\src\main\AndroidManifest.xml
+uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:12:5-84
+	android:name
+		ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:12:22-81
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:14:5-81
+	android:name
+		ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:14:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:16:5-80
+	android:name
+		ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:16:22-77
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:18:5-75
+	android:name
+		ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:18:22-72
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:20:5-76
+	android:name
+		ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:20:22-73
+uses-permission#android.permission.GET_TASKS
+ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:22:5-68
+	android:name
+		ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:22:22-65
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:24:5-79
+	android:name
+		ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:24:22-76
+uses-permission#android.permission.CALL_PHONE
+ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:26:5-69
+	android:name
+		ADDED from [cn.finalteam:toolsfinal:1.1.5] C:\Users\username\.gradle\caches\transforms-2\files-2.1\21f130731a26dc83f3269c99404e31e5\toolsfinal-1.1.5\AndroidManifest.xml:26:22-66
