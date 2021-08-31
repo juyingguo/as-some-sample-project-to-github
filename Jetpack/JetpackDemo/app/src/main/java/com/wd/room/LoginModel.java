@@ -4,7 +4,7 @@ import com.wd.room.databinding.ActivityMainBinding;
 
 public class LoginModel {
 
-    ActivityMainBinding activityMainBinding;
+    private ActivityMainBinding activityMainBinding;
     public LoginModel(ActivityMainBinding activityMainBinding){
         this.activityMainBinding = activityMainBinding;
     }

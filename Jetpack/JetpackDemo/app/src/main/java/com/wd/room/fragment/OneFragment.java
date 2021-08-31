@@ -32,10 +32,8 @@ public class OneFragment extends Fragment {
 
         FragOneBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.frag_one,container,false);
-
         final ListValueViewModel viewModel = new ViewModelProvider(getActivity())
                 .get(ListValueViewModel.class);
-
         myAdapter = new OneListAdapter();
         myAdapter.add("吴新仲");
         myAdapter.add("轩冉");

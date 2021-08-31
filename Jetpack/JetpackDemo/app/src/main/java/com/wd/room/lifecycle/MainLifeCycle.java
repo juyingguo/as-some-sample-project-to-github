@@ -26,10 +26,10 @@ import java.util.Random;
  * 优化内存释放，提升了程序性能
  */
 public class MainLifeCycle implements LifecycleObserver, View.OnClickListener {
-    ActivityMainBinding binding;
-    Context context;
-    UserDao userDao;
-    Random random = new Random(10000);
+    private ActivityMainBinding binding;
+    private Context context;
+    private UserDao userDao;
+    private Random random = new Random(10000);
     public MainLifeCycle(ActivityMainBinding binding, Context context) {
         this.binding = binding;
         this.context = context;

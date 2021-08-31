@@ -1,12 +1,6 @@
 package com.wd.room;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.room.Room;
-
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 import com.wd.room.activity.BaseActivity;
 import com.wd.room.databinding.ActivityMainBinding;
@@ -34,4 +28,5 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     protected void finalize() throws Throwable {
         super.finalize();
     }
+
 }
