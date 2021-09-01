@@ -1,5 +1,6 @@
 package com.example.liuwangshu.moondatabinding.util;
 
+import android.annotation.SuppressLint;
 import android.databinding.BindingConversion;
 
 import com.example.liuwangshu.moondatabinding.model.Swordsman;
@@ -15,7 +16,7 @@ public class Utils {
 
     @BindingConversion
     public static String convertDate(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss.SSS");
         return sdf.format(date);
     }
 }

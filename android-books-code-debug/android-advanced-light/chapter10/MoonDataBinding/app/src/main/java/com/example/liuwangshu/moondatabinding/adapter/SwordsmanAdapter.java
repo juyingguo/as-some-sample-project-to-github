@@ -1,6 +1,7 @@
 package com.example.liuwangshu.moondatabinding.adapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -14,8 +15,9 @@ public class SwordsmanAdapter extends RecyclerView.Adapter<SwordsmanAdapter.Swor
     public SwordsmanAdapter(List<Swordsman> mList) {
         this.mList = mList;
     }
+    @NonNull
     @Override
-    public SwordsmanViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SwordsmanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemSwordsmanBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_swordsman, parent, false);
         return new SwordsmanViewHolder(binding);
     }
@@ -31,7 +33,7 @@ public class SwordsmanAdapter extends RecyclerView.Adapter<SwordsmanAdapter.Swor
     public class SwordsmanViewHolder extends RecyclerView.ViewHolder {
         ItemSwordsmanBinding binding;
 
-        public SwordsmanViewHolder(ViewDataBinding binding) {
+        SwordsmanViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
             this.binding = (ItemSwordsmanBinding) binding;
         }

@@ -1,1 +1,2 @@
 include ':advancelight_chapter_10_mvpsimple'
+rootProject.name='MoonMvpSimple'

@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import com.example.liuwangshu.moondatabinding.databinding.ActivityUpdateBinding;
 import com.example.liuwangshu.moondatabinding.model.ObFSwordsman;
@@ -11,6 +12,7 @@ import com.example.liuwangshu.moondatabinding.model.ObSwordsman;
 import com.example.liuwangshu.moondatabinding.model.Swordsman;
 
 public class UpdateActivity extends AppCompatActivity {
+    private final String  TAG = "UpdateActivity";
     private ActivityUpdateBinding binding;
     private ObservableArrayList<Swordsman> list;
     private ObSwordsman obSwordsman;
@@ -54,7 +56,11 @@ public class UpdateActivity extends AppCompatActivity {
             public void onClick(View view) {
                 swordsman1.setName("杨过");
                 swordsman2.setName("小龙女");
-                list.add(swordsman1);
+//                list.remove(0);
+//                list.add(swordsman1);
+//                list.add(swordsman2);
+                list.add(0,swordsman1);
+                Log.i(TAG,"list.size():" + list.size());
             }
         });
 
