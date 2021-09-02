@@ -19,18 +19,22 @@
             android:layout_marginTop="50dp"
             android:text="@{ipData.country}"/>
         <TextView
-            android:id="@+id/tv_area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@{ipData.area}"/>
 
         <TextView
-            android:id="@+id/tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="@{ipData.city}"/>
+            android:text="@{`city=` + ipData.city}"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@{`isp=` + ipData.isp}"
+            tools:ignore="HardcodedText" />
 
 
         <Button
