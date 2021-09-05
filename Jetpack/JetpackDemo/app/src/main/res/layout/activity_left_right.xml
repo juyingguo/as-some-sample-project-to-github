@@ -36,5 +36,11 @@
             android:text="to MainActivity"
             android:onClick="toClick"
             tools:ignore="HardcodedText" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="to toClickStartRotationTestActivity"
+            android:onClick="toClickStartRotationTestActivity"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 </layout>

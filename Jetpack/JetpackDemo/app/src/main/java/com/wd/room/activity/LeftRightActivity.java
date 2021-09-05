@@ -24,4 +24,8 @@ public class LeftRightActivity extends BaseActivity<ActivityLeftRightBinding> {
     public void toClick(View view) {
         startActivity(new Intent(this, MainActivity.class));
     }
+
+    public void toClickStartRotationTestActivity(View view) {
+        startActivity(new Intent(this, RotationTestActivity.class));
+    }
 }
