@@ -20,12 +20,16 @@ import java.util.List;
 import javax.annotation.Nullable;
 import okhttp3.internal.Util;
 import okhttp3.internal.http.HttpMethod;
+import okhttp3.internal.platform.Platform;
+
+import static okhttp3.internal.platform.Platform.INFO;
 
 /**
  * An HTTP request. Instances of this class are immutable if their {@link #body} is null or itself
  * immutable.
  */
 public final class Request {
+  private static final String TAG = "Request";
   final HttpUrl url;
   final String method;
   final Headers headers;
@@ -130,6 +134,8 @@ public final class Request {
      * exception by calling {@link HttpUrl#parse}; it returns null for invalid URLs.
      */
     public Builder url(String url) {
+      if (OkHttpClient.sDebugToggle)
+          Platform.get().log(INFO,  TAG + " url method call,url:" + url,null);
       if (url == null) throw new NullPointerException("url == null");
 
       // Silently replace web socket URLs with HTTP URLs.

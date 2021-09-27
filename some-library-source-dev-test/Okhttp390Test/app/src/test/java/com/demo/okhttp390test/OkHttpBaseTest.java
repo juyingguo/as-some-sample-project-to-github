@@ -35,9 +35,66 @@ public class OkHttpBaseTest {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+//                System.out.println(response.body().string());
+            }
+        });
+        //should sleep;because net callback need time,after test method end,will not receive info any more.
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void okHttpGetRequestAndCancelUseCall() {
+        String url = "https://www.baidu.com";
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Request request = new Request.Builder().url(url).tag("cancel").build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.out.println("onFailure,call.isCanceled():" + call.isCanceled()  + " IOException:" + e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
                 System.out.println(response.body().string());
             }
         });
+        call.cancel();
+        //should sleep;because net callback need time,after test method end,will not receive info any more.
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void okHttpGetRequestAndCancelUseDispatcher() {
+        String url = "https://www.baidu.com";
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Request request = new Request.Builder().url(url).tag("cancel").build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.out.println("onFailure,call.isCanceled():" + call.isCanceled()  + " IOException:" + e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (null != response.cacheResponse()) {
+                    String str = response.cacheResponse().toString();
+                    System.out.println("cache---" + str);
+                } else {
+                    String str = response.networkResponse().toString();
+                    System.out.println("network---" + str);
+                }
+            }
+        });
+//        call.cancel();
+        client.dispatcher().cancelAll();
         //should sleep;because net callback need time,after test method end,will not receive info any more.
         try {
             Thread.sleep(2000);

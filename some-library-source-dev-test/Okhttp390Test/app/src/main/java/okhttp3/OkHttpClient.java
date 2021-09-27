@@ -221,7 +221,10 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
   final int readTimeout;
   final int writeTimeout;
   final int pingInterval;
-
+  /** debug print switch */
+  private final boolean print;
+  /** debug print switch static variable,init together with {@link #print}*/
+  public static boolean sDebugToggle;
   public OkHttpClient() {
     this(new Builder());
   }
@@ -268,7 +271,8 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
     this.readTimeout = builder.readTimeout;
     this.writeTimeout = builder.writeTimeout;
     this.pingInterval = builder.pingInterval;
-
+    this.print = builder.print;
+    sDebugToggle = this.print;
     if (interceptors.contains(null)) {
       throw new IllegalStateException("Null interceptor: " + interceptors);
     }
@@ -469,7 +473,7 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
     int readTimeout;
     int writeTimeout;
     int pingInterval;
-
+    boolean print;
     public Builder() {
       dispatcher = new Dispatcher();
       protocols = DEFAULT_PROTOCOLS;
@@ -491,6 +495,7 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
       readTimeout = 10_000;
       writeTimeout = 10_000;
       pingInterval = 0;
+      print = false;
     }
 
     Builder(OkHttpClient okHttpClient) {
@@ -521,6 +526,7 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
       this.readTimeout = okHttpClient.readTimeout;
       this.writeTimeout = okHttpClient.writeTimeout;
       this.pingInterval = okHttpClient.pingInterval;
+      this.print = okHttpClient.print;
     }
 
     /**
@@ -914,7 +920,11 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
       this.eventListenerFactory = eventListenerFactory;
       return this;
     }
-
+    /** debug print switch */
+    public Builder print(boolean print) {
+      this.print = print;
+      return this;
+    }
     public OkHttpClient build() {
       return new OkHttpClient(this);
     }
