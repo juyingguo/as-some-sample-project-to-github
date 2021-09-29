@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ImageDealDemo</string>
+    <string name="text_loading">Loading</string>
+</resources>
