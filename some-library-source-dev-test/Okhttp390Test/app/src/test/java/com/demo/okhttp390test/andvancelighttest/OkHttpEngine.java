@@ -14,7 +14,7 @@ import okhttp3.Response;
 public class OkHttpEngine {
     private static volatile  OkHttpEngine mInstance;
     private OkHttpClient mOkHttpClient;
-    private Handler mHandler;
+//    private Handler mHandler;
 
     public static OkHttpEngine getInstance(/*Context context*/) {
         if (mInstance == null) {
@@ -37,7 +37,7 @@ public class OkHttpEngine {
                 .readTimeout(20, TimeUnit.SECONDS)
                 .cache(new Cache(sDcache.getAbsoluteFile(), cacheSize));
          mOkHttpClient=builder.build();
-         mHandler = new Handler();
+//         mHandler = new Handler();
     }
 
     /**
@@ -67,7 +67,7 @@ public class OkHttpEngine {
             }
 
             private void sendSuccessCallback(final String str, final ResultCallback callback) {
-                mHandler.post(new Runnable() {
+                /*mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         if (callback != null) {
@@ -78,17 +78,26 @@ public class OkHttpEngine {
                             }
                         }
                     }
-                });
+                });*/
+                if (callback != null) {
+                    try {
+                        callback.onResponse(str);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             private void sendFailedCallback(final Request request, final Exception e, final ResultCallback callback) {
-                mHandler.post(new Runnable() {
+                /*mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         if (callback != null)
                             callback.onError(request, e);
                     }
-                });
+                });*/
+                if (callback != null)
+                    callback.onError(request, e);
             }
 
         });

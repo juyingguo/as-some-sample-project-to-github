@@ -120,6 +120,7 @@ public class OkHttpBaseDemoTest {
                 System.out.println("onResponse");
             }
         });
+        sleep(3000);
     }
     /**
      * post异步请求
@@ -174,7 +175,7 @@ public class OkHttpBaseDemoTest {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                System.out.println("onFailure,call.isCanceled():" + call.isCanceled()  + " IOException:" + e);
             }
 
             @Override
