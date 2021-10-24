@@ -52,7 +52,8 @@ public class OkHttpBaseDemoTest {
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
-                .cache(new Cache(sDcache.getAbsoluteFile(), cacheSize));
+                .cache(new Cache(sDcache.getAbsoluteFile(), cacheSize))
+                .print(true);
         mOkHttpClient = builder.build();
     }
     @Test
@@ -131,7 +132,7 @@ public class OkHttpBaseDemoTest {
                 .add("ip", "59.108.54.37")
                 .build();
         Request request = new Request.Builder()
-                .url("https://ip.taobao.com/outGetIpInfo")
+                .url("http://ip.taobao.com/outGetIpInfo")//raw protocol is https,use http for test
                 .post(formBody)
                 .build();
         OkHttpClient mOkHttpClient = new OkHttpClient();
@@ -218,11 +219,12 @@ public class OkHttpBaseDemoTest {
      */
     @Test
     public void downAsynFileUseEnqueue() {
-        String url = "https://img0.baidu.com/it/u=205282336,1640876785&fm=253&fmt=auto&app=120&f=JPEG?w=690&h=460";
+        String url = "http://img0.baidu.com/it/u=205282336,1640876785&fm=253&fmt=auto&app=120&f=JPEG?w=690&h=460";
         Request request = new Request.Builder().url(url).build();
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                System.out.println("onFailure,call.isCanceled():" + call.isCanceled()  + " IOException:" + e);
             }
 
             @Override
@@ -293,7 +295,7 @@ public class OkHttpBaseDemoTest {
         });
     }
     @Test
-    public void cancelTest() {
+    public void cancelRequestTest() {
         final Request request = new Request.Builder()
                 .url("http://www.baidu.com")
                 .cacheControl(CacheControl.FORCE_NETWORK)
