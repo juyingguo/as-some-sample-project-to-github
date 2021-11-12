@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">wifi transfer</string>
+    <string name="str_send">发送</string>
+    <string name="str_un_connect">未连接</string>
+    <string name="str_wait_receiver_to_connect">等待接收方主动连接</string>
+    <string name="str_connected">已连接</string>
+    <string name="str_select_file">选择文件</string>
+    <string name="str_send_file">发文件</string>
+    <string name="str_receive_file">收文件</string>
+    <string name="str_receive_success">接收完成</string>
+    <string name="str_receive_fail">接收失败</string>
+    <string name="str_i_want_send_file">我要发送</string>
+    <string name="str_sending">正在发送</string>
+    <string name="str_receiving">正在接收</string>
+    <string name="str_un_exist_uhost_sdext">没有检测到优盘或外置卡</string>
+
+</resources>
