@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CircleCameraActivity" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.example.circlecamera.CircleCameraSurfaceView
+            android:id="@+id/id_surfaceview"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <com.example.circlecamera.CircleMaskView
+            android:id="@+id/id_maskView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <ImageButton 
+        android:id="@+id/id_btn_shutter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/btn_shutter_background"
+        />
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">wifi transfer</string>
+    <string name="str_send">send</string>
+    <string name="str_un_connect">unconnected</string>
+    <string name="str_wait_receiver_to_connect">waiting for the receiver to take the initiative to connect</string>
+    <string name="str_connected">connected</string>
+    <string name="str_select_file">select file</string>
+    <string name="str_send_file">send file</string>
+    <string name="str_receive_file">receive file</string>
+    <string name="str_receive_success"> receive success</string>
+    <string name="str_receive_fail">receive fail</string>
+    <string name="str_see_received_file">see received file</string>
+    <string name="str_i_want_send_file">I want to send it</string>
+    <string name="str_sending">sending</string>
+    <string name="str_receiving">receiving</string>
+    <string name="str_un_exist_uhost_sdext">No upan card or external card was checked.</string>
+</resources>
