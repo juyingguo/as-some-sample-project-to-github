@@ -73,7 +73,7 @@ void IDecode::Main()
         XData pack = packs.front();
         packs.pop_front();
 
-        //发送数据到解码线程，一个数据包，可能解码多个结果
+        //发送数据到解码线程，一个数据包，可能解码多个结果。{AVPacket文档有指出}
         if(this->SendPacket(pack))
         {
             while(!isExit)

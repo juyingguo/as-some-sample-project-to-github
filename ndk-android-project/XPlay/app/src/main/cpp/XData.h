@@ -41,6 +41,7 @@ struct XData
 {
     int type = 0;
     unsigned char *data = 0;
+    //存放解码后的数据
     unsigned char *datas[8] = {0};
     int size = 0;
     bool isAudio = false;

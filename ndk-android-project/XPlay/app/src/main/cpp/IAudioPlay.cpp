@@ -54,6 +54,7 @@ void IAudioPlay::Update(XData data)
     //XLOGE("IAudioPlay::Update %d",data.size);
     //压入缓冲队列
     if(data.size<=0|| !data.data) return;
+    //此处也使用线程标志，线程退出，此处的阻塞也应该退出。
     while(!isExit)
     {
         framesMutex.lock();

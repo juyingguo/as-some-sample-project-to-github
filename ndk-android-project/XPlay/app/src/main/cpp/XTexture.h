@@ -30,6 +30,10 @@
 
 #ifndef XPLAY_XTEXTURE_H
 #define XPLAY_XTEXTURE_H
+/**
+ * 像素格式枚举值与当前解码库ffmpeg中保值一致 libavutil/pixfmt.h AVPixelFormat
+ * 如果改变解码库，可以对应更换
+ **/
 enum XTextureType
 {
     XTEXTURE_YUV420P = 0,  // Y 4  u 1 v 1

@@ -40,7 +40,7 @@
 class IObserver:public XThread
 {
 public:
-    //观察者接收数据函数
+    //观察者接收数据函数，空的实现，主题不需要实现，观察者才需要实现
     virtual void Update(XData data) {}
 
     //主体函数 添加观察者(线程安全)

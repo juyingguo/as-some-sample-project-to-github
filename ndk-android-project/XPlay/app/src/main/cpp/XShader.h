@@ -30,6 +30,9 @@
 
 #ifndef XPLAY_XSHADER_H
 #define XPLAY_XSHADER_H
+/**
+ * 与XTextureType中的视频格式枚举值保持一致
+ */
 enum XShaderType
 {
     XSHADER_YUV420P = 0,    //软解码和虚拟机
@@ -47,9 +50,12 @@ public:
     virtual void Draw();
 
 protected:
-    unsigned int vsh = 0;
+    unsigned int vsh = 0;//类型使用unsigned int 就不需要引用对应的头文件,只要与实际需要使用的头文件对应即可。
     unsigned int fsh = 0;
     unsigned int program = 0;
+    /**
+     * 存放材质，便于后期清理。第一次初始化，第二次直接读取；当窗口大小变化的时候（或者重新打开窗口时），先清理，再次初始化；
+     */
     unsigned int texts[100] = {0};
 };
 

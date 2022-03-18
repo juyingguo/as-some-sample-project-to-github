@@ -39,12 +39,13 @@ bool FFDemux::Open(const char *url)
     {
         char buf[1024] = {0};
         av_strerror(re,buf,sizeof(buf));
-        XLOGE(TAG "FFDemux open %s failed!",url);
+        XLOGE(TAG "FFDemux open %s failed! msg=%s",url,buf);
         return false;
     }
     XLOGI(TAG "FFDemux open %s success!",url);
 
     //读取文件信息
+    //对于mp4文件不调用该函数也是可以的，对于其它格式的文件，不调用可能获取不到文件格式信息
     re = avformat_find_stream_info(ic,0);
     if(re != 0 )
     {
@@ -98,6 +99,7 @@ XParameter FFDemux::GetAPara()
     para.para = ic->streams[re]->codecpar;
     para.channels = ic->streams[re]->codecpar->channels;
     para.sample_rate = ic->streams[re]->codecpar->sample_rate;
+    XLOGE("FFDemux::GetAPara sample_rate=%d",para.sample_rate);
     return para;
 }
 //读取一帧数据，数据由调用者清理

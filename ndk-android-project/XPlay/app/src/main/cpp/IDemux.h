@@ -39,7 +39,7 @@
 //解封装接口
 class IDemux: public IObserver {
 public:
-    //打开文件，或者流媒体 rmtp http rtsp
+    //打开文件，或者流媒体 rtmp http rtsp
     virtual bool Open(const char *url) = 0;
 
     //获取视频参数

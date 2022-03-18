@@ -53,6 +53,7 @@ extern "C"
 JNIEXPORT
 jint JNI_OnLoad(JavaVM *vm,void *res)
 {
+    XLOGI("JNI_OnLoad call.");
     FFDecode::InitHard(vm);
 
 
@@ -129,7 +130,7 @@ Java_xplay_xplay_MainActivity_stringFromJNI(
 extern "C"
 JNIEXPORT void JNICALL
 Java_xplay_xplay_XPlay_InitView(JNIEnv *env, jobject instance, jobject surface) {
-
+    XLOGI("Java_xplay_xplay_XPlay_InitView call.");
     // TODO
     ANativeWindow *win = ANativeWindow_fromSurface(env,surface);
     view->SetRender(win);

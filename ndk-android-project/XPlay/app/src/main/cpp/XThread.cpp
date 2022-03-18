@@ -43,7 +43,7 @@ void XThread::Start()
 {
     isExit = false;
     thread th(&XThread::ThreadMain,this);
-    th.detach();
+    th.detach();//当前线程放弃对新创建的线程的控制，如果不放弃，对象清空时，可能引发线程出错。
 }
 void XThread::ThreadMain()
 {
@@ -57,7 +57,8 @@ void XThread::ThreadMain()
 
 //通过控制isExit安全停止线程（不一定成功）
 void XThread::Stop()
-{XLOGI("Stop 停止线程begin!");
+{
+    XLOGI("Stop 停止线程begin!");
     isExit = true;
     for(int i = 0; i < 200; i++)
     {

@@ -38,7 +38,12 @@
 class IDecode:public IObserver
 {
 public:
-    //打开解码器
+    /**
+     * 打开解码器
+     * @param para
+     * @param isHard 默认值为软解码
+     * @return
+     */
     virtual bool Open(XParameter para,bool isHard=false) = 0;
 
     //future模型 发送数据到线程解码
@@ -59,7 +64,7 @@ public:
 protected:
     virtual void Main();
 
-    //读取缓冲
+    //读取缓冲,需要做好同步，观察者收到数据后存放进来，主线程中取数据。
     std::list<XData> packs;
     std::mutex packsMutex;
 

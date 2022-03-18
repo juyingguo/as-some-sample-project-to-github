@@ -32,6 +32,7 @@
 #include <EGL/egl.h>
 #include "XEGL.h"
 #include "XLog.h"
+//代码量比较小，实现类直接在接口类文件定义中写，同时该实现类的声明和定义也放在一起。
 class CXEGL:public XEGL
 {
 public:
@@ -85,7 +86,7 @@ public:
             XLOGE("eglChooseConfig failed!");
             return false;
         }
-        XLOGE("eglChooseConfig success!");
+        XLOGE("eglChooseConfig success! numConfigs = %d.",numConfigs);
         surface = eglCreateWindowSurface(display,config,nwin,NULL);
 
 

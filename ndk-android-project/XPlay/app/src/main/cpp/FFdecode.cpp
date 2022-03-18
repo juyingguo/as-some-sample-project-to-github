@@ -31,6 +31,7 @@ extern "C"
 {
     #include <libavcodec/avcodec.h>
     #include <libavcodec/jni.h>
+    #include <libavutil/pixfmt.h>
 }
 
 #include "FFDecode.h"
@@ -61,7 +62,7 @@ bool FFDecode::Open(XParameter para,bool isHard)
     codec = avcodec_alloc_context3(cd);
     avcodec_parameters_to_context(codec,p);
 
-    codec->thread_count = 8;
+    codec->thread_count = 8;//多线程解码
     //3 打开解码器
     int re = avcodec_open2(codec,0,0);
     if(re != 0)
@@ -131,10 +132,14 @@ XData FFDecode::RecvFrame()
         //样本字节数 * 单通道样本数 * 通道数
         d.size = av_get_bytes_per_sample((AVSampleFormat)frame->format)*frame->nb_samples*2;
     }
-    d.format = frame->format;
-    //if(!isAudio)
-    //    XLOGE("data format is %d",frame->format);
-    memcpy(d.datas,frame->data,sizeof(d.datas));
+    d.format = frame->format;//解码后方可知道数据格式，音频、视频都可以往下传
+    /*if(!isAudio){
+        XLOGE("data format is %d",frame->format);
+        XLOGE("data format AV_PIX_FMT_YUV420P value is %d",AV_PIX_FMT_YUV420P);
+        XLOGE("data format AV_PIX_FMT_NV12 value is %d",AV_PIX_FMT_NV12);
+        XLOGE("data format AV_PIX_FMT_NV12 AV_PIX_FMT_NV21 is %d",AV_PIX_FMT_NV21);
+    }*/
+    memcpy(d.datas,frame->data,sizeof(d.datas));//数据大小一致，直接复制
 
     return d;
 }

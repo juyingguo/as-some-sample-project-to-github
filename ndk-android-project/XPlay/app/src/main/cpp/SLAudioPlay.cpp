@@ -77,7 +77,7 @@ void SLAudioPlay::PlayCall(void *bufq)
     }
     if(!buf)
         return;
-    memcpy(buf,d.data,d.size);
+    memcpy(buf,d.data,d.size);//将XData中的数据复制到成员变量buf中，就可以将XData中的数据清除，且不影响加入播放队列中的数据
     (*bf)->Enqueue(bf,buf,d.size);
     d.Drop();
 
