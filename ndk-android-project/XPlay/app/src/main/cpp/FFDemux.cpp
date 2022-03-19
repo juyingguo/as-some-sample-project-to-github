@@ -60,6 +60,7 @@ bool FFDemux::Open(const char *url)
     //打开时，先获取音频流，视频流索引，防止 Read()时还未赋值。
 	GetVPara();
     GetAPara();
+    //XLOGI(TAG "Open,XParameter().sample_rate = %d!",XParameter().sample_rate);
     return true;
 }
 //获取视频参数

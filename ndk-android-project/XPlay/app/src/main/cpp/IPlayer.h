@@ -25,35 +25,46 @@
 
 
 //
-// Created by Administrator on 2018-03-01.
+// Created by Administrator on 2018-03-07.
 //
 
-#ifndef XPLAY_XTHREAD_H
-#define XPLAY_XTHREAD_H
+#ifndef XPLAY_IPLAYER_H
+#define XPLAY_IPLAYER_H
 
-//sleep 毫秒
-void XSleep(int mis);
 
-//c++ 11 线程库
-class XThread
+#include "XThread.h"
+#include "XParameter.h"
+
+class IDemux;
+class IAudioPlay;
+class IVideoView;
+class IResample;
+class IDecode;
+
+
+class IPlayer : public XThread
 {
 public:
-    //启动线程
+    static IPlayer *Get(unsigned char index=0);
+    virtual bool Open(const char *path);
     virtual bool Start();
+    /** 初始化窗口 */
+    virtual void InitView(void *win);
+    //是否视频硬解码
+    bool isHardDecode = true;
 
-    //通过控制isExit安全停止线程（不一定成功）
-    virtual void Stop();
+    //音频输出参数配置
+    XParameter outPara;
 
-    //入口主函数
-    virtual void Main() {}
-
+    IDemux *demux = 0;
+    IDecode *vdecode = 0;
+    IDecode *adecode = 0;
+    IResample *resample = 0;
+    IVideoView *videoView = 0;
+    IAudioPlay *audioPlay = 0;
 protected:
-    bool isExit = false;
-    bool isRunning = false;
-private:
-    void ThreadMain();
-
+    IPlayer(){};
 };
 
 
-#endif //XPLAY_XTHREAD_H
+#endif //XPLAY_IPLAYER_H

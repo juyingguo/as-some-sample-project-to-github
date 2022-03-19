@@ -39,11 +39,12 @@ void XSleep(int mis)
     this_thread::sleep_for(du);
 }
 //启动线程
-void XThread::Start()
+bool XThread::Start()
 {
     isExit = false;
     thread th(&XThread::ThreadMain,this);
     th.detach();//当前线程放弃对新创建的线程的控制，如果不放弃，对象清空时，可能引发线程出错。
+    return true;
 }
 void XThread::ThreadMain()
 {
