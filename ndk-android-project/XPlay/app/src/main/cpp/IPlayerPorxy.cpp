@@ -28,49 +28,43 @@
 // Created by Administrator on 2018-03-07.
 //
 
+#include "IPlayerPorxy.h"
 #include "FFPlayerBuilder.h"
-#include "FFDemux.h"
-#include "FFdecode.h"
-#include "FFResample.h"
-#include "GLVideoView.h"
-#include "SLAudioPlay.h"
 
-IDemux *FFPlayerBuilder::CreateDemux()
+void IPlayerPorxy::Init(void *vm)
 {
-    IDemux *ff = new FFDemux();
-    return ff;
-}
+    mux.lock();
+    if(vm)
+    {
+        FFPlayerBuilder::InitHard(vm);
+    }
+    if(!player)
+        player = FFPlayerBuilder::Get()->BuilderPlayer();
 
-IDecode *FFPlayerBuilder::CreateDecode()
-{
-    IDecode *ff = new FFDecode();
-    return ff;
+    mux.unlock();
 }
-
-IResample *FFPlayerBuilder::CreateResample()
+bool IPlayerPorxy::Open(const char *path)
 {
-    IResample *ff = new FFResample();
-    return ff;
+    bool re = false;
+    mux.lock();
+    if(player)
+        re = player->Open(path);
+    mux.unlock();
+    return re;
 }
-
-IVideoView *FFPlayerBuilder::CreateVideoView()
+bool IPlayerPorxy::Start()
 {
-    IVideoView *ff = new GLVideoView();
-    return ff;
+    bool re = false;
+    mux.lock();
+    if(player)
+        re = player->Start();
+    mux.unlock();
+    return re;
 }
-
-IAudioPlay *FFPlayerBuilder::CreateAudioPlay()
+void IPlayerPorxy::InitView(void *win)
 {
-    IAudioPlay *ff = new SLAudioPlay();
-    return ff;
-}
-
-IPlayer *FFPlayerBuilder::CreatePlayer(unsigned char index)
-{
-    return IPlayer::Get(index);
-}
-/** 初始化硬解码(是和视频硬解码{ IPlayer#isHardDecode }对应需要设置的,只有都是硬解码时才需要设置，软解码当前调用也没影响),传递java虚拟机，这个函数的耦合是不可避免的。*/
-void FFPlayerBuilder::InitHard(void *vm)
-{
-    FFDecode::InitHard(vm);
+    mux.lock();
+    if(player)
+        player->InitView(win);
+    mux.unlock();
 }

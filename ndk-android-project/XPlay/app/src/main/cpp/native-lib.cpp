@@ -23,88 +23,40 @@
 *******************************************************************************/
 //！！！！！！！！！ 加群23304930下载代码和交流
 
-
 #include <jni.h>
 #include <string>
 #include <android/native_window_jni.h>
 
 #include "XLog.h"
-#include "IObserver.h"
-#include "FFPlayerBuilder.h"
-
-class TestObs:public IObserver
-{
-public:
-    void Update(XData d)
-    {
-        //XLOGI("TestObs Update data size is %d",d.size);
-    }
-};
-
-IVideoView *view = NULL;
+#include "IPlayerPorxy.h"
 extern "C"
 JNIEXPORT
 jint JNI_OnLoad(JavaVM *vm,void *res)
 {
-    XLOGI("JNI_OnLoad call.");
-    FFPlayerBuilder::InitHard(vm);
+    IPlayerPorxy::Get()->Init(vm);
 
-
-    ///////////////////////////////////
-    IPlayer * player = FFPlayerBuilder::Get()->BuilderPlayer();
-    player->isHardDecode = false;
-    player->Open("/sdcard/paiDuiGe.mp4");
-    player->Start();
-
-    //de->Start();
-    //vdecode->Start();
-    //adecode->Start();
-
-
+    IPlayerPorxy::Get()->isHardDecode = false;
+    IPlayerPorxy::Get()->Open("/sdcard/paiDuiGe.mp4");
+    IPlayerPorxy::Get()->Start();
 
     return JNI_VERSION_1_4;
 }
 
+extern "C"
+JNIEXPORT void JNICALL
+Java_xplay_xplay_XPlay_InitView(JNIEnv *env, jobject instance, jobject surface) {
 
+    // TODO
+    ANativeWindow *win = ANativeWindow_fromSurface(env,surface);
+    IPlayerPorxy::Get()->InitView(win);
+}
 
 extern "C"
 JNIEXPORT jstring
-
 JNICALL
 Java_xplay_xplay_MainActivity_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
-
-    //XLOGI("S begin!");
-    //XSleep(3000);
-    //XLOGI("S end!");
-    //return env->NewStringUTF(hello.c_str());
-
-
-    //XSleep(3000);
-    //de->Stop();
-    /*for(;;)
-    {
-        XData d = de->Read();
-        XLOGI("Read data size is %d",d.size);
-
-
-    }*/
-
     return env->NewStringUTF(hello.c_str());
-}
-extern "C"
-JNIEXPORT void JNICALL
-Java_xplay_xplay_XPlay_InitView(JNIEnv *env, jobject instance, jobject surface) {
-    XLOGI("Java_xplay_xplay_XPlay_InitView call.");
-    // TODO
-    ANativeWindow *win = ANativeWindow_fromSurface(env,surface);
-//    view->SetRender(win);
-    IPlayer::Get()->InitView(win);
-    //XEGL::Get()->Init(win);
-    //XShader shader;
-    //shader.Init();
-
-
 }
