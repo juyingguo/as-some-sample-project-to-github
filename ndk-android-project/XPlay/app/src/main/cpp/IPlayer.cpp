@@ -86,7 +86,7 @@ bool IPlayer::Start()
         audioPlay->StartPlay(outPara);
     if(vdecode)
         vdecode->Start();
-    XThread::Start();
+//    XThread::Start();
 
     return true;
 }

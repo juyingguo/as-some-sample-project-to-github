@@ -28,17 +28,9 @@
 #include <string>
 #include <android/native_window_jni.h>
 
-#include "FFDemux.h"
 #include "XLog.h"
-#include "FFDecode.h"
-#include "XEGL.h"
-#include "XShader.h"
-#include "IVideoView.h"
-#include "GLVideoView.h"
-#include "FFResample.h"
-#include "IAudioPlay.h"
-#include "SLAudioPlay.h"
-#include "IPlayer.h"
+#include "IObserver.h"
+#include "FFPlayerBuilder.h"
 
 class TestObs:public IObserver
 {
@@ -55,49 +47,14 @@ JNIEXPORT
 jint JNI_OnLoad(JavaVM *vm,void *res)
 {
     XLOGI("JNI_OnLoad call.");
-    FFDecode::InitHard(vm);
+    FFPlayerBuilder::InitHard(vm);
 
 
     ///////////////////////////////////
-    ///测试用代码
-    TestObs *tobs = new TestObs();
-    IDemux *de = new FFDemux();
-    //de->AddObs(tobs);
-    //de->Open("/sdcard/1080.mp4");
-
-    IDecode *vdecode = new FFDecode();
-    //vdecode->Open(de->GetVPara(), true);
-    //vdecode->Open(de->GetVPara(), true);
-
-    IDecode *adecode = new FFDecode();
-    //adecode->Open(de->GetAPara());
-    de->AddObs(vdecode);
-    de->AddObs(adecode);
-
-    view = new GLVideoView();
-    vdecode->AddObs(view);
-
-    IResample *resample = new FFResample();
-    //XParameter outPara = de->GetAPara();
-
-    //resample->Open(de->GetAPara(),outPara);
-    adecode->AddObs(resample);
-
-    IAudioPlay *audioPlay = new SLAudioPlay();
-
-    //audioPlay->StartPlay(outPara);
-    resample->AddObs(audioPlay);
-
-    IPlayer::Get()->demux = de;
-    IPlayer::Get()->adecode = adecode;
-    IPlayer::Get()->vdecode = vdecode;
-    IPlayer::Get()->videoView = view;
-    IPlayer::Get()->resample = resample;
-    IPlayer::Get()->audioPlay = audioPlay;
-    IPlayer::Get()->isHardDecode = false;
-
-    IPlayer::Get()->Open("/sdcard/paiDuiGe.mp4");
-    IPlayer::Get()->Start();
+    IPlayer * player = FFPlayerBuilder::Get()->BuilderPlayer();
+    player->isHardDecode = false;
+    player->Open("/sdcard/paiDuiGe.mp4");
+    player->Start();
 
     //de->Start();
     //vdecode->Start();
