@@ -36,8 +36,8 @@ jint JNI_OnLoad(JavaVM *vm,void *res)
     IPlayerPorxy::Get()->Init(vm);
 
     IPlayerPorxy::Get()->setHardDecode(false);
-//    IPlayerPorxy::Get()->Open("/sdcard/paiDuiGe.mp4");
-    IPlayerPorxy::Get()->Open("http://edu.ibotn.com/nkplay.mp4");
+    IPlayerPorxy::Get()->Open("/sdcard/paiDuiGe.mp4");
+//    IPlayerPorxy::Get()->Open("http://edu.ibotn.com/nkplay.mp4");
     IPlayerPorxy::Get()->Start();
 
     return JNI_VERSION_1_4;

@@ -33,6 +33,7 @@
 
 
 #include "IDemux.h"
+#include <mutex>
 struct AVFormatContext;//技巧：采用结构体指针方式，无需引用头文件,只是一个类型，无需关心实现。
 
 class FFDemux: public IDemux {
@@ -40,6 +41,7 @@ public:
 
     //打开文件，或者流媒体 rtmp http rtsp
     virtual bool Open(const char *url);
+    virtual void Close();
 
     //获取视频参数
     virtual XParameter GetVPara();
@@ -53,7 +55,12 @@ public:
     FFDemux();
 
 private:
-    AVFormatContext *ic = 0;//c++11，且调用无参构造函数时才初始化。c++11的坑。如果是有参构造函数需要在该函数中初始化
+    /**
+     *  c++11，且调用无参构造函数时才初始化。c++11的坑。如果是有参构造函数需要在该函数中初始化。<br/>
+     *  多线程访问需要加锁
+     */
+    AVFormatContext *ic = 0;
+    std::mutex mux;
     int audioStream = 1;
     int videoStream = 0;
 };
