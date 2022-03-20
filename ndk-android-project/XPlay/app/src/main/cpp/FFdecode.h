@@ -43,6 +43,7 @@ public:
     static void InitHard(void *vm);
 
     virtual bool Open(XParameter para,bool isHard=false);
+    virtual void Close();
     //future模型 发送数据到线程解码
     virtual bool SendPacket(XData pkt);
 
@@ -52,6 +53,7 @@ public:
 protected:
     AVCodecContext *codec = 0;
     AVFrame *frame = 0;
+    std::mutex mux;
 };
 
 
