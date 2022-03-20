@@ -30,7 +30,14 @@
 extern "C"{
 #include <libavformat/avformat.h>
 }
-//打开文件，或者流媒体 rtmp http rtsp
+
+//分数转为浮点数
+static double r2d(AVRational r)
+{
+    return r.num == 0 || r.den == 0 ?0.:(double) r.num/(double)r.den;
+}
+
+//打开文件，或者流媒体 rmtp http rtsp
 bool FFDemux::Open(const char *url)
 {
     XLOGI(TAG "Open file %s begin",url);
@@ -132,6 +139,12 @@ XData FFDemux::Read()
         av_packet_free(&pkt);
         return XData();
     }
+
+    //转换pts(ffmpeg api要求转换),同时将其秒转化为毫秒，便于精确控制
+    pkt->pts = pkt->pts * (1000*r2d(ic->streams[pkt->stream_index]->time_base));
+    pkt->dts = pkt->dts * (1000*r2d(ic->streams[pkt->stream_index]->time_base));
+    d.pts = (int)pkt->pts;
+    //XLOGE("demux pts %d",d.pts);
 
     return d;
 }

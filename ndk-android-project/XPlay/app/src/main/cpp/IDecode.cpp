@@ -63,6 +63,19 @@ void IDecode::Main()
     while(!isExit)
     {
         packsMutex.lock();
+
+        //判断音视频同步
+        if(!isAudio && synPts > 0)
+        {
+            //XLOGI("IDecode::Main() enter,current synPts = %d,pts = %d\n",synPts,pts);
+            if(synPts < pts)
+            {
+                packsMutex.unlock();
+                XSleep(1);
+                continue;
+            }
+        }
+
         if(packs.empty())
         {
             packsMutex.unlock();
@@ -82,7 +95,7 @@ void IDecode::Main()
                 XData frame = RecvFrame();
                 if(!frame.data) break;
                 //XLOGE("RecvFrame %d",frame.size);
-
+                pts = frame.pts;
                 //发送数据给观察者
                 this->Notify(frame);
 

@@ -60,6 +60,9 @@ public:
     //最大的队列缓冲，防止一直没有读取，导致内存耗尽。
     int maxList = 100;
 
+    //同步时间，再次打开文件要清理
+    int synPts = 0;
+    int pts = 0;
 
 protected:
     virtual void Main();

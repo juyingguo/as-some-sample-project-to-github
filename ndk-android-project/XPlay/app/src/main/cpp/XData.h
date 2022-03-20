@@ -40,6 +40,7 @@ enum XDataType
 struct XData
 {
     int type = 0;
+    int pts = 0;
     unsigned char *data = 0;
     //存放解码后的数据
     unsigned char *datas[8] = {0};

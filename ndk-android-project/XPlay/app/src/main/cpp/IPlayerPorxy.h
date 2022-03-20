@@ -47,7 +47,8 @@ public:
         return &px;
     }
     void Init(void *vm = 0);
-
+    /** this method should be call after {Init} method and before {Open} method*/
+    virtual void setHardDecode(bool isHardDecode);
     virtual bool Open(const char *path);
     virtual bool Start();
     virtual void InitView(void *win);

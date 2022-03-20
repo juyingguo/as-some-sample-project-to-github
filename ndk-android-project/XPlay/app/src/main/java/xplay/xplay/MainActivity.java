@@ -30,6 +30,7 @@ import android.Manifest;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = (TextView) findViewById( R.id.sample_text );
         tv.setText( stringFromJNI() );
+        System.out.println("getExternalCacheDir():" + getExternalCacheDir());
     }
 
     private static final int RC_PREM =100;

@@ -86,6 +86,7 @@ XData FFResample::Resample(XData indata)
         out.Drop();
         return XData();
     }
+    out.pts = indata.pts;
     //XLOGE("swr_convert success = %d",len);
     return out;
 }

@@ -43,6 +43,12 @@ void IPlayerPorxy::Init(void *vm)
 
     mux.unlock();
 }
+void IPlayerPorxy::setHardDecode(bool isHardDecode) {
+    mux.lock();
+    if(player)
+        player->setHardDecode(isHardDecode);
+    mux.unlock();
+}
 bool IPlayerPorxy::Open(const char *path)
 {
     bool re = false;

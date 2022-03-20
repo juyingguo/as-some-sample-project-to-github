@@ -140,6 +140,6 @@ XData FFDecode::RecvFrame()
         XLOGE("data format AV_PIX_FMT_NV12 AV_PIX_FMT_NV21 is %d",AV_PIX_FMT_NV21);
     }*/
     memcpy(d.datas,frame->data,sizeof(d.datas));//数据大小一致，直接复制
-
+    d.pts = static_cast<int>(frame->pts);
     return d;
 }

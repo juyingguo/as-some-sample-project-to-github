@@ -32,6 +32,7 @@
 #define XPLAY_IPLAYER_H
 
 
+#include <mutex>
 #include "XThread.h"
 #include "XParameter.h"
 
@@ -46,6 +47,7 @@ class IPlayer : public XThread
 {
 public:
     static IPlayer *Get(unsigned char index=0);
+    virtual void setHardDecode(bool isHardDecode);
     virtual bool Open(const char *path);
     virtual bool Start();
     /** 初始化窗口 */
@@ -63,6 +65,9 @@ public:
     IVideoView *videoView = 0;
     IAudioPlay *audioPlay = 0;
 protected:
+    //用作音视频同步
+    void Main();
+    std::mutex mux;
     IPlayer(){};
 };
 
