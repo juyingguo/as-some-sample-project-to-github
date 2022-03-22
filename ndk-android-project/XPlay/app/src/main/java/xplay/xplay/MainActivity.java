@@ -27,7 +27,10 @@
 package xplay.xplay;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ConfigurationInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -71,8 +74,16 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = (TextView) findViewById( R.id.sample_text );
         tv.setText( stringFromJNI() );
         System.out.println("getExternalCacheDir():" + getExternalCacheDir());
+        getOpenGLInfo();
     }
-
+    private void getOpenGLInfo(){
+        ActivityManager am =(ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        ConfigurationInfo info = am.getDeviceConfigurationInfo();
+        String s = info.reqGlEsVersion+"";
+        String ver = Integer.toHexString(Integer.parseInt(s));
+//        tv.setText("reqGlEsVersion = " + ver);
+        System.out.println("reqGlEsVersion = " + ver);
+    }
     private static final int RC_PREM =100;
     private static final String[] perm ={Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private void toCheckPermission() {
