@@ -38,22 +38,40 @@ class CXTexture:public XTexture
 public:
     XShader sh;
     XTextureType type;
-
+    std::mutex mux;
+    virtual void Drop()
+    {
+        mux.lock();
+        XEGL::Get()->Close();
+        sh.Close();
+        mux.unlock();
+        delete this;//将自己的指针控件释放掉。
+    }
     virtual bool Init(void *win,XTextureType type)
     {
+        mux.lock();
+        //此时不能调用Drop(),因为会将对象清理。调用对应变量的清理函数即可。
+        XEGL::Get()->Close();
+        sh.Close();
         this->type = type;
         if(!win)
         {
+            mux.unlock();
             XLOGE("XTexture Init failed win is NULL");
             return false;
         }
-        if(!XEGL::Get()->Init(win))return false;
+        if(!XEGL::Get()->Init(win))
+        {
+            mux.unlock();
+            return false;
+        }
         sh.Init((XShaderType)type);
+        mux.unlock();
         return true;
     }
     virtual void Draw(unsigned char *data[],int width,int height)
     {
-
+        mux.lock();
         sh.GetTexture(0,width,height,data[0]);  // Y
 
         if(type == XTEXTURE_YUV420P)
@@ -67,6 +85,7 @@ public:
         }
         sh.Draw();
         XEGL::Get()->Draw();
+        mux.unlock();
     }
 
 };
