@@ -30,6 +30,8 @@
 
 #ifndef XPLAY_XSHADER_H
 #define XPLAY_XSHADER_H
+
+#include <mutex>
 /**
  * 与XTextureType中的视频格式枚举值保持一致
  */
@@ -44,6 +46,7 @@ class XShader
 {
 public:
     virtual bool Init(XShaderType type=XSHADER_YUV420P);
+    virtual void Close();
 
     //获取材质并映射到内存
     virtual void GetTexture(unsigned int index,int width,int height, unsigned char *buf,bool isa=false);
@@ -57,6 +60,7 @@ protected:
      * 存放材质，便于后期清理。第一次初始化，第二次直接读取；当窗口大小变化的时候（或者重新打开窗口时），先清理，再次初始化；
      */
     unsigned int texts[100] = {0};
+    std::mutex mux;
 };
 
 
