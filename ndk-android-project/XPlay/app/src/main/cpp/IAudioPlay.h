@@ -47,6 +47,8 @@ public:
 
     virtual bool StartPlay(XParameter out) = 0;
     virtual void Close() = 0;
+    /**清除缓冲队列，需要在接口类中实现;关闭的时候要清理，seek的时候也要清理*/
+    virtual void Clear();
     //最大缓冲
     int maxFrame = 100;
     int pts = 0;

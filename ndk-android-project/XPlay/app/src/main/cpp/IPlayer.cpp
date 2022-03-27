@@ -68,8 +68,47 @@ void IPlayer::setHardDecode(bool isHardDecode)
 {
     this->isHardDecode = isHardDecode;
 }
+/** 关闭播放器，特别注意先后顺序不能错，先停止主体线程，再清理观察者，然后再清除缓冲队列，最后清理资源*/
+void IPlayer::Close()
+{
+    mux.lock();
+    //1 先关闭主体线程，再清理观察者
+    //同步线程
+    XThread::Stop();//当前线程停止
+    //解封装
+    if(demux)
+        demux->Stop();
+    //解码
+    if(vdecode)
+        vdecode->Stop();
+    if(adecode)
+        adecode->Stop();
+    //2 清理缓冲队列
+    if(vdecode)
+        vdecode->Clear();
+    if(adecode)
+        adecode->Clear();
+    if(audioPlay)
+        audioPlay->Clear();
+
+    //3 清理资源
+    if(audioPlay)
+        audioPlay->Close();
+    if(videoView)
+        videoView->Close();
+    if(vdecode)
+        vdecode->Close();
+    if(adecode)
+        adecode->Close();
+    if(demux)
+        demux->Close();
+    mux.unlock();
+
+
+}
 bool IPlayer::Open(const char *path)
 {
+    Close();
     mux.lock();
     //解封装
     if(!demux || !demux->Open(path))
@@ -100,21 +139,27 @@ bool IPlayer::Open(const char *path)
     mux.unlock();
     return true;
 }
+
 bool IPlayer::Start()
 {
     mux.lock();
+    /**
+     * 播放时，先出声音，画面是黑色的，过一会才出现画面。
+     * 解决方法：
+     * IPlayer::Start中调整为：先启动音频播放器，再依次启动视频解码，音频解码，解封装,同步线程。
+     */
+    if(audioPlay)
+        audioPlay->StartPlay(outPara);
+    if(vdecode)
+        vdecode->Start();
+    if(adecode)
+        adecode->Start();
     if(!demux || !demux->Start())
     {
         mux.unlock();
         XLOGE("demux->Start failed!");
         return false;
     }
-    if(adecode)
-        adecode->Start();
-    if(audioPlay)
-        audioPlay->StartPlay(outPara);
-    if(vdecode)
-        vdecode->Start();
     XThread::Start();
     mux.unlock();
 

@@ -47,6 +47,8 @@ public:
     virtual bool Open(XParameter para,bool isHard=false) = 0;
 
     virtual void Close()=0;
+    /**清除缓冲队列，需要在接口类中实现;关闭的时候要清理，seek的时候也要清理*/
+    virtual void Clear();
     //future模型 发送数据到线程解码
     virtual bool SendPacket(XData pkt) = 0;
 

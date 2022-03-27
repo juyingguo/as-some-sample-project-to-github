@@ -49,6 +49,7 @@ public:
     static IPlayer *Get(unsigned char index=0);
     virtual void setHardDecode(bool isHardDecode);
     virtual bool Open(const char *path);
+    virtual void Close();
     virtual bool Start();
     /** 初始化窗口 */
     virtual void InitView(void *win);
