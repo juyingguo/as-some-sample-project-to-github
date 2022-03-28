@@ -29,14 +29,17 @@ package xplay.xplay;
 import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ConfigurationInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary( "native-lib" );
     }
 
+    private Button bt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -69,10 +73,21 @@ public class MainActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.M){
             toCheckPermission();
         }
+        bt = findViewById( R.id.open_button );
 
-        // Example of a call to a native method
-        TextView tv = (TextView) findViewById( R.id.sample_text );
-        tv.setText( stringFromJNI() );
+        bt.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("XPlay","open button click!");
+                //打开选择路径窗口
+                Intent intent = new Intent();
+                intent.setClass( MainActivity.this ,OpenUrl.class);
+                startActivity( intent );
+
+
+            }
+        } );
+
         System.out.println("getExternalCacheDir():" + getExternalCacheDir());
         getOpenGLInfo();
     }

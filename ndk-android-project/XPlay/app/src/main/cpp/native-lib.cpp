@@ -56,11 +56,12 @@ Java_xplay_xplay_XPlay_InitView(JNIEnv *env, jobject instance, jobject surface) 
 }
 
 extern "C"
-JNIEXPORT jstring
-JNICALL
-Java_xplay_xplay_MainActivity_stringFromJNI(
-        JNIEnv *env,
-        jobject /* this */) {
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
+JNIEXPORT void JNICALL
+Java_xplay_xplay_OpenUrl_Open(JNIEnv *env, jobject instance, jstring url_) {
+    const char *url = env->GetStringUTFChars(url_, 0);
+
+    IPlayerPorxy::Get()->Open(url);
+    IPlayerPorxy::Get()->Start();
+
+    env->ReleaseStringUTFChars(url_, url);
 }

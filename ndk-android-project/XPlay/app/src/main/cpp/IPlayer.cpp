@@ -169,6 +169,9 @@ bool IPlayer::Start()
 void IPlayer::InitView(void *win)
 {
     if(videoView)
+    {
+        videoView->Close();
         videoView->SetRender(win);
+    }
 }
 
