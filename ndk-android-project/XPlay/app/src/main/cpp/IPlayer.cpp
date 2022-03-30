@@ -83,6 +83,8 @@ void IPlayer::Close()
         vdecode->Stop();
     if(adecode)
         adecode->Stop();
+//    if(audioPlay)
+//        audioPlay->Stop();
     //2 清理缓冲队列
     if(vdecode)
         vdecode->Clear();
@@ -105,6 +107,22 @@ void IPlayer::Close()
     mux.unlock();
 
 
+}
+double IPlayer::PlayPos()
+{
+    double pos = 0.0;
+    mux.lock();
+    int total = 0;
+    if(demux)
+        total = demux->totalMs;
+    if(total >0)
+    {
+        if(vdecode){
+            pos = (double)vdecode->pts/(double)total;
+        }
+    }
+    mux.unlock();
+    return pos;
 }
 bool IPlayer::Open(const char *path)
 {

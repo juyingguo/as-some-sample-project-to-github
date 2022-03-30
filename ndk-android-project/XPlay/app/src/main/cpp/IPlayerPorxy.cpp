@@ -50,13 +50,25 @@ void IPlayerPorxy::Init(void *vm)
 
     mux.unlock();
 }
+
+//获取当前的播放进度 0.0 ~ 1.0
+double IPlayerPorxy::PlayPos()
+{
+    double pos = 0.0;
+    mux.lock();
+    if(player)
+    {
+        pos = player->PlayPos();
+    }
+    mux.unlock();
+    return pos;
+}
 void IPlayerPorxy::setHardDecode(bool isHardDecode) {
     mux.lock();
     if(player)
         player->setHardDecode(isHardDecode);
     mux.unlock();
 }
-
 bool IPlayerPorxy::Open(const char *path)
 {
     bool re = false;

@@ -35,11 +35,13 @@ import android.content.pm.ConfigurationInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,7 +49,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Runnable {
     private static final String TAG = "MainActivity";
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Button bt;
+    private SeekBar seek;
+    private Thread th;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -74,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
             toCheckPermission();
         }
         bt = findViewById( R.id.open_button );
-
+        seek = findViewById( R.id.aplayseek );
+        seek.setMax(1000);
         bt.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +95,18 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("getExternalCacheDir():" + getExternalCacheDir());
         getOpenGLInfo();
+
+        th = new Thread(this);
+        th.start();
     }
+    @Override
+    public void run(){
+        for (;;){
+            seek.setProgress((int)( 1000*PlayPos()));
+            SystemClock.sleep(40);
+        }
+    }
+    public native double PlayPos();
     private void getOpenGLInfo(){
         ActivityManager am =(ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         ConfigurationInfo info = am.getDeviceConfigurationInfo();
@@ -123,10 +139,4 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onRequestPermissionsResult,requestCode" + requestCode);
         EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
     }
-
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
 }
