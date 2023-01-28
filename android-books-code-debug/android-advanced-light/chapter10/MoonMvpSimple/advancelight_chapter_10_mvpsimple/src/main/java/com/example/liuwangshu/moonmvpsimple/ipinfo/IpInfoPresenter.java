@@ -1,5 +1,7 @@
 package com.example.liuwangshu.moonmvpsimple.ipinfo;
 
+import android.util.Log;
+
 import com.example.liuwangshu.moonmvpsimple.LoadTasksCallBack;
 import com.example.liuwangshu.moonmvpsimple.model.IpInfo;
 import com.example.liuwangshu.moonmvpsimple.net.NetTask;
@@ -9,11 +11,12 @@ import com.example.liuwangshu.moonmvpsimple.net.NetTask;
  * Created by Administrator on 2016/12/29 0029.
  */
 
-public class IpInfoPresenter implements IpInfoContract.Presenter, LoadTasksCallBack<IpInfo/*String*/> {
-    private NetTask<String> netTask;
+public class IpInfoPresenter implements IpInfoContract.Presenter, LoadTasksCallBack<IpInfo> {
+    private final String TAG = IpInfoPresenter.class.getSimpleName();
+    private NetTask netTask;
     private IpInfoContract.View addTaskView;
 
-    IpInfoPresenter(IpInfoContract.View addTaskView, NetTask<String> netTask) {
+    public IpInfoPresenter(IpInfoContract.View addTaskView, NetTask netTask) {
         this.netTask = netTask;
         this.addTaskView=addTaskView;
     }
@@ -23,8 +26,16 @@ public class IpInfoPresenter implements IpInfoContract.Presenter, LoadTasksCallB
     }
 
     @Override
+    public void cancelTask() {
+        netTask.cancelTask();
+    }
+
+    @Override
     public void onSuccess(IpInfo ipInfo) {
-        if(addTaskView.isActive()){
+        Log.d(TAG,"onSuccess,ipInfo:" + ipInfo);
+        boolean active = addTaskView.isActive();
+        Log.d(TAG,"onSuccess,addTaskView.isActive():" + active);
+        if(active){
             addTaskView.setIpInfo(ipInfo);
         }
     }

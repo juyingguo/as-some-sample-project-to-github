@@ -5,8 +5,14 @@ package com.example.liuwangshu.moonmvpsimple.model;
  */
 
 public class IpData {
+    /*接口及返回json::
+       https://ip.useragentinfo.com/json?ip=117.136.12.79
+       {"country": "中国", "short_name": "CN", "province": "广东省", "city": "", "area": "",
+       "isp": "移动", "net": "移动网络", "ip": "117.136.12.79", "code": 200, "desc": "success"}
+       */
     private String country;
     private String country_id;
+    private String province;
     private String area;
     private String area_id;
     private String region;
@@ -17,7 +23,51 @@ public class IpData {
     private String county_id;
     private String isp;
     private String isp_id;
+    private String net;
     private String ip;
+    private String short_name;
+    private String desc;
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getNet() {
+        return net;
+    }
+
+    public void setNet(String net) {
+        this.net = net;
+    }
+
+    public String getShort_name() {
+        return short_name;
+    }
+
+    public void setShort_name(String short_name) {
+        this.short_name = short_name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public String getCountry() {
         return country;
@@ -128,6 +178,7 @@ public class IpData {
         return "IpData{" +
                 "country='" + country + '\'' +
                 ", country_id='" + country_id + '\'' +
+                ", province='" + province + '\'' +
                 ", area='" + area + '\'' +
                 ", area_id='" + area_id + '\'' +
                 ", region='" + region + '\'' +
@@ -138,7 +189,11 @@ public class IpData {
                 ", county_id='" + county_id + '\'' +
                 ", isp='" + isp + '\'' +
                 ", isp_id='" + isp_id + '\'' +
+                ", net='" + net + '\'' +
                 ", ip='" + ip + '\'' +
+                ", short_name='" + short_name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 }

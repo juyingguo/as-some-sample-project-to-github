@@ -66,11 +66,10 @@ public class IpInfoFragment extends Fragment implements IpInfoContract.View {
 
     @Override
     public void setIpInfo(IpInfo ipInfo) {
-        if(ipInfo!=null&&ipInfo.getData()!=null){
-            IpData ipData=ipInfo.getData();
-            tv_country.setText(ipData.getCountry());
-            tv_area.setText(ipData.getArea());
-            tv_city.setText(ipData.getCity());
+        if(ipInfo!=null){
+            tv_country.setText(ipInfo.getCountry());
+            tv_area.setText(ipInfo.getArea());
+            tv_city.setText(ipInfo.getCity());
         }
     }
 
@@ -101,5 +100,11 @@ public class IpInfoFragment extends Fragment implements IpInfoContract.View {
     @Override
     public boolean isActive() {
         return isAdded();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.cancelTask();
     }
 }

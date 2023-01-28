@@ -9,4 +9,5 @@ import com.example.liuwangshu.moonmvpsimple.ipinfo.IpInfoContract;
 
 public interface NetTask<T> {
     void execute(T data , LoadTasksCallBack callBack);
+    void cancelTask();
 }

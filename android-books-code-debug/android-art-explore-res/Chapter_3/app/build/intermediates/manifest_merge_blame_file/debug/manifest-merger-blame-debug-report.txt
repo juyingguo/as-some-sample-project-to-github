@@ -1,0 +1,78 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.ryg.chapter_3"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk android:targetSdkVersion="22" />
+7-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+8
+9    <application
+9-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:7:5-40:19
+10        android:allowBackup="true"
+10-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:8:9-35
+11        android:debuggable="true"
+12        android:icon="@drawable/ic_launcher"
+12-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:9:9-45
+13        android:label="@string/app_name"
+13-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:10:9-41
+14        android:theme="@style/AppTheme" >
+14-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:11:9-40
+15        <activity
+15-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:12:9-16:45
+16            android:name="com.ryg.chapter_3.TestActivity"
+16-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:13:13-41
+17            android:configChanges="orientation|screenSize"
+17-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:14:13-59
+18            android:label="@string/app_name"
+18-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:15:13-45
+19            android:launchMode="standard" />
+19-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:16:13-42
+20        <activity
+20-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:17:9-21:45
+21            android:name="com.ryg.chapter_3.DemoActivity_1"
+21-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:18:13-43
+22            android:configChanges="screenLayout"
+22-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:19:13-49
+23            android:label="@string/title_scene_1"
+23-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:20:13-50
+24            android:launchMode="standard" />
+24-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:21:13-42
+25        <activity
+25-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:22:9-26:45
+26            android:name="com.ryg.chapter_3.DemoActivity_2"
+26-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:23:13-43
+27            android:configChanges="screenLayout"
+27-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:24:13-49
+28            android:label="@string/title_scene_1"
+28-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:25:13-50
+29            android:launchMode="standard" />
+29-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:26:13-42
+30        <activity
+30-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:27:9-30:48
+31            android:name="com.ryg.chapter_3.ThirdActivity"
+31-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:28:13-42
+32            android:configChanges="screenLayout"
+32-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:29:13-49
+33            android:label="@string/app_name" />
+33-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:30:13-45
+34        <activity
+34-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:31:9-39:20
+35            android:name="com.ryg.chapter_3.MainActivity"
+35-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:32:13-41
+36            android:label="@string/app_name" >
+36-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:33:13-45
+37            <intent-filter>
+37-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:34:13-38:29
+38                <action android:name="android.intent.action.MAIN" />
+38-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:35:17-69
+38-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:35:25-66
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:37:17-77
+40-->D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:37:27-74
+41            </intent-filter>
+42        </activity>
+43    </application>
+44
+45</manifest>

@@ -1,0 +1,62 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\as_project\\as-some-sample-project-to-github\\android-books-code-debug\\android-art-explore-res\\Chapter_3\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "D:\\as_project\\as-some-sample-project-to-github\\android-books-code-debug\\android-art-explore-res\\Chapter_3\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "56",
+                        "endColumns": "48",
+                        "endOffsets": "100"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                },
+                {
+                    "source": "D:\\as_project\\as-some-sample-project-to-github\\android-books-code-debug\\android-art-explore-res\\Chapter_3\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "3,4,6,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "56,103,216,156",
+                        "endColumns": "46,52,60,59",
+                        "endOffsets": "98,151,272,211"
+                    },
+                    "to": {
+                        "startLines": "3,4,5,6",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "104,151,204,265",
+                        "endColumns": "46,52,60,59",
+                        "endOffsets": "146,199,260,320"
+                    }
+                },
+                {
+                    "source": "D:\\as_project\\as-some-sample-project-to-github\\android-books-code-debug\\android-art-explore-res\\Chapter_3\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "11,20,25,31,38",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "196,527,727,949,1237",
+                        "endLines": "17,22,29,36,41",
+                        "endColumns": "12,12,12,12,12",
+                        "endOffsets": "486,684,941,1229,1402"
+                    },
+                    "to": {
+                        "startLines": "7,14,17,22,28",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "325,616,776,991,1271",
+                        "endLines": "13,16,21,27,31",
+                        "endColumns": "12,12,12,12,12",
+                        "endOffsets": "611,771,986,1266,1433"
+                    }
+                }
+            ]
+        }
+    ]
+}

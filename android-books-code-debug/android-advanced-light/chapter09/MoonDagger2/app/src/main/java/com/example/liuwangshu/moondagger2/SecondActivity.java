@@ -3,6 +3,8 @@ package com.example.liuwangshu.moondagger2;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.example.liuwangshu.moondagger2.component.DaggerSwordsmanComponent;
 import com.example.liuwangshu.moondagger2.model.Swordsman;
 import com.google.gson.Gson;
 

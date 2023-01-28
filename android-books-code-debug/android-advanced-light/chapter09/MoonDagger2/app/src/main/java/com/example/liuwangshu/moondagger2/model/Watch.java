@@ -16,5 +16,6 @@ public class Watch {
     }
     public void work(){
         Log.d("Dagger2","手表工作");
+        System.out.println("手表工作");
     }
 }

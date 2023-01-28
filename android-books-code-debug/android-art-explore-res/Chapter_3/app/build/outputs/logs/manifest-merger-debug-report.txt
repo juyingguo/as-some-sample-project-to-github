@@ -1,0 +1,95 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:2:1-42:12
+	package
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:3:5-32
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:5:5-30
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+application
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:7:5-40:19
+	android:label
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:10:9-41
+	android:icon
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:9:9-45
+	android:allowBackup
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:8:9-35
+	android:theme
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:11:9-40
+activity#com.ryg.chapter_3.TestActivity
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:12:9-16:45
+	android:label
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:15:13-45
+	android:launchMode
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:16:13-42
+	android:configChanges
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:14:13-59
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:13:13-41
+activity#com.ryg.chapter_3.DemoActivity_1
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:17:9-21:45
+	android:label
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:20:13-50
+	android:launchMode
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:21:13-42
+	android:configChanges
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:19:13-49
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:18:13-43
+activity#com.ryg.chapter_3.DemoActivity_2
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:22:9-26:45
+	android:label
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:25:13-50
+	android:launchMode
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:26:13-42
+	android:configChanges
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:24:13-49
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:23:13-43
+activity#com.ryg.chapter_3.ThirdActivity
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:27:9-30:48
+	android:label
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:30:13-45
+	android:configChanges
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:29:13-49
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:28:13-42
+activity#com.ryg.chapter_3.MainActivity
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:31:9-39:20
+	android:label
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:33:13-45
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:32:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:34:13-38:29
+action#android.intent.action.MAIN
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:35:17-69
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:35:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:37:17-77
+	android:name
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml:37:27-74
+uses-sdk
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+		ADDED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml
+		INJECTED from D:\as_project\as-some-sample-project-to-github\android-books-code-debug\android-art-explore-res\Chapter_3\app\src\main\AndroidManifest.xml

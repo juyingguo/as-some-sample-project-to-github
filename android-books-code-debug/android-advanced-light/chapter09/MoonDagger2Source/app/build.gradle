@@ -1,0 +1,34 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'com.neenbedankt.android-apt'
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.example.liuwangshu.moondagger2"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:appcompat-v7:25.0.1'
+    testImplementation 'junit:junit:4.12'
+//    apt 'com.google.dagger:dagger-compiler:2.7'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+    implementation 'com.google.dagger:dagger:2.7'
+}

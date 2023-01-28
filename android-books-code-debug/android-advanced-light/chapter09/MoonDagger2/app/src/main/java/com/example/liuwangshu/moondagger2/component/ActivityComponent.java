@@ -15,7 +15,7 @@ import dagger.Component;
  * Created by Administrator on 2016/12/20 0020.
  */
 //@ApplicationScope
-//@Singleton
+@Singleton
 @Component(modules = {GsonModule.class,EngineModule.class},dependencies = SwordsmanComponent.class)
 public interface ActivityComponent {
     void inject(MainActivity activity);

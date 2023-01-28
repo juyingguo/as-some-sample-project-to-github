@@ -1,0 +1,8 @@
+/*
+task test {
+	doLast {
+		println 'Hello world'
+	}
+}*/
+
+

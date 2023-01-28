@@ -7,6 +7,7 @@ import com.example.liuwangshu.moonmvpsimple.model.IpInfo;
 public interface IpInfoContract {
     interface Presenter {
         void getIpInfo(String ip);
+        void cancelTask();
     }
 
     interface View extends BaseView<Presenter> {

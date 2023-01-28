@@ -1,0 +1,4 @@
+#Sat Jan 28 09:15:54 CST 2023
+base.0=D\:\\as_project\\as-some-sample-project-to-github\\android-books-code-debug\\android-art-explore-res\\Chapter_3\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
