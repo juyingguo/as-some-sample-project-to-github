@@ -83,6 +83,8 @@ void IPlayer::Close()
         vdecode->Stop();
     if(adecode)
         adecode->Stop();
+//    if(audioPlay)
+//        audioPlay->Stop();
     //2 清理缓冲队列
     if(vdecode)
         vdecode->Clear();
@@ -105,6 +107,22 @@ void IPlayer::Close()
     mux.unlock();
 
 
+}
+double IPlayer::PlayPos()
+{
+    double pos = 0.0;
+    mux.lock();
+    int total = 0;
+    if(demux)
+        total = demux->totalMs;
+    if(total >0)
+    {
+        if(vdecode){
+            pos = (double)vdecode->pts/(double)total;
+        }
+    }
+    mux.unlock();
+    return pos;
 }
 bool IPlayer::Open(const char *path)
 {
@@ -130,7 +148,7 @@ bool IPlayer::Open(const char *path)
     }
 
     //重采样 有可能不需要，解码后或者解封后可能是直接能播放的数据
-    if(outPara.sample_rate <= 0)
+//    if(outPara.sample_rate <= 0)
         outPara = demux->GetAPara();
     if(!resample || !resample->Open(demux->GetAPara(),outPara))
     {

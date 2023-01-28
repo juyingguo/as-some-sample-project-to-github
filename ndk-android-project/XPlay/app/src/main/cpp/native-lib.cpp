@@ -65,3 +65,8 @@ Java_xplay_xplay_OpenUrl_Open(JNIEnv *env, jobject instance, jstring url_) {
 
     env->ReleaseStringUTFChars(url_, url);
 }
+extern "C"
+JNIEXPORT jdouble JNICALL
+Java_xplay_xplay_MainActivity_PlayPos(JNIEnv *env, jobject thiz) {
+    return IPlayerPorxy::Get()->PlayPos();
+}
