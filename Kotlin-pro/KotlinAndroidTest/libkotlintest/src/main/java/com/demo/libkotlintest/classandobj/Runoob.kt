@@ -3,7 +3,7 @@ package com.demo.libkotlintest.classandobj
 /**
  * val simple: Int?       // 类型为 Int ，默认实现 getter ，但必须在构造函数中初始化
  */
-class  Runoob constructor(name: String,val maxLength:Int=10) {  // 类名为 Runoob
+public class  Runoob(name: String,val maxLength:Int=10) {  // 类名为 Runoob
     // 大括号内是类体构成
     var url: String = "http://www.runoob.com"
     var country: String = "CN"

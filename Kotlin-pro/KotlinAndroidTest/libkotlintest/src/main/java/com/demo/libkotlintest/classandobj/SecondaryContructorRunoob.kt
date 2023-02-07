@@ -1,6 +1,6 @@
 package com.demo.libkotlintest.classandobj
 
-class Runoob2  constructor(name: String) {  // 类名为 RunoobSecondaryConstructor
+class SecondaryContructorRunoob  constructor(name: String) {  // 类名为 SecondaryContructorRunoob
     // 大括号内是类体构成
     var url: String = "http://www.runoob.com"
     var country: String = "CN"
@@ -20,7 +20,7 @@ class Runoob2  constructor(name: String) {  // 类名为 RunoobSecondaryConstruc
 }
 
 fun main(args: Array<String>) {
-    val runoob =  Runoob2("菜鸟教程", 10000)
+    val runoob =  SecondaryContructorRunoob("菜鸟教程", 10000)
     println(runoob.siteName)
     println(runoob.url)
     println(runoob.country)

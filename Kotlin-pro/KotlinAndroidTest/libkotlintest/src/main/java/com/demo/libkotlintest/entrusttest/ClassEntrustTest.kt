@@ -11,7 +11,7 @@ interface Base {
 
 // 实现此接口的被委托的类
 class BaseImpl(val x: Int) : Base {
-    override fun print() { print(x) }
+    override fun print() { println(x) }
 }
 
 // 通过关键字 by 建立委托类

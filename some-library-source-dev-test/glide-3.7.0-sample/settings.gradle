@@ -1,0 +1,2 @@
+include ':app', ':flickr', ':svg', ':giphy'
+rootProject.name='glide-3.7.0-sample'

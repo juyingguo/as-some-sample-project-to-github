@@ -1,0 +1,29 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+ 	>
+	<!--点击获取信息按钮  -->
+    <Button  
+        android:id="@+id/btn_getItemcontacts"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="getItemcontacts"
+        android:textColor="#cc0000"
+        android:background="#d9ecec"
+        android:focusable="true"
+        android:text="浏览新闻"
+         />
+    
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_below="@id/btn_getItemcontacts"
+        android:background="#d9ecec"
+        />
+    
+
+</LinearLayout>

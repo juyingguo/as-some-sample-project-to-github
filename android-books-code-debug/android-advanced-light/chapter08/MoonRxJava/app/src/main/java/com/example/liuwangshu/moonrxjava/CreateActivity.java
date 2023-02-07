@@ -7,7 +7,9 @@ import android.util.Log;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 /**
  * 创建操作符
@@ -23,6 +25,59 @@ public class CreateActivity extends AppCompatActivity {
 //        repeat();
     }
 
+    private void create() {
+        Observable.create(new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+                subscriber.onNext(1);
+                subscriber.onCompleted();
+            }
+        }).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Log.d(TAG, "create:" +integer.intValue());
+            }
+        });
+    }
+    private void map() {
+        Observable.create(new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+                subscriber.onNext(1);
+                subscriber.onCompleted();
+            }
+        }).map(new Func1<Integer, String>() {
+            @Override
+            public String call(Integer integer) {
+                return "a" + integer.intValue();
+            }
+        }).subscribe(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String integer) {
+                Log.d(TAG, "create:" +integer);
+            }
+        });
+    }
     private void repeat() {
         Observable.range(0, 3)
                 .repeat(2)
