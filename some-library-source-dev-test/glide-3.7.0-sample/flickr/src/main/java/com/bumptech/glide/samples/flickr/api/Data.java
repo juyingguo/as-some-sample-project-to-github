@@ -6,10 +6,10 @@ final class Data {
 
   static final String[] URLS_CUSTOM = new String[]{//image use from *\as_project\androidFrame\Android-Universal-Image-Loader
           // Heavy images
-          "https://img-pre.ivsky.com/img/tupian/pre/202012/25/jiebing_zhiwu-001.jpg",
-          "https://img-pre.ivsky.com/img/tupian/pre/202012/25/jiebing_zhiwu-002.jpg",
-          "https://img-pre.ivsky.com/img/tupian/pre/202012/25/jiebing_zhiwu-003.jpg",
-          "https://img-pre.ivsky.com/img/tupian/pre/202012/25/jiebing_zhiwu-004.jpg",
+          "https://www.ssfiction.com/wp-content/uploads/2020/08/20200804_5f2950bd634d1.jpg",
+          "https://www.ssfiction.com/wp-content/uploads/2020/08/20200804_5f298d6439aec.jpg",
+          "https://img0.baidu.com/it/u=2952267595,701567101&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500",
+          "https://img0.baidu.com/it/u=999102415,1087089385&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500",
 			// Light images
 			"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg10.360buyimg.com%2Fn1%2Fjfs%2Ft1%2F24680%2F11%2F6235%2F228967%2F5c4aa4a8Ef6767301%2Fea8dac2961eb24c0.jpg&refer=http%3A%2F%2Fimg10.360buyimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638797781&t=1ed22386802bae768fff791313f34a15",
 			"https://img0.baidu.com/it/u=1964164365,3191594877&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800",
